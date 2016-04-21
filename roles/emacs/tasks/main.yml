@@ -1,0 +1,59 @@
+---
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- name: install emacs
+  package:
+    name: '{{ emacs_package }}'
+    state: latest
+
+- name: install emacs-auctex
+  package:
+    name: emacs-auctex
+    state: latest
+
+- name: install gxmessage
+  package:
+    name: gxmessage
+    state: latest
+
+- name: install xclip
+  package:
+    name: xclip
+    state: latest
+
+- name: install python-pip
+  package:
+    name: python-pip
+    state: latest
+
+- name: clone emacs config
+  git:
+    clone: yes
+    dest: '{{ my_home }}/emacs'
+    repo: https://github.com/balle/emacs.git
+
+- name: link .emacs
+  file:
+    follow: yes
+    src: '{{ my_home }}/emacs/.emacs'
+    dest: '{{ my_home }}/.emacs'
+    state: link
+
+- name: link .emacs.d
+  file:
+    follow: yes
+    src: '{{ my_home }}/emacs/.emacs.d'
+    dest: '{{ my_home }}/.emacs.d'
+    state: link
+
+- name: link .emacs-snippets
+  file:
+    follow: yes
+    src: '{{ my_home }}/emacs/.emacs-snippets'
+    dest: '{{ my_home }}/.emacs-snippets'
+    state: link
+
+- name: install jedi requirements
+  pip:
+    requirements: '{{ my_home }}/emacs/.emacs.d/extensions/emacs-jedi/requirements.txt'
+    state: present

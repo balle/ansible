@@ -6,6 +6,7 @@
     name: zsh
     state: latest
 
+- name: install autojump
   package:
     name: '{{ autojump_package }}'
     state: latest
