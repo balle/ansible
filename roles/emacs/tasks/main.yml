@@ -21,11 +21,6 @@
     name: xclip
     state: latest
 
-- name: install python-pip
-  package:
-    name: python-pip
-    state: latest
-
 - name: clone emacs config
   git:
     clone: yes
