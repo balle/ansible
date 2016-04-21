@@ -7,31 +7,31 @@
 - name: configure tmux
   copy:
     src: tmux.conf
-    dest: '/home/{{ ansible_env.SUDO_USER }}/.tmux.conf'
-    owner: '{{ ansible_env.SUDO_USER }}'
-    group: '{{ ansible_env.SUDO_USER }}'
+    dest: '{{ my_home }}/.tmux.conf'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
     mode: 0440
 
 - name: make tmux.d dir
   file:
-    path: '/home/{{ ansible_env.SUDO_USER }}/.tmux.d'
+    path: '{{ my_home }}/.tmux.d'
     state: directory
 
 - name: make tmux.d plugins dir
   file:
-    path: '/home/{{ ansible_env.SUDO_USER }}/.tmux.d/plugins'
+    path: '{{ my_home }}/.tmux.d/plugins'
     state: directory
 
 - name: copy tmux startup script
   copy:
     src: startup.sh
-    dest: '/home/{{ ansible_env.SUDO_USER }}/.tmux.d/startup.sh'
-    owner: '{{ ansible_env.SUDO_USER }}'
-    group: '{{ ansible_env.SUDO_USER }}'
+    dest: '{{ my_home }}/.tmux.d/startup.sh'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
     mode: 0700
 
 - name: git clone tpm
   git:
     clone: yes
-    dest: '/home/{{ ansible_env.SUDO_USER }}/.tmux.d/tpm'
+    dest: '{{ my_home }}/.tmux.d/tpm'
     repo: https://github.com/tmux-plugins/tpm.git

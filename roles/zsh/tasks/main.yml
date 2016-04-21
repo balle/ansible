@@ -13,7 +13,7 @@
 - name: configure zsh
   copy:
     src: zshrc
-    dest: '/home/{{ ansible_env.SUDO_USER }}/.zshrc'
-    owner: '{{ ansible_env.SUDO_USER }}'
-    group: '{{ ansible_env.SUDO_USER }}'
+    dest: '{{ my_home }}/.zshrc'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
     mode: 0600
