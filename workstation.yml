@@ -1,6 +1,6 @@
 ---
 - name: Workstation setup
-  hosts: localhost
+  hosts: all
 
   roles:
     - tmux
