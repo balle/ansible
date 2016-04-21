@@ -1,0 +1,13 @@
+---
+- name: install zile
+  package:
+    name: zile
+    state: present
+
+- name: configure zile
+  copy:
+    src: zilerc
+    dest: '/home/{{ ansible_env.SUDO_USER }}/.zilerc'
+    owner: '{{ ansible_env.SUDO_USER }}'
+    group: '{{ ansible_env.SUDO_USER }}'
+    mode: 0440
