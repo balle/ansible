@@ -1,0 +1,6 @@
+---
+- name: Workstation setup
+  hosts: localhost
+
+  roles:
+    - zsh

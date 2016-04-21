@@ -1,0 +1,19 @@
+---
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- name: install zsh
+  package:
+    name: zsh
+    state: latest
+
+  package:
+    name: '{{ autojump_package }}'
+    state: latest
+
+- name: configure zsh
+  copy:
+    src: zshrc
+    dest: '/home/{{ ansible_env.SUDO_USER }}/.zshrc'
+    owner: '{{ ansible_env.SUDO_USER }}'
+    group: '{{ ansible_env.SUDO_USER }}'
+    mode: 0600
