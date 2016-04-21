@@ -3,5 +3,6 @@
   hosts: localhost
 
   roles:
+    - tmux
     - zile
     - zsh
