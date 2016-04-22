@@ -3,24 +3,14 @@
 
 - name: install emacs
   package:
-    name: '{{ emacs_package }}'
+    name: '{{ item }}'
     state: latest
-
-- name: install emacs-auctex
-  package:
-    name: emacs-auctex
-    state: latest
-
-- name: install gxmessage
-  package:
-    name: gxmessage
-    state: latest
-
-- name: install xclip
-  package:
-    name: xclip
-    state: latest
-
+  with_items:
+    - '{{ emacs_package }}'
+    - emacs-auctex
+    - gxmessage
+    - xclip
+    
 - name: clone emacs config
   become_user: '{{ my_user }}'
   git:

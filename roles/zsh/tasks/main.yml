@@ -3,13 +3,11 @@
 
 - name: install zsh
   package:
-    name: zsh
+    name: '{{ item }}'
     state: latest
-
-- name: install autojump
-  package:
-    name: '{{ autojump_package }}'
-    state: latest
+  with_items:
+    - zsh
+    - '{{ autojump_package }}'
 
 - name: configure zsh
   copy:
