@@ -22,6 +22,7 @@
     state: latest
 
 - name: clone emacs config
+  become_user: '{{ my_user }}'
   git:
     clone: yes
     dest: '{{ my_home }}/emacs'

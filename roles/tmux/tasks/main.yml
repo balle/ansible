@@ -31,6 +31,7 @@
     mode: 0700
 
 - name: git clone tpm
+  become_user: '{{ my_user }}'
   git:
     clone: yes
     dest: '{{ my_home }}/.tmux.d/tpm'
