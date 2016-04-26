@@ -3,12 +3,14 @@
 
 - name: install zsh
   package:
-    name: '{{ item }}'
+    name: zsh
     state: latest
-  with_items:
-    - zsh
-    - '{{ autojump_package }}'
 
+- name: install zsh autojump
+  package:
+    name: '{{ autojump_package }}'
+  when: ansible_os_family != "OpenBSD"
+  
 - name: configure zsh
   copy:
     src: zshrc

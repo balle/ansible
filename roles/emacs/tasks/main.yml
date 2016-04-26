@@ -7,10 +7,15 @@
     state: latest
   with_items:
     - '{{ emacs_package }}'
-    - emacs-auctex
     - gxmessage
     - xclip
-    
+
+- name: install emacs auctex
+  package:
+    name: emacs-auctex    
+    state: latest
+  when: ansible_os_family != "OpenBSD"
+
 - name: clone emacs config
   become_user: '{{ my_user }}'
   git:
