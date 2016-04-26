@@ -1,0 +1,30 @@
+---
+- name: install openbox
+  package:
+    name: openbox
+    state: latest
+
+- name: make openbox config dir
+  file:
+    path: '{{ my_home }}/.config/openbox'
+    state: directory
+    recurse: yes
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    
+
+- name: configure openbox
+  copy:
+    src: ob-rc.xml
+    dest: '{{ my_home }}/.config/openbox/rc.xml'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0755
+
+- name: openbox autostart
+  copy:
+    src: ob-autostart.sh
+    dest: '{{ my_home }}/.config/openbox/autostart.sh'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0755

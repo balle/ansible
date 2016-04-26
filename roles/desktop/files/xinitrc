@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# startup /home/.fluxbox/startup
+# exec fluxbox
+# exec startxfce4
+# exec wmaker
+#  exec e16
+#exec enlightenment_start
+
+xmodmap -e "keycode 96 = Super_L"
+
+exec openbox-session

@@ -1,0 +1,26 @@
+---
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- name: install xorg packages
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - xbindkeys
+    - xscreensaver
+
+- name: x startup config
+  copy:
+    src: xinitrc
+    dest: '{{ desktop_xstartup_script }}'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0700
+
+- name: xbindkeys config
+  copy:
+    src: xbindkeyrc
+    dest: '{{ my_home }}/.xbindkeysrc'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0440

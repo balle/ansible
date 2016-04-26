@@ -1,0 +1,5 @@
+---
+- name: install browser
+  package:
+    - name: '{{ my_browser }}'
+    - state: latest

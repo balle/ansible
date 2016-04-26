@@ -1,0 +1,5 @@
+---
+- name: install terminal
+  package:
+    - name: '{{ my_terminal }}'
+    - state: latest

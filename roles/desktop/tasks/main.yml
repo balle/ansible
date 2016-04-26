@@ -1,0 +1,5 @@
+---
+- include: xorg.yml
+- include: openbox.yml
+- include: browser.yml
+- include: terminal.yml
