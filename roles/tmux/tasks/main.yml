@@ -3,6 +3,7 @@
   package:
     name: tmux
     state: latest
+  when: ansible_os_family != "OpenBSD"
 
 - name: configure tmux
   copy:
