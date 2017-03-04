@@ -8,3 +8,5 @@
     - zile
     - zsh
     - desktop
+    - doas
+    - ksh

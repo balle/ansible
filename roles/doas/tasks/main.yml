@@ -1,0 +1,9 @@
+---
+
+- name: configure doas
+  copy:
+    src: doas.conf
+    dest: '/etc/doas.conf'
+    owner: 'root'
+    group: 'wheel'
+    mode: 0544

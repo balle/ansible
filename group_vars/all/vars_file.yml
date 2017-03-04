@@ -1,5 +1,5 @@
-my_user: '{{ ansible_env.SUDO_USER }}'
-my_group: '{{ ansible_env.SUDO_USER }}'
-my_home: '/home/{{ ansible_env.SUDO_USER }}'
+my_user: 'basti'
+my_group: 'basti'
+my_home: '/home/basti'
 my_terminal: tilda
 my_browser: chromium

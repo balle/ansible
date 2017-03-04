@@ -1,0 +1,37 @@
+---
+
+- name: configure user ksh
+  copy:
+    src: kshrc
+    dest: '{{ my_home }}/.kshrc'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0600
+  when: ansible_os_family == 'OpenBSD'
+
+- name: profile for user
+  copy:
+    src: profile
+    dest: '{{ my_home }}/.profile'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0600
+  when: ansible_os_family == 'OpenBSD'
+
+- name: configure root ksh
+  copy:
+    src: kshrc
+    dest: '/root/.kshrc'
+    owner: 'root'
+    group: 'wheel'
+    mode: 0600
+  when: ansible_os_family == 'OpenBSD'
+
+- name: profile for root
+  copy:
+    src: profile
+    dest: '/root/.profile'
+    owner: 'root'
+    group: 'wheel'
+    mode: 0600
+  when: ansible_os_family == 'OpenBSD'

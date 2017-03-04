@@ -13,25 +13,3 @@
     group: '{{ my_group }}'
     mode: 0440
 
-- name: make tmux.d plugins dir
-  file:
-    path: '{{ my_home }}/.tmux.d/plugins'
-    state: directory
-    recurse: yes
-    owner: '{{ my_user }}'
-    group: '{{ my_group }}'
-    
-- name: copy tmux startup script
-  copy:
-    src: startup.sh
-    dest: '{{ my_home }}/.tmux.d/startup.sh'
-    owner: '{{ my_user }}'
-    group: '{{ my_group }}'
-    mode: 0700
-
-- name: git clone tpm
-  become_user: '{{ my_user }}'
-  git:
-    clone: yes
-    dest: '{{ my_home }}/.tmux.d/tpm'
-    repo: https://github.com/tmux-plugins/tpm.git

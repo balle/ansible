@@ -3,11 +3,13 @@
 
 - name: install emacs
   package:
-    name: '{{ item }}'
+    name: '{{ emacs_package }}'
     state: latest
-  with_items:
-    - '{{ emacs_package }}'
-    - xclip
+
+- name: install xclip
+  package:
+    name: 'xclip'
+    state: latest
 
 - name: install emacs auctex
   package:
@@ -28,6 +30,14 @@
     clone: yes
     dest: '{{ my_home }}/emacs'
     repo: https://github.com/balle/emacs.git
+  when: ansible_os_family != "OpenBSD"
+
+- name: clone emacs config
+  git:
+    clone: yes
+    dest: '{{ my_home }}/emacs'
+    repo: https://github.com/balle/emacs.git
+  when: ansible_os_family == "OpenBSD"
 
 - name: link .emacs
   file:

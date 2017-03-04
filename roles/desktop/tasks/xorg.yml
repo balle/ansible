@@ -1,13 +1,15 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install xorg packages
+- name: install xbindkeys
   package:
-    name: '{{ item }}'
+    name: 'xbindkeys'
     state: latest
-  with_items:
-    - xbindkeys
-    - xscreensaver
+
+- name: install xscreensaver
+  package:
+    name: 'xscreensaver'
+    state: latest
 
 - name: x startup config
   copy:
@@ -18,8 +20,8 @@
     mode: 0700
 
 - name: xbindkeys config
-  copy:
-    src: xbindkeyrc
+  template:
+    src: xbindkeysrc.j2
     dest: '{{ my_home }}/.xbindkeysrc'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'

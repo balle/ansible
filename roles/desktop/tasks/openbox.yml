@@ -22,8 +22,8 @@
     mode: 0755
 
 - name: openbox autostart
-  copy:
-    src: ob-autostart.sh
+  template:
+    src: ob-autostart.j2
     dest: '{{ my_home }}/.config/openbox/autostart.sh'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'

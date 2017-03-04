@@ -8,5 +8,6 @@
 #exec enlightenment_start
 
 xmodmap -e "keycode 96 = Super_L"
+export LC_ALL="en_US.UTF-8"
 
 exec openbox-session
