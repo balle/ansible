@@ -36,6 +36,32 @@
     name: '{{ python3_package }}'
     state: latest
 
+- name: install python 3 pip 
+  package:
+    name: '{{ python3_pip_package }}'
+    state: latest
+
+- name: install python 3 virtualenv 
+  package:
+    name: '{{ python3_virtualenv_package }}'
+    state: latest
+
+- name: link python3
+  file:
+    follow: yes
+    src: '/usr/local/bin/python3.6'
+    dest: '/usr/bin/python3'
+    state: link
+  when: ansible_os_family == 'OpenBSD'
+
+- name: link pydoc3
+  file:
+    follow: yes
+    src: '/usr/local/bin/pydoc3.6'
+    dest: '/usr/local/bin/pydoc3'
+    state: link
+  when: ansible_os_family == 'OpenBSD'
+
 - name: install common lisp
   package:
     name: '{{ sbcl_package }}'
