@@ -1,0 +1,59 @@
+---
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- name: install gcc
+  package:
+    name: gcc
+    state: latest
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install make
+  package:
+    name: make
+    state: latest
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install automake
+  package:
+    name: automake
+    state: latest
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install autoconf
+  package:
+    name: autoconf
+    state: latest
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install patch
+  package:
+    name: patch
+    state: latest
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install python3
+  package:
+    name: '{{ python3_package }}'
+    state: latest
+
+- name: install common lisp
+  package:
+    name: '{{ sbcl_package }}'
+    state: latest
+
+- name: clone lisp snippets
+  git:
+    clone: yes
+    dest: '{{ my_home }}/lisp'
+    repo: https://github.com/balle/lisp-snippets.git
+
+- name: install erlang
+  package:
+    name: '{{ erlang_package }}'
+    state: latest
+
+- name: clone erlang snippets
+  git:
+    clone: yes
+    dest: '{{ my_home }}/erlang'
+    repo: https://github.com/balle/erlang-snippets.git

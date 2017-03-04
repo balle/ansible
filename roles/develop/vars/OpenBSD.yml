@@ -1,0 +1,4 @@
+python3_package: 'python-3.6.0p0'
+sbcl_package: 'sbcl'
+erlang_package: 'erlang-19.2v0'
+
