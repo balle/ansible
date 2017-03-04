@@ -3,3 +3,4 @@ my_group: 'basti'
 my_home: '/home/basti'
 my_terminal: tilda
 my_browser: chromium
+my_pdf_reader: 'mupdf-1.10ap0'
