@@ -1,0 +1,6 @@
+---
+
+- name: install dsniff
+  package:
+    name: '{{ dsniff_package }}'
+    state: latest

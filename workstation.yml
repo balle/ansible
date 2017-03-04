@@ -12,3 +12,4 @@
     - { name: ksh, tags: ksh }
     - { name: develop, tags: develop }
     - { name: write, tags: write }
+    - { name: hack, tags: hack }

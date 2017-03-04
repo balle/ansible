@@ -1,0 +1,56 @@
+---
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- name: install tcpdump
+  package:
+    name: 'tcpdump'
+    state: latest
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install wireshark
+  package:
+    name: '{{ wireshark_package }}'
+    state: latest
+
+- name: install nmap
+  package:
+    name: 'nmap'
+    state: latest
+
+- name: install kismet
+  package:
+    name: 'kismet'
+    state: latest
+
+- name: install aircrack-ng
+  package:
+    name: 'aircrack-ng'
+    state: latest
+
+- name: install dsniff
+  package:
+    name: '{{ dsniff_package }}'
+    state: latest
+
+- name: install ettercap
+  package:
+    name: '{{ ettercap_package }}'
+    state: latest
+
+- name: install zed attack proxy
+  package:
+    name: '{{ zap_package }}'
+    state: latest
+
+- name: clone metasploit
+  git:
+    clone: yes
+    dest: '{{ my_home }}/metasploit'
+    repo: 'https://github.com/rapid7/metasploit-framework.git'
+
+- name: clone w3af
+  git:
+    clone: yes
+    dest: '{{ my_home }}/w3af'
+    repo: 'https://github.com/andresriancho/w3af.git'
+
