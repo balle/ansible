@@ -13,7 +13,7 @@
 
 - name: install emacs auctex
   package:
-    name: emacs-auctex    
+    name: '{{ auctex_package }}'
     state: present
   when: ansible_os_family != "OpenBSD"
 
