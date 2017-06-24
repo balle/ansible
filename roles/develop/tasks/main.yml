@@ -78,6 +78,11 @@
     name: '{{ erlang_package }}'
     state: present
 
+- name: install elixir
+  package:
+    name: '{{ elixir_package }}'
+    state: present
+
 - name: clone erlang snippets
   git:
     clone: yes

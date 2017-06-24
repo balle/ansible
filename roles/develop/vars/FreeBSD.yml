@@ -3,4 +3,4 @@ python3_pip_package: 'py3-pip'
 python3_virtualenv_package: 'py3-virtualenv'
 sbcl_package: 'sbcl'
 erlang_package: 'erlang'
-
+elixir_package: 'elixir'
