@@ -41,6 +41,7 @@
   package:
     name: '{{ zap_package }}'
     state: latest
+  when: ansible_os_family != 'FreeBSD'
 
 - name: clone metasploit
   git:
