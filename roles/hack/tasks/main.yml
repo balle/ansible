@@ -4,43 +4,43 @@
 - name: install tcpdump
   package:
     name: 'tcpdump'
-    state: latest
+    state: present
   when: ansible_os_family != 'OpenBSD'
 
 - name: install wireshark
   package:
     name: '{{ wireshark_package }}'
-    state: latest
+    state: present
 
 - name: install nmap
   package:
     name: 'nmap'
-    state: latest
+    state: present
 
 - name: install kismet
   package:
     name: 'kismet'
-    state: latest
+    state: present
 
 - name: install aircrack-ng
   package:
     name: 'aircrack-ng'
-    state: latest
+    state: present
 
 - name: install dsniff
   package:
     name: '{{ dsniff_package }}'
-    state: latest
+    state: present
 
 - name: install ettercap
   package:
     name: '{{ ettercap_package }}'
-    state: latest
+    state: present
 
 - name: install zed attack proxy
   package:
     name: '{{ zap_package }}'
-    state: latest
+    state: present
   when: ansible_os_family != 'FreeBSD'
 
 - name: clone metasploit

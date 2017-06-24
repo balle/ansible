@@ -4,23 +4,23 @@
 - name: install emacs
   package:
     name: '{{ emacs_package }}'
-    state: latest
+    state: present
 
 - name: install xclip
   package:
     name: 'xclip'
-    state: latest
+    state: present
 
 - name: install emacs auctex
   package:
     name: emacs-auctex    
-    state: latest
+    state: present
   when: ansible_os_family != "OpenBSD"
 
 - name: install gxmessage
   package:
     name: gxmessage 
-    state: latest
+    state: present
   when: ansible_os_family != "OpenBSD"
 
 

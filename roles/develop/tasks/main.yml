@@ -4,47 +4,47 @@
 - name: install gcc
   package:
     name: gcc
-    state: latest
+    state: present
   when: ansible_os_family != 'OpenBSD'
 
 - name: install make
   package:
     name: make
-    state: latest
+    state: present
   when: ansible_os_family != 'OpenBSD'
 
 - name: install automake
   package:
     name: automake
-    state: latest
+    state: present
   when: ansible_os_family != 'OpenBSD'
 
 - name: install autoconf
   package:
     name: autoconf
-    state: latest
+    state: present
   when: ansible_os_family != 'OpenBSD'
 
 - name: install patch
   package:
     name: patch
-    state: latest
+    state: present
   when: ansible_os_family != 'OpenBSD'
 
 - name: install python3
   package:
     name: '{{ python3_package }}'
-    state: latest
+    state: present
 
 - name: install python 3 pip 
   package:
     name: '{{ python3_pip_package }}'
-    state: latest
+    state: present
 
 - name: install python 3 virtualenv 
   package:
     name: '{{ python3_virtualenv_package }}'
-    state: latest
+    state: present
 
 - name: link python3
   file:
@@ -65,7 +65,7 @@
 - name: install common lisp
   package:
     name: '{{ sbcl_package }}'
-    state: latest
+    state: present
 
 - name: clone lisp snippets
   git:
@@ -76,7 +76,7 @@
 - name: install erlang
   package:
     name: '{{ erlang_package }}'
-    state: latest
+    state: present
 
 - name: clone erlang snippets
   git:

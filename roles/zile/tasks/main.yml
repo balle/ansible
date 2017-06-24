@@ -2,7 +2,7 @@
 - name: install zile
   package:
     name: zile
-    state: latest
+    state: present
 
 - name: configure zile
   copy:

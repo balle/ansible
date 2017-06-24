@@ -2,7 +2,7 @@
 - name: install tmux
   package:
     name: tmux
-    state: latest
+    state: present
   when: ansible_os_family != "OpenBSD"
 
 - name: configure tmux

@@ -4,12 +4,12 @@
 - name: install xbindkeys
   package:
     name: 'xbindkeys'
-    state: latest
+    state: present
 
 - name: install xscreensaver
   package:
     name: 'xscreensaver'
-    state: latest
+    state: present
 
 - name: x startup config
   copy:

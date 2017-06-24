@@ -4,19 +4,19 @@
 - name: install libreoffice
   package:
     name: 'libreoffice'
-    state: latest
+    state: present
 
 - name: install latex
   package:
     name: '{{ texlive_package }}'
-    state: latest
+    state: present
 
 - name: install owncloud client
   package:
     name: '{{ owncloud_client_package }}'
-    state: latest
+    state: present
 
 - name: install pdf reader
   package:
     name: '{{ my_pdf_reader }}'
-    state: latest
+    state: present

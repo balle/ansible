@@ -2,7 +2,7 @@
 - name: install openbox
   package:
     name: openbox
-    state: latest
+    state: present
 
 - name: make openbox config dir
   file:
