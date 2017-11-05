@@ -1,2 +1,3 @@
 texlive_package: 'texlive_base'
 owncloud_client_package: 'owncloudclient-2.2.4p0'
+cabal_package: 'cabal-install'

@@ -20,3 +20,39 @@
   package:
     name: '{{ my_pdf_reader }}'
     state: present
+
+- name: install dictionary
+  package:
+    name: 'mozilla-dicts-{{ my_dict_lang }}'
+    state: present
+
+- name: link dict
+  file:
+    follow: yes
+    src: '/usr/local/share/mozilla-dicts/{{ my_dict_lang }}.aff'
+    dest: '/usr/local/share/hunspell/{{ my_dict_lang }}.aff'
+    state: link
+  file:
+    follow: yes
+    src: '/usr/local/share/mozilla-dicts/{{ my_dict_lang }}.dic'
+    dest: '/usr/local/share/hunspell/{{ my_dict_lang }}.dic'
+    state: link
+  when: ansible_os_family == "OpenBSD"
+
+- name: install haskell cabal
+  package:
+    name: '{{ cabal_package }}'
+    state: present
+  register: cabal
+  when: ansible_os_family == "OpenBSD"
+
+- name: install pandoc
+  command: cabal install pandoc
+  when: cabal.changed
+  when: ansible_os_family == "OpenBSD"
+
+- name: install pandoc
+  package:
+    name: 'pandoc'
+    state: present
+  when: ansible_os_family != "OpenBSD"
