@@ -12,21 +12,18 @@ export LOGCHECK=10
 # check local mails every minute
 export MAILCHECK=60
 
-export PYMACS_PYTHON=python2
+export PYMACS_PYTHON=python3
 
 # default editor / browser settings
-export SVN_EDITOR="/usr/bin/nano"
-export EDITOR="/usr/bin/zile"
-export BROWSER="/usr/bin/firefox"
+export SVN_EDITOR="{{ mg_binary }}"
+export EDITOR="{{ mg_binary }}"
+export BROWSER="{{ firefox_binary }}"
 
 # shell nach x sekunden automatisch schliessen
 export TMOUT=0
 
 # Symbolische Links verfolgen
 set -P
-
-# search path for cd
-#export CDPATH="~/Musik:~/Musik/*:~/Musik/*/*"
 
 # terminal blinken und piepen ausstellen
 setopt nobeep
@@ -89,7 +86,6 @@ export PS1="
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias mt="touch /var/mail/basti"
 
 alias tripwire='LC_ALL=C /usr/sbin/tripwire'
 
@@ -97,10 +93,9 @@ alias em="emacs -nw"
 alias b="popd"
 alias g="xscreensaver-command -lock &"
 alias l='ls -aluih'
-alias m='tail -f /var/log/messages.log'
+alias m='tail -f /var/log/messages'
 alias n='netstat -anp | grep LISTEN'
 alias p='ps -e -o ppid,pid,%cpu,%mem,stackp,tty,user,state,cmd'
-alias u='/etc/umts/setpin; netcfg umts'
 alias psg="ps ax | grep"
 alias psm="ps -e -o size,rss,pid,cmd|sort -h"
 alias okm="setxkbmap de"
@@ -112,5 +107,4 @@ alias praesi_off="sudo xrandr --output VGA1 --off; sudo xrandr --output LVDS1 --
 alias play_on="xrandr --size 800x600"
 alias play_off="xrandr --size 1024x600"
 
-. /etc/profile.d/autojump.zsh
 
