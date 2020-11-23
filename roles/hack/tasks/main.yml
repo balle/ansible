@@ -17,11 +17,6 @@
     name: 'nmap'
     state: present
 
-- name: install kismet
-  package:
-    name: 'kismet'
-    state: present
-
 - name: install aircrack-ng
   package:
     name: 'aircrack-ng'
