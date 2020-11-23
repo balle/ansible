@@ -2,4 +2,5 @@
 - include: xorg.yml
 - include: openbox.yml
 - include: browser.yml
+- include: mua.yml
 - include: terminal.yml

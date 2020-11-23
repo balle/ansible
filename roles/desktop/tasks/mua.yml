@@ -1,0 +1,5 @@
+---
+- name: install mail user agent
+  package:
+    name: '{{ my_mua }}'
+    state: present
