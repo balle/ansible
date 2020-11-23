@@ -5,7 +5,6 @@
   roles:
     - { name: emacs, tags: emacs }
     - { name: tmux, tags: tmux }
-    - { name: zile, tags: zile }
     - { name: zsh, tags: zsh }
     - { name: desktop, tags: desktop }
     - { name: doas, tags: doas }

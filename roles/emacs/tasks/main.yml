@@ -6,6 +6,20 @@
     name: '{{ emacs_package }}'
     state: present
 
+- name: install mg
+  package:
+    name: 'mg'
+    state: present
+  when: ansible_os_family != "OpenBSD"
+
+- name: configure mg
+  copy:
+    src: mg.conf
+    dest: '{{ my_home }}/.mg'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0600
+
 - name: install xclip
   package:
     name: 'xclip'
