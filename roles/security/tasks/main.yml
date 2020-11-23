@@ -1,0 +1,6 @@
+---
+
+- name: install gnupg
+  package:
+    name: 'gnupg'
+    state: present
