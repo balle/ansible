@@ -1,19 +1,9 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install libreoffice
-  package:
-    name: 'libreoffice'
-    state: present
-
 - name: install latex
   package:
     name: '{{ texlive_package }}'
-    state: present
-
-- name: install owncloud client
-  package:
-    name: '{{ owncloud_client_package }}'
     state: present
 
 - name: install pdf reader
@@ -39,20 +29,3 @@
     state: link
   when: ansible_os_family == "OpenBSD"
 
-- name: install haskell cabal
-  package:
-    name: '{{ cabal_package }}'
-    state: present
-  register: cabal
-  when: ansible_os_family == "OpenBSD"
-
-- name: install pandoc
-  command: cabal install pandoc
-  when: cabal.changed
-  when: ansible_os_family == "OpenBSD"
-
-- name: install pandoc
-  package:
-    name: 'pandoc'
-    state: present
-  when: ansible_os_family != "OpenBSD"
