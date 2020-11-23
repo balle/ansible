@@ -49,7 +49,7 @@
 - name: link python3
   file:
     follow: yes
-    src: '/usr/local/bin/python3.6'
+    src: '/usr/local/bin/python3.8'
     dest: '/usr/bin/python3'
     state: link
   when: ansible_os_family == 'OpenBSD'
@@ -57,34 +57,13 @@
 - name: link pydoc3
   file:
     follow: yes
-    src: '/usr/local/bin/pydoc3.6'
+    src: '/usr/local/bin/pydoc3.8'
     dest: '/usr/local/bin/pydoc3'
     state: link
   when: ansible_os_family == 'OpenBSD'
 
-- name: install common lisp
+- name: install golang
   package:
-    name: '{{ sbcl_package }}'
+    name: '{{ go_package }}'
     state: present
 
-- name: clone lisp snippets
-  git:
-    clone: yes
-    dest: '{{ my_home }}/lisp'
-    repo: https://github.com/balle/lisp-snippets.git
-
-- name: install erlang
-  package:
-    name: '{{ erlang_package }}'
-    state: present
-
-- name: install elixir
-  package:
-    name: '{{ elixir_package }}'
-    state: present
-
-- name: clone erlang snippets
-  git:
-    clone: yes
-    dest: '{{ my_home }}/erlang'
-    repo: https://github.com/balle/erlang-snippets.git
