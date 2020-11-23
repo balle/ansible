@@ -2,6 +2,6 @@ my_user: 'basti'
 my_group: 'basti'
 my_home: '/home/basti'
 my_terminal: tilda
-my_browser: chromium
-my_pdf_reader: 'mupdf-1.10ap0'
+my_browser: firefox
+my_pdf_reader: 'mupdf'
 my_dict_var: 'de-DE'
