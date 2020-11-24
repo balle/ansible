@@ -3,3 +3,8 @@
   package:
     name: '{{ my_mua }}'
     state: present
+
+- name: install spam filter
+  package:
+    name: '{{ my_spam_filter }}'
+    state: present
