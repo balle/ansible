@@ -44,6 +44,12 @@
     dest: '{{ my_home }}/metasploit'
     repo: 'https://github.com/rapid7/metasploit-framework.git'
 
+- name: install metasploit dependencies
+  command: "cd {{ my_home }}/metasploit && bundle install"
+  become_user: "{{ my_user }}"
+  become_method: "su"
+  run_once: True
+
 - name: clone w3af
   git:
     clone: yes
