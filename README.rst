@@ -31,3 +31,12 @@ Run all but some tags locally
   
   ansible-playbook -c local --skip-tags desktop,office workstation.yml
 
+
+On macos run
+============
+
+.. code-block:: bash
+
+  ansible-playbook -c local --skip-tags desktop,desktop-tools,doas,ksh -e my_home=/Users/$YOUR_USERNAME --become-user $YOUR_USERNAME workstation.yml
+
+
