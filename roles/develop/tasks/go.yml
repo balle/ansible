@@ -5,20 +5,14 @@
     name: '{{ go_package }}'
     state: present
 
-- name: install go guru
-  command: go get -u -v golang.org/x/tools/cmd/guru
-
-- name: install godef
-  command: go get -u -v github.com/rogpeppe/godef
-
-- name: install gocode
-  command: go get -u -v github.com/nsf/gocode
-
-- name: install goimports
-  command: go get -u -v golang.org/x/tools/cmd/goimports
-
-- name: install goflymake
-  command: go get -u -v github.com/dougm/goflymake
-
-- name: install gore
-  command: go get -u github.com/motemen/gore/cmd/gore
+- name: install go modules
+  command: "{{ item }}"
+  become_user: "{{ my_user }}"
+  become_method: "su"
+  loop:
+    - go get -u -v golang.org/x/tools/cmd/guru
+    - go get -u -v github.com/rogpeppe/godef
+    - go get -u -v github.com/nsf/gocode
+    - go get -u -v golang.org/x/tools/cmd/goimports
+    - go get -u -v github.com/dougm/goflymake
+    - go get -u github.com/motemen/gore/cmd/gore
