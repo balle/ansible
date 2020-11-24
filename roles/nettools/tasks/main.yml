@@ -1,0 +1,16 @@
+---
+- name: install tcpdump
+  package:
+    name: 'tcpdump'
+    state: present
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install wireshark
+  package:
+    name: '{{ wireshark_package }}'
+    state: present
+
+- name: install jnettop
+  package:
+    name: 'jnettop'
+    state: present
