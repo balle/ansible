@@ -44,10 +44,20 @@
     dest: '{{ my_home }}/metasploit'
     repo: 'https://github.com/rapid7/metasploit-framework.git'
 
+- name: install ruby
+  package: 
+    name: "{{ ruby_package }}"
+    state: present
+- name: link bundler
+  file:
+    follow: yes
+    src: '/usr/local/bin/bundle27'
+    dest: '/usr/local/bin/bundle'
+    state: link
+  when: ansible_os_family == 'OpenBSD'
+
 - name: install metasploit dependencies
-  command: "cd {{ my_home }}/metasploit && bundle install"
-  become_user: "{{ my_user }}"
-  become_method: "su"
+  command: chdir="{{ my_home }}/metasploit" "bundle install"
   run_once: True
 
 - name: clone w3af
