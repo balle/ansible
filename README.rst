@@ -14,3 +14,20 @@ Run remote over ssh
 .. code-block:: bash
 
   ansible-playbook -k workstation.yml 
+
+  
+Run only one tag locally
+========================
+
+.. code-block:: bash
+  
+  ansible-playbook -c local -t base workstation.yml
+
+  
+Run all but some tags locally
+=============================
+
+.. code-block:: bash
+  
+  ansible-playbook -c local --skip-tags desktop,office workstation.yml
+
