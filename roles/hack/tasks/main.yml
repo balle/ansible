@@ -26,7 +26,8 @@
   package:
     name: '{{ dsniff_package }}'
     state: present
-
+  when: ansible_os_family != 'Darwin'
+  
 - name: install ettercap
   package:
     name: '{{ ettercap_package }}'

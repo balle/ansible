@@ -1,0 +1,5 @@
+ruby_package: 'ruby'
+ettercap_package: 'ettercap'
+wireshark_package: 'wireshark'
+zap_package: 'owasp-zap'
+
