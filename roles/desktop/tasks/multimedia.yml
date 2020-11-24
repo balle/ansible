@@ -1,0 +1,14 @@
+---
+- name: install mplayer
+  package:
+    name: 'mplayer'
+    state: present
+
+- name: install gstreamer plugins
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - gstreamer-plugins-good
+    - gstreamer-plugins-bad
+    - gstreamer-plugins-ugly

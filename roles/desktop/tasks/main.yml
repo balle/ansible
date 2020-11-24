@@ -1,6 +1,7 @@
 ---
 - include: xorg.yml
 - include: openbox.yml
+- include: terminal.yml
 - include: browser.yml
 - include: mua.yml
-- include: terminal.yml
+- include: multimedia.yml
