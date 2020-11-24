@@ -13,7 +13,7 @@
 
 - name: configure aide
   copy:
-    src: ""{{ aide_config }}"
+    src: "{{ aide_config }}"
     dest: '{{ my_home }}/.zshrc'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
