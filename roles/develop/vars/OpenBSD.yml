@@ -1,4 +1,4 @@
-python3_package: 'python-3.6.0p0'
+python3_package: 'python3'
 python3_pip_package: 'py3-pip'
 python3_virtualenv_package: 'py3-virtualenv'
 go_package: 'go'

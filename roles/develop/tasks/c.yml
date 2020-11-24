@@ -1,0 +1,24 @@
+
+- name: install gcc
+  package:
+    name: gcc
+    state: present
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install make
+  package:
+    name: make
+    state: present
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install automake
+  package:
+    name: automake
+    state: present
+  when: ansible_os_family != 'OpenBSD'
+
+- name: install autoconf
+  package:
+    name: autoconf
+    state: present
+  when: ansible_os_family != 'OpenBSD'

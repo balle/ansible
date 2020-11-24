@@ -1,0 +1,11 @@
+
+- name: install git
+  package:
+    name: 'git'
+    state: present
+
+- name: install patch
+  package:
+    name: patch
+    state: present
+  when: ansible_os_family != 'OpenBSD'
