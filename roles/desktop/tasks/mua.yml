@@ -4,6 +4,11 @@
     name: '{{ my_mua }}'
     state: present
 
+- name: install mail user agent addons
+  package:
+    name: '{{ my_mua_addons }}'
+    state: present
+
 - name: install spam filter
   package:
     name: '{{ my_spam_filter }}'
