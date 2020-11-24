@@ -41,10 +41,33 @@
     dest: '{{ my_home }}/metasploit'
     repo: 'https://github.com/rapid7/metasploit-framework.git'
 
+- name: install rbenv on macos
+  package: 
+    name: "rbenv"
+    state: present
+  when: ansible_os_family != 'Darwin'
+
+- name: install ruby on macos
+  command: "{{ item }}"
+  run_once: True
+  loop:
+    - "rbenv install 2.7.2"
+    - "rbenv global 2.7.2"
+
 - name: install ruby
   package: 
     name: "{{ ruby_package }}"
     state: present
+  when: ansible_os_family != 'Darwin'
+  
+- name: install ruby development files
+  package: 
+    name: "{{ ruby_devel_package }}"
+    state: present
+  when:
+    - ansible_os_family != 'OpenBSD'
+    - ansible_os_family != 'Darwin'
+    
 - name: link bundler
   file:
     follow: yes
