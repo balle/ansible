@@ -1,0 +1,22 @@
+---
+- name: install sleuthkit
+  package:
+    name: 'sleuthkit'
+    state: present
+
+- name: install autopsy
+  package:
+    name: 'autopsy'
+    state: present
+
+- name: install testdisk
+  package:
+    name: 'testdisk'
+    state: present
+
+- name: install volatility framework
+  git:
+    clone: yes
+    dest: '{{ my_home }}/volatility'
+    repo: https://github.com/volatilityfoundation/volatility
+

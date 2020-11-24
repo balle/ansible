@@ -15,3 +15,4 @@
     - { name: write, tags: write }
     - { name: office, tags: office }
     - { name: hack, tags: hack }
+    - { name: forensics, tags: forensics }
