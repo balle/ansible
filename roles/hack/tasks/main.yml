@@ -22,11 +22,18 @@
     name: '{{ ettercap_package }}'
     state: present
 
+- name: install zed attack proxy on macos
+  package:
+    name: '{{ zap_package }}'
+    state: present
+  ignore_errors: yes
+  when: ansible_os_family == 'Darwin'
+
 - name: install zed attack proxy
   package:
     name: '{{ zap_package }}'
     state: present
-  when: ansible_os_family != 'FreeBSD'
+  when: ansible_os_family != 'Darwin'
 
 - name: clone metasploit
   git:
@@ -56,3 +63,13 @@
     dest: '{{ my_home }}/w3af'
     repo: 'https://github.com/andresriancho/w3af.git'
 
+- name: clone routersploit
+  git:
+    clone: yes
+    dest: '{{ my_home }}/routersploit'
+    repo: 'https://github.com/threat9/routersploit.git'
+
+- name: install routersploit dependencies
+  command: chdir="{{ my_home }}/routersploit" "python3 -m pip install -r requirements.txt"
+  run_once: True
+  
