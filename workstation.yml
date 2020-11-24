@@ -8,6 +8,7 @@
     - { name: tmux, tags: base }
     - { name: zsh, tags: base }
     - { name: desktop, tags: desktop }
+    - { name: desktop-tools, tags: desktop-tools }
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
     - { name: develop, tags: develop }
