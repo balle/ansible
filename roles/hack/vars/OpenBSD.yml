@@ -1,5 +1,5 @@
-dsniff_package: 'dsniff-2.3p15-no_x11'
-ettercap_package: 'ettercap-0.7.5.3p3-no_x11'
-wireshark_package: 'wireshark-gtk-2.2.4'
+dsniff_package: 'dsniff-2.3p16-no_x11'
+ettercap_package: 'ettercap-0.7.5.3p6-no_x11'
+wireshark_package: 'wireshark'
 zap_package: 'zaproxy'
 
