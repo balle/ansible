@@ -7,4 +7,4 @@ my_mua: claws-mail
 my_mua_addons: claws-mail-bogofilter
 my_spam_filter: bogofilter
 my_pdf_reader: 'mupdf'
-my_dict_var: 'de-DE'
+my_dict_lang: 'de-DE'
