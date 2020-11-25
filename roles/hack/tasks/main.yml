@@ -33,7 +33,9 @@
   package:
     name: '{{ zap_package }}'
     state: present
-  when: ansible_os_family != 'Darwin'
+  when:
+    - ansible_os_family != 'Darwin'
+    - ansible_os_family != 'RedHat'
 
 - name: clone metasploit
   git:

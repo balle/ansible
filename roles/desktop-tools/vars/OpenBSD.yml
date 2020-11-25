@@ -1,0 +1,4 @@
+firefox_binary: "/usr/local/bin/firefox"
+my_mua_addons: "claws-mail-bogofilter"
+
+

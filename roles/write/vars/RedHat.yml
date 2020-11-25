@@ -1,3 +1,2 @@
 texlive_package: 'texlive-base'
-my_dict_lang: 'de-DE'
-
+my_dict_lang: 'de'
