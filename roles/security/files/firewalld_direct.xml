@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<direct>
+  <rule ipv="ipv4" table="filter" chain="INPUT" priority="0">-m state --state ESTABLISHED,RELATED -j ACCEPT</rule>
+  <rule ipv="ipv4" table="filter" chain="INPUT" priority="99">-j REJECT</rule>
+  <rule ipv="ipv6" table="filter" chain="INPUT" priority="0">-m state --state ESTABLISHED,RELATED -j ACCEPT</rule>
+  <rule ipv="ipv6" table="filter" chain="INPUT" priority="99">-j REJECT</rule>
+</direct>
