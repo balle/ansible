@@ -1,4 +1,6 @@
 aide_config: 'aide_openbsd.conf'
 sysctl_config: 'sysctl_openbsd.conf'
 sysctl_config_dest: '/etc/sysctl.conf'
+packetfilter_config: 'pf.conf'
+packetfilter_config_dest: '/etc/pf.conf'
 

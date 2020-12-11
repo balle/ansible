@@ -26,3 +26,11 @@
     owner: 'root'
     group: 'root'
     mode: 0600
+
+- name: configure packetfilter
+  copy:
+    src: '{{ packetfilter_config }}'
+    dest: '{{ packetfilter_config_dest }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
