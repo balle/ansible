@@ -1,3 +1,5 @@
 aide_config: 'aide_macos.conf'
+sysctl_config: 'sysctl_macos.conf'
+sysctl_config_dest: '/etc/sysctl.conf'
 
 
