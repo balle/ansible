@@ -18,3 +18,11 @@
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
     mode: 0600
+
+- name: configure sysctl 
+  copy:
+    src: '{{ sysctl_config }}'
+    dest: '{{ sysctl_config_dest }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0600

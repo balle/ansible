@@ -1,0 +1,6 @@
+ruby_package: 'ruby'
+dsniff_package: 'dsniff'
+ettercap_package: 'ettercap'
+wireshark_package: 'wireshark'
+zap_package: 'zaproxy'
+

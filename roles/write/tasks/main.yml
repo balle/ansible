@@ -15,6 +15,13 @@
   package:
     name: 'mozilla-dicts-{{ my_dict_lang }}'
     state: present
+  when: ansible_os_family != "RedHat"
+
+- name: install dictionary
+  package:
+    name: 'hunspell-de'
+    state: present
+  when: ansible_os_family == "RedHat"
 
 - name: link dict
   file:

@@ -1,4 +1,6 @@
 ---
+- include_vars: '{{ ansible_os_family }}.yml'
+  
 - name: install mail user agent
   package:
     name: '{{ my_mua }}'
