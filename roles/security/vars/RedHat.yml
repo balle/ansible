@@ -1,3 +1,5 @@
 aide_config: 'aide_redhat.conf'
+sysctl_config: 'sysctl_redhat.conf'
+sysctl_config_dest: '/etc/sysctl.d/42-security.conf'
 
 
