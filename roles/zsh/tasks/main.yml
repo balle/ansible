@@ -12,7 +12,7 @@
   when: ansible_os_family != "OpenBSD"
   
 - name: configure zsh
-  copy:
+  template:
     src: zshrc
     dest: '{{ my_home }}/.zshrc'
     owner: '{{ my_user }}'
