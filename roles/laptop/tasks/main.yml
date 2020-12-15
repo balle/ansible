@@ -1,0 +1,7 @@
+---
+- name: enable apmd
+  lineinfile:
+    path: /etc/rc.conf.local
+    line: 'apmd_flags='
+    insertbefore: EOF
+  when: ansible_os_family == "OpenBSD"
