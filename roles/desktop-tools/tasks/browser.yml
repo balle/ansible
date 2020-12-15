@@ -3,3 +3,11 @@
   package:
     name: '{{ my_browser }}'
     state: present
+
+- name: configure browser
+  copy:
+    src: '{{ my_browser_config }}'
+    dest: '{{ my_browser_config_dest }}'
+    owner: '{{ my_user }}'
+    group: '{{ my_group }}'
+    mode: 0600

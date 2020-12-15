@@ -17,7 +17,7 @@ export PYMACS_PYTHON=python3
 # default editor / browser settings
 export SVN_EDITOR="{{ mg_binary }}"
 export EDITOR="{{ mg_binary }}"
-export BROWSER="{{ firefox_binary }}"
+export BROWSER="{{ my_browser }}"
 
 {% raw %}
 

@@ -2,7 +2,9 @@ my_user: 'basti'
 my_group: 'basti'
 my_home: '/home/basti'
 my_terminal: tilda
-my_browser: firefox
+my_browser: midori
+my_browser_config: midori.conf
+my_browser_config_dest: '/home/basti/.config/midori/config'
 my_mua: claws-mail
 my_spam_filter: bogofilter
 my_pdf_reader: 'mupdf'
