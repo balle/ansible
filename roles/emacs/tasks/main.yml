@@ -49,6 +49,7 @@
 - name: clone emacs config
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/emacs'
     repo: https://github.com/balle/emacs.git
   when: ansible_os_family == "OpenBSD"
@@ -67,10 +68,4 @@
     dest: '{{ my_home }}/.emacs.d'
     state: link
 
-- name: link .emacs-snippets
-  file:
-    follow: yes
-    src: '{{ my_home }}/emacs/.emacs-snippets'
-    dest: '{{ my_home }}/.emacs-snippets'
-    state: link
 
