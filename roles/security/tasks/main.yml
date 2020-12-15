@@ -1,6 +1,6 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
-
+  
 - name: install gnupg
   package:
     name: 'gnupg'
@@ -34,4 +34,4 @@
     owner: 'root'
     group: 'root'
     mode: 0600
-when: ansible_os_family != 'Darwin'
+  when: ansible_os_family != 'Darwin'
