@@ -5,12 +5,12 @@
     name: '{{ python3_package }}'
     state: present
 
-- name: install python 3 pip 
+- name: install python 3 pip
   package:
     name: '{{ python3_pip_package }}'
     state: present
 
-- name: install python 3 virtualenv 
+- name: install python 3 virtualenv
   package:
     name: '{{ python3_virtualenv_package }}'
     state: present
@@ -30,3 +30,8 @@
     dest: '/usr/local/bin/pydoc3'
     state: link
   when: ansible_os_family == 'OpenBSD'
+
+- name: install ipython3
+  package:
+    name: '{{ ipython3_package }}'
+    state: present
