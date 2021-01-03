@@ -1,6 +1,30 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
 
+- name: create xorg.conf.d dir
+  file:
+    path: '/etc/X11/xorg.conf.d'
+    state: directory
+    recurse: yes
+    owner: 'root'
+    group: 'root'
+
+- name: xorg keyboard config
+  copy:
+    src: xorg_keyboard.conf
+    dest: '/etc/X11/xorg.conf.d/xorg_keyboard.conf'
+    owner: 'root'
+    group: 'root'
+    mode: 0744
+
+- name: xorg synaptics config
+  copy:
+    src: xorg_synaptics.conf
+    dest: '/etc/X11/xorg.conf.d/xorg_synaptics.conf'
+    owner: 'root'
+    group: 'root'
+    mode: 0744
+
 - name: install xbindkeys
   package:
     name: 'xbindkeys'
