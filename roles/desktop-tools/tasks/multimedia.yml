@@ -12,3 +12,10 @@
     - gstreamer1-plugins-good
     - gstreamer1-plugins-bad
     - gstreamer1-plugins-ugly
+
+- name: install feh
+  package:
+    name: 'feh'
+    state: present
+  when: ansible_os_family != "Darwin"
+  
