@@ -3,6 +3,7 @@
   hosts: all
 
   roles:
+    - { name: system, tags: base }
     - { name: security, tags: base }
     - { name: emacs, tags: emacs }
     - { name: tmux, tags: base }
