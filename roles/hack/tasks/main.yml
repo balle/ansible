@@ -45,9 +45,24 @@
 
 - name: install rbenv on macos
   package: 
+    name: "postgresql"
+    state: present
+  when: ansible_os_family == 'Darwin'
+
+- name: install postgresql
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ postgresql_server }}"
+    - "{{ postgresql_client }}"
+  when: ansible_os_family != 'Darwin'
+  
+- name: install rbenv on macos
+  package: 
     name: "rbenv"
     state: present
-  when: ansible_os_family != 'Darwin'
+  when: ansible_os_family == 'Darwin'
 
 - name: install ruby on macos
   command: "{{ item }}"
@@ -55,6 +70,7 @@
   loop:
     - "rbenv install 2.7.2"
     - "rbenv global 2.7.2"
+  when: ansible_os_family == 'Darwin'
 
 - name: install ruby
   package: 
