@@ -8,7 +8,8 @@
   package:
     name: 'autopsy'
     state: present
-
+  when: ansible_os_family != "OpenBSD"
+  
 - name: install testdisk
   package:
     name: 'testdisk'

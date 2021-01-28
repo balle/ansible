@@ -17,7 +17,9 @@ export PYMACS_PYTHON=python3
 # default editor / browser settings
 export SVN_EDITOR="{{ mg_binary }}"
 export EDITOR="{{ mg_binary }}"
-export BROWSER="{{ firefox_binary }}"
+export BROWSER="{{ my_browser }}"
+
+{% raw %}
 
 # shell nach x sekunden automatisch schliessen
 export TMOUT=0
@@ -107,4 +109,4 @@ alias praesi_off="sudo xrandr --output VGA1 --off; sudo xrandr --output LVDS1 --
 alias play_on="xrandr --size 800x600"
 alias play_off="xrandr --size 1024x600"
 
-
+{% endraw %}

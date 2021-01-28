@@ -1,16 +1,21 @@
 #hsetroot -fill /home/basti/Bilder/whax.jpg&
+#feh -B -bg-scale /home/basti/Bilder/whax.jpg &
+
+{{ my_browser }} &
 xscreensaver &
+xbindkeys &
+wmapm &
+wmnetload -i urtwn0 &
+#wmsystemtray &
+sleep 1
+
 xbindkeys &
 {{ my_terminal }} &
 
-DELAY=.5
-#APPS='wmtop \
-#      wmsm -d sda -m \
-#      wmnd \
-#      wmacpi \
-#      wmBinClock \
-#      wmix \
-#      wmmaiload \
-#      wmwifi -tn -i 3 -l \
-#      wmsystemtray'
-#(for X in $APPS ; do ($X &) ; sleep $DELAY ; done) &
+xterm -fa monaco -fs 12 +mb -vb +sb -fg white -bg black &
+xterm -fa monaco -fs 12 +mb -vb +sb -fg white -bg black &
+wmmon &
+wmmon -s &
+wmmon -i &
+wmtime -digital &
+#/usr/X11R6/bin/wmBinClock &

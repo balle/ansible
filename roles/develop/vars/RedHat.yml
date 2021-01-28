@@ -1,6 +1,5 @@
 python3_package: 'python3'
 python3_pip_package: 'python3-pip'
 python3_virtualenv_package: 'python3-virtualenvwrapper'
+ipython3_package: 'python3-ipython'
 go_package: 'golang'
-
-

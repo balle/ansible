@@ -1,0 +1,11 @@
+---
+- name: install dockapps
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - wmapm
+    - wmnetload
+    - wmmon
+    - wmtime
+
