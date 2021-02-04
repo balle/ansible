@@ -9,9 +9,9 @@
     name: "{{ item }}"
     state: present
   loop:
-    - gstreamer1-plugins-good
-    - gstreamer1-plugins-bad
-    - gstreamer1-plugins-ugly
+    - "{{ gstreamer1-plugins-good }}"
+    - "{{ gstreamer1-plugins-bad }}"
+    - "{{ gstreamer1-plugins-ugly }}"
 
 - name: install feh
   package:
