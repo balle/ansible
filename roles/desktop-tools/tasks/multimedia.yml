@@ -1,4 +1,6 @@
 ---
+- include_vars: '{{ ansible_os_family }}.yml'
+  
 - name: install mplayer
   package:
     name: 'mplayer'
@@ -9,9 +11,9 @@
     name: "{{ item }}"
     state: present
   loop:
-    - "{{ gstreamer1-plugins-good }}"
-    - "{{ gstreamer1-plugins-bad }}"
-    - "{{ gstreamer1-plugins-ugly }}"
+    - "{{ gstreamer1_plugins_good }}"
+    - "{{ gstreamer1_plugins_bad }}"
+    - "{{ gstreamer1_plugins_ugly }}"
 
 - name: install feh
   package:
