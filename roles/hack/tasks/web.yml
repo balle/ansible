@@ -1,0 +1,21 @@
+---
+- name: install zed attack proxy on macos
+  package:
+    name: '{{ zap_package }}'
+    state: present
+  ignore_errors: yes
+  when: ansible_os_family == 'Darwin'
+
+- name: install zed attack proxy
+  package:
+    name: '{{ zap_package }}'
+    state: present
+  when:
+    - ansible_os_family != 'Darwin'
+    - ansible_os_family != 'RedHat'
+
+- name: clone w3af
+  git:
+    clone: yes
+    dest: '{{ my_home }}/w3af'
+    repo: 'https://github.com/andresriancho/w3af.git'
