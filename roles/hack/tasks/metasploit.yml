@@ -1,0 +1,61 @@
+---
+- name: clone metasploit
+  git:
+    clone: yes
+    dest: '{{ my_home }}/hack/metasploit'
+    repo: 'https://github.com/rapid7/metasploit-framework.git'
+
+- name: install rbenv on macos
+  package: 
+    name: "postgresql"
+    state: present
+  when: ansible_os_family == 'Darwin'
+
+- name: install postgresql
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ postgresql_server }}"
+    - "{{ postgresql_client }}"
+  when: ansible_os_family != 'Darwin'
+  
+- name: install rbenv on macos
+  package: 
+    name: "rbenv"
+    state: present
+  when: ansible_os_family == 'Darwin'
+
+- name: install ruby on macos
+  command: "{{ item }}"
+  run_once: True
+  loop:
+    - "rbenv install 2.7.2"
+    - "rbenv global 2.7.2"
+  when: ansible_os_family == 'Darwin'
+
+- name: install ruby
+  package: 
+    name: "{{ ruby_package }}"
+    state: present
+  when: ansible_os_family != 'Darwin'
+  
+- name: install ruby development files
+  package: 
+    name: "{{ ruby_devel_package }}"
+    state: present
+  when:
+    - ansible_os_family != 'OpenBSD'
+    - ansible_os_family != 'Darwin'
+    
+- name: link bundler
+  file:
+    follow: yes
+    src: '/usr/local/bin/bundle27'
+    dest: '/usr/local/bin/bundle'
+    state: link
+  when: ansible_os_family == 'OpenBSD'
+
+- name: install metasploit dependencies
+  command: chdir="{{ my_home }}/metasploit" "bundle install"
+  run_once: True

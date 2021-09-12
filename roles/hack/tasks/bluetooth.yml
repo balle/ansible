@@ -1,0 +1,33 @@
+---
+- name: Install cmake
+  package:
+    name: cmake
+    state: present
+
+- name: Install libusb-devel
+  package:
+    name: libusb-devel
+    state: present
+
+- name: Install bluez-libs-devel
+  package:
+    name: bluez-libs-devel
+    state: present
+
+- name: Install libpcap-devel
+  package:
+    name: libpcap-devel
+    state: present
+
+- name: clone libbtbb
+  git:
+    clone: yes
+    dest: '{{ my_home }}/hack/libbtbb'
+    repo: 'https://github.com/greatscottgadgets/libbtbb.git'
+
+- name: clone ubertooth
+  git:
+    clone: yes
+    dest: '{{ my_home }}/hack/ubertooth'
+    repo: 'https://github.com/greatscottgadgets/ubertooth.git'
+

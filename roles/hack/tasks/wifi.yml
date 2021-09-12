@@ -1,0 +1,6 @@
+---
+- name: install aircrack-ng
+  package:
+    name: 'aircrack-ng'
+    state: present
+

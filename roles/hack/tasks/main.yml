@@ -1,108 +1,15 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
+- include: metasploit.yml
+- include: wifi.yml
+- include: hijacking.yml
+- include: web.yml
+- include: bluetooth.yml
 
 - name: install nmap
   package:
     name: 'nmap'
     state: present
-
-- name: install aircrack-ng
-  package:
-    name: 'aircrack-ng'
-    state: present
-
-- name: install dsniff
-  package:
-    name: '{{ dsniff_package }}'
-    state: present
-  when: ansible_os_family != 'Darwin'
-  
-- name: install ettercap
-  package:
-    name: '{{ ettercap_package }}'
-    state: present
-
-- name: install zed attack proxy on macos
-  package:
-    name: '{{ zap_package }}'
-    state: present
-  ignore_errors: yes
-  when: ansible_os_family == 'Darwin'
-
-- name: install zed attack proxy
-  package:
-    name: '{{ zap_package }}'
-    state: present
-  when:
-    - ansible_os_family != 'Darwin'
-    - ansible_os_family != 'RedHat'
-
-- name: clone metasploit
-  git:
-    clone: yes
-    dest: '{{ my_home }}/metasploit'
-    repo: 'https://github.com/rapid7/metasploit-framework.git'
-
-- name: install rbenv on macos
-  package: 
-    name: "postgresql"
-    state: present
-  when: ansible_os_family == 'Darwin'
-
-- name: install postgresql
-  package:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - "{{ postgresql_server }}"
-    - "{{ postgresql_client }}"
-  when: ansible_os_family != 'Darwin'
-  
-- name: install rbenv on macos
-  package: 
-    name: "rbenv"
-    state: present
-  when: ansible_os_family == 'Darwin'
-
-- name: install ruby on macos
-  command: "{{ item }}"
-  run_once: True
-  loop:
-    - "rbenv install 2.7.2"
-    - "rbenv global 2.7.2"
-  when: ansible_os_family == 'Darwin'
-
-- name: install ruby
-  package: 
-    name: "{{ ruby_package }}"
-    state: present
-  when: ansible_os_family != 'Darwin'
-  
-- name: install ruby development files
-  package: 
-    name: "{{ ruby_devel_package }}"
-    state: present
-  when:
-    - ansible_os_family != 'OpenBSD'
-    - ansible_os_family != 'Darwin'
-    
-- name: link bundler
-  file:
-    follow: yes
-    src: '/usr/local/bin/bundle27'
-    dest: '/usr/local/bin/bundle'
-    state: link
-  when: ansible_os_family == 'OpenBSD'
-
-- name: install metasploit dependencies
-  command: chdir="{{ my_home }}/metasploit" "bundle install"
-  run_once: True
-
-- name: clone w3af
-  git:
-    clone: yes
-    dest: '{{ my_home }}/w3af'
-    repo: 'https://github.com/andresriancho/w3af.git'
 
 - name: clone routersploit
   git:
