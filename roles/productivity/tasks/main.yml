@@ -1,0 +1,10 @@
+---
+- name: Install ruby
+  package:
+    name: ruby
+    state: present
+
+- name: Install timetrap
+  gem: 
+    name: timetrap
+    state: present
