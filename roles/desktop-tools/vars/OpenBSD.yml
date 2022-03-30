@@ -1,5 +1,9 @@
 firefox_binary: "/usr/local/bin/firefox"
-my_mua_addons: "claws-mail-bogofilter"
+my_mua_addons: 
+  - "claws-mail-address-keeper"
+  - "claws-mail-bogofilter"
+  - "claws-mail-pgpinline"
+  - "claws-mail-pgpmime"
 gstreamer1-plugins-good: "gstreamer1-plugins-good"
 gstreamer1-plugins-bad: "gstreamer1-plugins-bad"
 gstreamer1-plugins-ugly: "gstreamer1-plugins-ugly"

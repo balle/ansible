@@ -5,3 +5,15 @@
     line: 'apmd_flags='
     insertbefore: EOF
   when: ansible_os_family == "OpenBSD"
+
+- name: install tlp
+  package: 
+    name: tlp
+    state: present
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+
+- name: Start tlp service
+  service:
+    name: tlp
+    enabled: yes
+    state: started

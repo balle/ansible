@@ -28,3 +28,10 @@
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
     mode: 0755
+
+- name: install feh
+  package:
+    name: 'feh'
+    state: present
+  when: ansible_os_family != "Darwin"
+  

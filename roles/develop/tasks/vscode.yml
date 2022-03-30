@@ -1,0 +1,31 @@
+---
+- include_vars: "vars/vscode-extensions.yml"
+
+- name: Install VSCode Redhat Repo
+  copy:
+    src: vscode-rpm.repo
+    dest: /etc/yum.repos.d/vscode.repo
+    owner: root
+    mode: 0644
+  when: ansible_os_family == "Redhat"
+
+- name: Install VSCode Debian Repo
+  copy:
+    src: vscode-deb.repo
+    dest: /etc/apt/sources.list.d/vscode.list
+    owner: root
+    mode: 0644
+  when: ansible_os_family == "Debian"
+
+- name: Install VSCode
+  package:
+    name: code
+    state: present
+  when: ansible_os_family == "Redhat" or ansible_os_family == "Debian"
+    
+- name: Install VSCode Extensions
+  command: "code --install-extension {{item}}"
+  become_user: "{{ my_user }}"
+  become_method: "su"
+  loop: "{{ extensions }}"
+  when: ansible_os_family == "Redhat" or ansible_os_family == "Debian"

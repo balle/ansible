@@ -1,0 +1,6 @@
+aide_config: 'aide_debian.conf'
+aide_config_dest: '/etc/aide/aide.conf'
+packetfilter_config: 'iptables.conf'
+packetfilter_config_dest: '/etc/iptables/rules.v4'
+
+

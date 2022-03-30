@@ -8,8 +8,9 @@
 
 - name: install mail user agent addons
   package:
-    name: '{{ my_mua_addons }}'
+    name: '{{ item }}'
     state: present
+  with_items: '{{ my_mua_addons }}'
 
 - name: install spam filter
   package:

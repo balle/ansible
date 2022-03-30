@@ -15,9 +15,20 @@
   copy:
     src: "{{ aide_config }}"
     dest: '{{ aide_config_dest }}'
-    owner: '{{ my_user }}'
-    group: '{{ my_group }}'
+    owner: 'root'
+    group: 'root'
     mode: 0600
+  register: aide_config
+
+- name: init aide db
+  command: aide --init --config {{ aide_config_dest }}
+  when: aide_config.changed
+
+- name: install iptables-persistent
+  package:
+    name: iptables-persistent
+    state: present
+  when: ansible_os_family == 'Debian'
 
 - name: configure packetfilter
   copy:
@@ -27,3 +38,44 @@
     group: 'root'
     mode: 0600
   when: ansible_os_family != 'Darwin'
+
+- name: configure ipv6 packetfilter
+  copy:
+    src: '{{ packetfilter_config }}'
+    dest: '/etc/iptables/rules.v6'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+  when: ansible_os_family == 'Debian'
+
+- name: Start iptables service
+  service:
+    name: iptables
+    enabled: yes
+    state: started
+  when: ansible_os_family == 'Debian'
+
+- name: install tiger
+  package:
+    name: tiger
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: configure tiger
+  copy:
+    src: "tigerrc"
+    dest: '/etc/tiger/tigerrc'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+  when: ansible_os_family == 'Debian'
+
+- name: install apparmor
+  package:
+    name: "{{ item }}"
+  with_items: 
+    - apparmor-profiles
+    - apparmor-profiles-extra
+    - apparmor-utils
+    - apparmor-notify
+  when: ansible_os_family == 'Debian'

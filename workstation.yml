@@ -1,13 +1,13 @@
 ---
 - name: Workstation setup
-  hosts: all
+  hosts: localhost
 
   roles:
-    - { name: system, tags: base }
-    - { name: security, tags: base }
+    - { name: system, tags: system,base }
+    - { name: security, tags: security,base }
     - { name: emacs, tags: emacs }
-    - { name: tmux, tags: base }
-    - { name: zsh, tags: base }
+    - { name: tmux, tags: tmux,base }
+    - { name: zsh, tags: zsh,base }
     - { name: desktop, tags: desktop }
     - { name: desktop-tools, tags: desktop-tools }
     - { name: laptop, tags: laptop }

@@ -1,0 +1,13 @@
+my_browser: "firefox-esr"
+firefox_binary: "/usr/bin/firefox"
+my_mua_addons: 
+  - "claws-mail-address-keeper"
+  - "claws-mail-bogofilter"
+  - "claws-mail-pgpinline"
+  - "claws-mail-pgpmime"
+
+gstreamer1_plugins_good: "gstreamer1.0-plugins-good"
+gstreamer1_plugins_bad: "gstreamer1.0-plugins-bad"
+gstreamer1_plugins_ugly: "gstreamer1.0-plugins-ugly"
+
+
