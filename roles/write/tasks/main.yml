@@ -13,22 +13,17 @@
 
 - name: install dictionary
   package:
-    name: 'mozilla-dicts-{{ my_dict_lang }}'
+    name: ''
     state: present
-  when: ansible_os_family != "RedHat"
+  when: ansible_os_family != "RedHat" and ansible_os_family != "Debian"
 
 - name: install dictionary
   package:
-    name: 'hunspell-de'
+    name: '{{ my_dict }}'
     state: present
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: link dict
-  file:
-    follow: yes
-    src: '/usr/local/share/mozilla-dicts/{{ my_dict_lang }}.aff'
-    dest: '/usr/local/share/hunspell/{{ my_dict_lang }}.aff'
-    state: link
+- name: link dic dict
   file:
     follow: yes
     src: '/usr/local/share/mozilla-dicts/{{ my_dict_lang }}.dic'
@@ -36,3 +31,7 @@
     state: link
   when: ansible_os_family == "OpenBSD"
 
+- name: install pandoc
+  package:
+    name: pandoc
+    state: present

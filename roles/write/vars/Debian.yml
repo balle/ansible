@@ -1,0 +1,3 @@
+texlive_package: 'texlive-base'
+my_dict: "hunspell-de-de-frami"
+my_dict_lang: 'de-de'

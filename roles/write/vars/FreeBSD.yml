@@ -1,3 +1,4 @@
 texlive_package: 'texlive-base'
+my_dict: "mozilla-dicts-de"
 my_dict_lang: 'de-DE'
 

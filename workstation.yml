@@ -3,11 +3,11 @@
   hosts: localhost
 
   roles:
-    - { name: system, tags: system,base }
-    - { name: security, tags: security,base }
+    - { name: system, tags: [system,base] }
+    - { name: security, tags: [security,base] }
     - { name: emacs, tags: emacs }
-    - { name: tmux, tags: tmux,base }
-    - { name: zsh, tags: zsh,base }
+    - { name: tmux, tags: [tmux,base] }
+    - { name: zsh, tags: [zsh,base] }
     - { name: desktop, tags: desktop }
     - { name: desktop-tools, tags: desktop-tools }
     - { name: laptop, tags: laptop }
@@ -17,6 +17,6 @@
     - { name: write, tags: write }
     - { name: office, tags: office }
     - { name: productivity, tags: productivity }
-    - { name: nettools, tags: hack,nettools }
+    - { name: nettools, tags: [hack,nettools] }
     - { name: hack, tags: hack }
     - { name: forensics, tags: forensics }
