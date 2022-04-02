@@ -2,3 +2,4 @@
 - include: browser.yml
 - include: mua.yml
 - include: multimedia.yml
+- include: messenger.yml
