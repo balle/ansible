@@ -20,3 +20,4 @@
     - { name: nettools, tags: [hack,nettools] }
     - { name: hack, tags: hack }
     - { name: forensics, tags: forensics }
+    - { name: virtualization, tags: virtualization }
