@@ -17,6 +17,7 @@
     state: present
   loop:
     - "{{ postgresql_server }}"
+    - "{{ postgresql_server_dev }}"
     - "{{ postgresql_client }}"
   when: ansible_os_family != 'Darwin'
   
@@ -47,7 +48,13 @@
   when:
     - ansible_os_family != 'OpenBSD'
     - ansible_os_family != 'Darwin'
-    
+
+- name: install ruby bundler
+  package:
+    name: ruby-bundler
+    state: present
+  when: ansible_os_family == "Debian"
+
 - name: link bundler
   file:
     follow: yes
@@ -57,5 +64,7 @@
   when: ansible_os_family == 'OpenBSD'
 
 - name: install metasploit dependencies
-  command: chdir="{{ my_home }}/metasploit" "bundle install"
+  command: bundle install
+  args:
+    chdir: "{{ my_home }}/hack/metasploit"
   run_once: True

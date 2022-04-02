@@ -1,9 +1,10 @@
 ruby_package: 'ruby'
-ruby_devel_package: 'ruby-devel'
+ruby_devel_package: 'ruby-dev'
 dsniff_package: 'dsniff'
 ettercap_package: 'ettercap'
 wireshark_package: 'wireshark'
 zap_package: 'zaproxy'
-postgresql_server: 'postgresql-server'
+postgresql_server: 'postgresql-13'
+postgresql_server_dev: "postgresql-server-dev-13"
 postgresql_client: 'postgresql'
 
