@@ -1,18 +1,25 @@
 ---
-- name: install zed attack proxy on macos
+- name: install zed attack proxy on macOS
   package:
     name: '{{ zap_package }}'
     state: present
   ignore_errors: yes
   when: ansible_os_family == 'Darwin'
 
-- name: install zed attack proxy
+- name: install zed attack proxy on OpenBSD
   package:
     name: '{{ zap_package }}'
     state: present
   when:
-    - ansible_os_family != 'Darwin'
-    - ansible_os_family != 'RedHat'
+    - ansible_os_family == 'OpenBSD'
+
+- name: install zed attack proxy on Linux
+  snap:
+    name: '{{ zap_package }}'
+    state: present
+    classic: yes
+  when:
+    - ansible_os_family == 'Debian' or ansible_os_family == "RedHat"
 
 - name: clone w3af
   git:
