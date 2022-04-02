@@ -14,3 +14,15 @@
     - "{{ gstreamer1_plugins_good }}"
     - "{{ gstreamer1_plugins_bad }}"
     - "{{ gstreamer1_plugins_ugly }}"
+
+- name: install music player
+  package: 
+    name: "{{ my_music_player }}"
+    state: present
+  when: ansible_os_family != "Debian"
+
+- name: install music player
+  snap: 
+    name: "{{ my_music_player }}"
+    state: present
+  when: ansible_os_family == "Debian"

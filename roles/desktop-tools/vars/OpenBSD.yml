@@ -7,5 +7,5 @@ my_mua_addons:
 gstreamer1-plugins-good: "gstreamer1-plugins-good"
 gstreamer1-plugins-bad: "gstreamer1-plugins-bad"
 gstreamer1-plugins-ugly: "gstreamer1-plugins-ugly"
-
+my_music_player: "deadbeef"
 
