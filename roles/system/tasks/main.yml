@@ -8,3 +8,15 @@
     owner: 'root'
     group: 'root'
     mode: 0600
+
+- name: install snapd
+  package: 
+    name: snapd
+    state: present
+  register: snapd_installed
+
+- name: setup snapd 
+  command: snap install core 
+  when: 
+  - snapd_installed.changed
+  - ansible_os_family == "Debian" or ansible_os_family == 'RedHat'
