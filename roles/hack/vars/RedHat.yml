@@ -1,6 +1,8 @@
 ruby_package: 'ruby'
 ruby_devel_package: 'ruby-devel'
 pcap_devel_package: 'libpcap-devel'
+libusb_dev: "libusb-devel"
+bluez_devel_package: "bluez-libs-devel"
 sqlite_devel_package: 'sqlite-devel'
 dsniff_package: 'dsniff'
 ettercap_package: 'ettercap'

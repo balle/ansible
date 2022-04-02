@@ -4,20 +4,23 @@
     name: cmake
     state: present
 
-- name: Install libusb-devel
+- name: Install libusb development files
   package:
-    name: libusb-devel
+    name: "{{ libusb_dev }}"
     state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: Install bluez-libs-devel
   package:
-    name: bluez-libs-devel
+    name: "{{ bluez_devel_package }}"
     state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: Install libpcap-devel
   package:
-    name: libpcap-devel
+    name: "{{ pcap_devel_package }}"
     state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: clone libbtbb
   git:

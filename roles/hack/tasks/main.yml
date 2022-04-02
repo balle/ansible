@@ -18,6 +18,8 @@
     repo: 'https://github.com/threat9/routersploit.git'
 
 - name: install routersploit dependencies
-  command: chdir="{{ my_home }}/routersploit" "python3 -m pip install -r requirements.txt"
+  command: python3 -m pip install -r requirements.txt
+  args:
+    chdir: "{{ my_home }}/routersploit"
   run_once: True
   
