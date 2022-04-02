@@ -1,5 +1,6 @@
 ruby_package: 'ruby'
 ruby_devel_package: 'ruby-devel'
+sqlite_devel_package: 'sqlite'
 ettercap_package: 'ettercap'
 wireshark_package: 'wireshark'
 zap_package: 'owasp-zap'

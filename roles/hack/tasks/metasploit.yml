@@ -63,6 +63,22 @@
     state: link
   when: ansible_os_family == 'OpenBSD'
 
+- name: install pcap development files
+  package: 
+    name: "{{ pcap_devel_package }}"
+    state: present
+  when:
+    - ansible_os_family != 'OpenBSD'
+    - ansible_os_family != 'Darwin'
+
+- name: install sqlite development files
+  package: 
+    name: "{{ sqlite_devel_package }}"
+    state: present
+  when:
+    - ansible_os_family != 'OpenBSD'
+    - ansible_os_family != 'Darwin'
+
 - name: install metasploit dependencies
   command: bundle install
   args:
