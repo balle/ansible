@@ -37,6 +37,7 @@ On macos run
 
 .. code-block:: bash
 
+  ansible-galaxy collection install community.general
   ansible-playbook -c local --skip-tags desktop,desktop-tools,doas,ksh -e my_home=/Users/$YOUR_USERNAME --become-user $YOUR_USERNAME workstation.yml
 
 

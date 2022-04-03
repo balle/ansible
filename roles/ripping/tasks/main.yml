@@ -5,6 +5,13 @@
   package: 
     name: "{{ dvdcss_package }}"
     state: present 
+  when: ansible_os_family != "Darwin"
+
+- name: install dvdcss on macos 
+  homebrew:
+    name: libdvdcss
+    state: present 
+  when: ansible_os_family == "Darwin"
 
 - name: Reconfigure dvdcss 
   command: dpkg-reconfigure -fnoninteractive libdvd-pkg
@@ -16,27 +23,57 @@
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
+- name: install makemkv on macos 
+  homebrew:
+    name: makemkv
+    state: present
+  when: ansible_os_family == "Darwin"
+
 - name: install handbrake
   package:
     name: handbrake
     state: present
+  when: ansible_os_family != "Darwin"
+
+- name: install handbrake on macos 
+  homebrew:
+    name: handbrake
+    state: present 
+  when: ansible_os_family == "Darwin"
 
 - name: install lame 
   package: 
     name: lame
     state: present
+  when: ansible_os_family != "Darwin"
 
 - name: install sound juicer
   package:
     name: sound-juicer
     state: present
+  when: ansible_os_family != "Darwin"
 
 - name: install streamripper
   package:
     name: streamripper
     state: present
+  when: ansible_os_family != "Darwin"
+
+- name: install streamripper on macos 
+  homebrew:
+    name: streamripper
+    state: present 
+  when: ansible_os_family == "Darwin"
 
 - name: install youtube-dl
   package:
     name: youtube-dl
     state: present
+  when: ansible_os_family != "Darwin"
+
+- name: install youtube-dl on macos 
+  homebrew:
+    name: youtube-dl
+    state: present
+  when: ansible_os_family == "Darwin"
+
