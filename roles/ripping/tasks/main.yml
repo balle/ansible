@@ -1,0 +1,42 @@
+--- 
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- name: install dvdcss 
+  package: 
+    name: "{{ dvdcss_package }}"
+    state: present 
+
+- name: Reconfigure dvdcss 
+  command: dpkg-reconfigure -fnoninteractive libdvd-pkg
+  when: ansible_os_family == "Debian"
+
+- name: install makemkv
+  snap:
+    name: makemkv
+    state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: install handbrake
+  package:
+    name: handbrake
+    state: present
+
+- name: install lame 
+  package: 
+    name: lame
+    state: present
+
+- name: install sound juicer
+  package:
+    name: sound-juicer
+    state: present
+
+- name: install streamripper
+  package:
+    name: streamripper
+    state: present
+
+- name: install youtube-dl
+  package:
+    name: youtube-dl
+    state: present

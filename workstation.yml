@@ -21,3 +21,4 @@
     - { name: hack, tags: hack }
     - { name: forensics, tags: forensics }
     - { name: virtualization, tags: virtualization }
+    - { name: ripping, tags: ripping }
