@@ -1,0 +1,17 @@
+---
+
+- name: install onedrive
+  package:
+    name: onedrive
+    state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: Start onedrive service
+  systemd:
+    name: onedrive
+    enabled: yes
+    state: started
+    scope: user
+  become_user: "{{ my_user }}"
+  become_method: "su"
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
