@@ -21,7 +21,6 @@
     - { name: develop, tags: [develop,work,home] }
     - { name: write, tags: [write,work,home] }
     - { name: office, tags: [office,work,home] }
-    - { name: productivity, tags: productivity }
     - { name: onedrive, tags: [onedrive,work] }
     - { name: vpn, tags: [vpn,work] }
     - { name: teams, tags: [teams,work] }
