@@ -31,3 +31,4 @@
     - { name: forensics, tags: [forensics,work,home] }
     - { name: virtualization, tags: [virtualization,work,home] }
     - { name: ripping, tags: [ripping,home] }
+    - { name: gaming, tags: [gaming,home] }
