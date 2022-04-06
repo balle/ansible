@@ -12,6 +12,14 @@
     name: '{{ wireshark_package }}'
     state: present
 
+- name: copy wireshark config
+  copy:
+    src: wireshark-preferences.conf
+    dest: "{{ my_home }}/.config/wireshark/preferences"
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+    mode: 0600
+    
 - name: install jnettop
   package:
     name: 'jnettop'
