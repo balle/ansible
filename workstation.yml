@@ -14,6 +14,7 @@
     - { name: thunderbird, tags: [thunderbird,work] }
     - { name: multimedia, tags: [multimedia,work,home] }
     - { name: signal, tags: [signal,work,home] }
+    - { name: wire, tags: [wire,work] }
     - { name: laptop, tags: [laptop,work,home] }
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
