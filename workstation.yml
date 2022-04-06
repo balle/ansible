@@ -3,23 +3,23 @@
   hosts: localhost
 
   roles:
-    - { name: system, tags: [system,base] }
-    - { name: security, tags: [security,base] }
-    - { name: emacs, tags: emacs }
-    - { name: tmux, tags: [tmux,base] }
-    - { name: zsh, tags: [zsh,base] }
+    - { name: system, tags: [system,base,work,home] }
+    - { name: security, tags: [security,base,work,home] }
+    - { name: emacs, tags: [emacs,work,home] }
+    - { name: tmux, tags: [tmux,base,work,home] }
+    - { name: zsh, tags: [zsh,base,work,home] }
     - { name: desktop, tags: desktop }
-    - { name: desktop-tools, tags: desktop-tools }
-    - { name: laptop, tags: laptop }
+    - { name: desktop-tools, tags: [desktop-tools,work,home] }
+    - { name: laptop, tags: [laptop,work,home] }
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
-    - { name: develop, tags: develop }
-    - { name: write, tags: write }
-    - { name: office, tags: office }
+    - { name: develop, tags: [develop,work,home] }
+    - { name: write, tags: [write,work,home] }
+    - { name: office, tags: [office,work,home] }
     - { name: productivity, tags: productivity }
-    - { name: onedrive, tags: onedrive }
-    - { name: nettools, tags: [hack,nettools] }
-    - { name: hack, tags: hack }
-    - { name: forensics, tags: forensics }
-    - { name: virtualization, tags: virtualization }
-    - { name: ripping, tags: ripping }
+    - { name: onedrive, tags: [onedrive,work] }
+    - { name: nettools, tags: [hack,nettools,work,home] }
+    - { name: hack, tags: [hack,work,home] }
+    - { name: forensics, tags: [forensics,work,home] }
+    - { name: virtualization, tags: [virtualization,work,home] }
+    - { name: ripping, tags: [ripping,home] }
