@@ -1,0 +1,13 @@
+---
+- name: install remmina
+    package:
+      name: remmina
+      state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: install remmina rdp plugin 
+    package:
+      name: remmina-plugin-rdp
+      state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+  
