@@ -1,0 +1,5 @@
+my_mua_addons:
+  - "claws-mail-plugins-address-keeper"
+  - "claws-mail-plugins-bogofilter"
+  - "claws-mail-plugins-pgpinline"
+  - "claws-mail-plugins-pgpmime"

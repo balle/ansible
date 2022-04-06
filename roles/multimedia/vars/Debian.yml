@@ -1,0 +1,5 @@
+gstreamer1_plugins_good: "gstreamer1.0-plugins-good"
+gstreamer1_plugins_bad: "gstreamer1.0-plugins-bad"
+gstreamer1_plugins_ugly: "gstreamer1.0-plugins-ugly"
+my_music_player: "deadbeef-vs"
+

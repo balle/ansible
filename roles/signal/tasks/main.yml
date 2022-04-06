@@ -1,8 +1,6 @@
 ---
-
 - name: install signal messenger 
   snap:
     name: signal-desktop
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
-  

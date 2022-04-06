@@ -1,0 +1,8 @@
+---
+
+- name: install thunderbird
+  package:
+    name: thunderbird
+    state: present
+  tags: work
+    
