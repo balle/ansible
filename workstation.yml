@@ -19,6 +19,7 @@
     - { name: productivity, tags: productivity }
     - { name: onedrive, tags: [onedrive,work] }
     - { name: vpn, tags: [vpn,work] }
+    - { name: teams, tags: [teams,work] }
     - { name: nettools, tags: [hack,nettools,work,home] }
     - { name: hack, tags: [hack,work,home] }
     - { name: forensics, tags: [forensics,work,home] }
