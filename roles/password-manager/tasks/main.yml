@@ -1,0 +1,5 @@
+---
+- name: Install password manager
+  package:
+    name: "{{ my_password_manager }}"
+    state: present

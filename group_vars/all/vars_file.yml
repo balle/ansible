@@ -5,4 +5,5 @@ my_browser: firefox
 my_mua: claws-mail
 my_spam_filter: bogofilter
 my_pdf_reader: 'evince'
+my_password_manager: "keepassx"
 
