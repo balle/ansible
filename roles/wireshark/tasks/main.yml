@@ -1,0 +1,23 @@
+---
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- name: install wireshark
+  package:
+    name: '{{ wireshark_package }}'
+    state: present
+
+- name: copy wireshark preferences
+  copy:
+    src: preferences.conf
+    dest: "{{ my_home }}/.config/wireshark/preferences"
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+    mode: 0600
+
+- name: copy wireshark dfilter
+  copy:
+    src: dfilter-buttons
+    dest: "{{ my_home }}/.config/wireshark/dfilter_buttons"
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+    mode: 0600

@@ -6,27 +6,6 @@
     name: 'tcpdump'
     state: present
   when: ansible_os_family != 'OpenBSD'
-
-- name: install wireshark
-  package:
-    name: '{{ wireshark_package }}'
-    state: present
-
-- name: copy wireshark preferences
-  copy:
-    src: wireshark-preferences.conf
-    dest: "{{ my_home }}/.config/wireshark/preferences"
-    owner: "{{ my_user }}"
-    group: "{{ my_user }}"
-    mode: 0600
-
-- name: copy wireshark dfilter
-  copy:
-    src: wireshark-dfilter-buttons
-    dest: "{{ my_home }}/.config/wireshark/dfilter_buttons
-    owner: "{{ my_user }}"
-    group: "{{ my_user }}"
-    mode: 0600
     
 - name: install jnettop
   package:
