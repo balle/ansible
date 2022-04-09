@@ -12,7 +12,6 @@
     dest: "{{ my_home }}/.config/wireshark/preferences"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
-    mode: 0600
 
 - name: copy wireshark dfilter
   copy:
@@ -20,7 +19,6 @@
     dest: "{{ my_home }}/.config/wireshark/dfilter_buttons"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
-    mode: 0600
 
 - name: create wireshark profile dirs
   file:
@@ -28,7 +26,6 @@
     state: directory
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
-    mode: 0600
   with_items: "{{ wireshark_profiles }}"
 
 - name: copy wireshark dfilter
@@ -37,6 +34,5 @@
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/preferences"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
-    mode: 0600
   with_items: "{{ wireshark_profiles }}"
 
