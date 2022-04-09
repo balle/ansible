@@ -21,3 +21,22 @@
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
     mode: 0600
+
+- name: create wireshark profile dirs
+  file:
+    path: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/"
+    state: directory
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+    mode: 0600
+  with_items: "{{ wireshark_profiles }}"
+
+- name: copy wireshark dfilter
+  copy:
+    src: "{{ item }}-profile"
+    dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/preferences"
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+    mode: 0600
+  with_items: "{{ wireshark_profiles }}"
+
