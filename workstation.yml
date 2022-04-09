@@ -21,7 +21,7 @@
     - { name: develop, tags: [develop,work,home] }
     - { name: write, tags: [write,work,home] }
     - { name: office, tags: [office,work,home] }
-    - { name: password-maanger, tags: [password-manager,work] }
+    - { name: password-manager, tags: [password-manager,work] }
     - { name: remote-desktop, tags: [remote-desktop,work] }
     - { name: onedrive, tags: [onedrive,work] }
     - { name: vpn, tags: [vpn,work] }
