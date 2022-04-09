@@ -13,13 +13,6 @@
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
 
-- name: copy wireshark dfilter
-  copy:
-    src: dfilter-buttons
-    dest: "{{ my_home }}/.config/wireshark/dfilter_buttons"
-    owner: "{{ my_user }}"
-    group: "{{ my_user }}"
-
 - name: create wireshark profile dirs
   file:
     path: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/"
@@ -32,6 +25,14 @@
   copy:
     src: "{{ item }}-profile"
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/preferences"
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+  with_items: "{{ wireshark_profiles }}"
+
+- name: copy wireshark dfilter buttons
+  copy:
+    src: dfilter_buttons
+    dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/dfilter_buttons"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
   with_items: "{{ wireshark_profiles }}"
