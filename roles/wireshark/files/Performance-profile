@@ -246,7 +246,7 @@ gui.qt.font_name: Liberation Mono,11,-1,5,50,0,0,0,0,0
 
 # Layout type (1-6)
 # A decimal number
-#gui.layout_type: 1
+gui.layout_type: 2
 
 # Layout content of the pane 1
 # One of: NONE, PLIST, PDETAILS, PBYTES, PDIAGRAM
