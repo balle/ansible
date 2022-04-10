@@ -9,6 +9,7 @@
     - { name: tmux, tags: [tmux,base,work,home] }
     - { name: zsh, tags: [zsh,base,work,home] }
     - { name: desktop, tags: desktop }
+    - { name: gnome, tags: [gnome,home,work] }
     - { name: browser, tags: [browser,work,home] }
     - { name: claws-mail, tags: [claws-mail,home] }
     - { name: thunderbird, tags: [thunderbird,work] }

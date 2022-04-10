@@ -1,0 +1,11 @@
+---
+- name: disable auto mount 
+  command: gsettings set org.gnome.desktop.media-handling automount false
+  become_user: "{{ my_user }}"
+  become_method: "su"
+
+- name: disable auto mount open
+  command: gsettings set org.gnome.desktop.media-handling automount-open false
+  become_user: "{{ my_user }}"
+  become_method: "su"
+  
