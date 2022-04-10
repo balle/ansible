@@ -1,0 +1,27 @@
+---
+- name: install docker
+  package: 
+    name: docker 
+    state: present 
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: install docker.io
+  package: 
+    name: docker.io
+    state: present 
+  when: ansible_os_family == "Debian"
+
+- name: Add user to docker group
+  user:
+    name: "{{ my_user }}"
+    groups:
+      - docker
+    append: yes
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: Start docker service
+  service:
+    name: docker
+    enabled: yes
+    state: started
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
