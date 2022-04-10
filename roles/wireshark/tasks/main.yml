@@ -44,6 +44,13 @@
     group: "{{ my_user }}"
   with_items: "{{ wireshark_profiles }}"
 
+- name: copy wireshark wifi dfilter buttons
+  copy:
+    src: Wifi-dfilter_buttons
+    dest: "{{ my_home }}/.config/wireshark/profiles/Wifi/dfilter_buttons"
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+
 - name: copy wireshark dfilter macros
   copy:
     src: dfilter_macros

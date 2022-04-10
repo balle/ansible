@@ -216,16 +216,17 @@ gui.stream.server.fg: 00007f
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: 
+gui.column.hidden: %m,%uS,%uD,%p
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
 gui.column.format: 
 	"No.", "%m",
 	"Time", "%t",
+	"Delta", "%Gt",
 	"Sport", "%uS",
-	"Source", "%s",
-	"Destination", "%d",
+	"Src", "%s",
+	"Dest", "%d",
 	"Dport", "%uD",
 	"Protocol", "%p",
 	"SSID", "%Cus:wlan_mgt.ssid:0:R",
@@ -385,74 +386,6 @@ capture.pcap_ng: FALSE
 # TRUE or FALSE (case-insensitive)
 #extcap.gui_save_on_start: TRUE
 
-# Remote SSH server address
-# A string
-#extcap.ciscodump.remotehost: 
-
-# Remote SSH server port
-# A string
-#extcap.ciscodump.remoteport: 22
-
-# Remote SSH server username
-# A string
-#extcap.ciscodump.remoteusername: basti
-
-# Path to SSH private key
-# A string
-#extcap.ciscodump.sshkey: 
-
-# ProxyCommand
-# A string
-#extcap.ciscodump.proxycommand: 
-
-# Remote interface
-# A string
-#extcap.ciscodump.remoteinterface: 
-
-# Remote capture filter
-# A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::40d6:9fff:fe3a:dc71 any eq 0, deny tcp any eq 0 host fe80::40d6:9fff:fe3a:dc71, deny tcp host fe80::9406:5fff:fe72:d48b any eq 0, deny tcp any eq 0 host fe80::9406:5fff:fe72:d48b, deny tcp host fe80::c6d:ffff:fec7:fd08 any eq 0, deny tcp any eq 0 host fe80::c6d:ffff:fec7:fd08, deny tcp host fe80::9482:7fff:fe9e:276a any eq 0, deny tcp any eq 0 host fe80::9482:7fff:fe9e:276a, deny tcp host fe80::3cb9:69ff:fe13:1174 any eq 0, deny tcp any eq 0 host fe80::3cb9:69ff:fe13:1174, deny tcp host fe80::42:f3ff:fe1e:54a3 any eq 0, deny tcp any eq 0 host fe80::42:f3ff:fe1e:54a3, deny tcp host fe80::42:10ff:feca:d6e4 any eq 0, deny tcp any eq 0 host fe80::42:10ff:feca:d6e4, deny tcp host fe80::4059:26fa:e05d:c48d any eq 0, deny tcp any eq 0 host fe80::4059:26fa:e05d:c48d, deny tcp host 192.168.122.1 any eq 0, deny tcp any eq 0 host 192.168.122.1, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 172.18.0.1 any eq 0, deny tcp any eq 0 host 172.18.0.1, deny tcp host 192.168.0.18 any eq 0, deny tcp any eq 0 host 192.168.0.18, permit ip any any
-
-# Packets to capture
-# A string
-#extcap.ciscodump.remotecount: 
-
-# Run in debug mode
-# A string
-#extcap.ciscodump.debug: false
-
-# Use a file for debug
-# A string
-#extcap.ciscodump.debugfile: 
-
-# Interface index
-# A string
-#extcap.dpauxmon.interface_id: 0
-
-# Run in debug mode
-# A string
-#extcap.dpauxmon.debug: false
-
-# Use a file for debug
-# A string
-#extcap.dpauxmon.debugfile: 
-
-# Listen port
-# A string
-#extcap.udpdump.port: 5555
-
-# Payload type
-# A string
-#extcap.udpdump.payload: data
-
-# Run in debug mode
-# A string
-#extcap.udpdump.debug: false
-
-# Use a file for debug
-# A string
-#extcap.udpdump.debugfile: 
-
 # Max bytes in a packet
 # A string
 #extcap.randpkt.maxbytes: 5000
@@ -523,7 +456,7 @@ capture.pcap_ng: FALSE
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::40d6:9fff:fe3a:dc71 or host fe80::9406:5fff:fe72:d48b or host fe80::c6d:ffff:fec7:fd08 or host fe80::9482:7fff:fe9e:276a or host fe80::3cb9:69ff:fe13:1174 or host fe80::42:f3ff:fe1e:54a3 or host fe80::42:10ff:feca:d6e4 or host fe80::4059:26fa:e05d:c48d or host 192.168.122.1 or host 172.17.0.1 or host 172.18.0.1 or host 192.168.0.18) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::82fa:5bff:fe0b:efca or host 10.0.42.67) and port 22)
 
 # Packets to capture
 # A string
@@ -537,6 +470,18 @@ capture.pcap_ng: FALSE
 # A string
 #extcap.sshdump.debugfile: 
 
+# Interface index
+# A string
+#extcap.dpauxmon.interface_id: 0
+
+# Run in debug mode
+# A string
+#extcap.dpauxmon.debug: false
+
+# Use a file for debug
+# A string
+#extcap.dpauxmon.debugfile: 
+
 # Starting position
 # A string
 #extcap.sdjournal.startfrom: 
@@ -548,6 +493,62 @@ capture.pcap_ng: FALSE
 # Use a file for debug
 # A string
 #extcap.sdjournal.debugfile: 
+
+# Listen port
+# A string
+#extcap.udpdump.port: 5555
+
+# Payload type
+# A string
+#extcap.udpdump.payload: data
+
+# Run in debug mode
+# A string
+#extcap.udpdump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.udpdump.debugfile: 
+
+# Remote SSH server address
+# A string
+#extcap.ciscodump.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.ciscodump.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.ciscodump.remoteusername: basti
+
+# Path to SSH private key
+# A string
+#extcap.ciscodump.sshkey: 
+
+# ProxyCommand
+# A string
+#extcap.ciscodump.proxycommand: 
+
+# Remote interface
+# A string
+#extcap.ciscodump.remoteinterface: 
+
+# Remote capture filter
+# A string
+#extcap.ciscodump.remotefilter: deny tcp host fe80::82fa:5bff:fe0b:efca any eq 0, deny tcp any eq 0 host fe80::82fa:5bff:fe0b:efca, deny tcp host 10.0.42.67 any eq 0, deny tcp any eq 0 host 10.0.42.67, permit ip any any
+
+# Packets to capture
+# A string
+#extcap.ciscodump.remotecount: 
+
+# Run in debug mode
+# A string
+#extcap.ciscodump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.ciscodump.debugfile: 
 
 ####### Name Resolution ########
 
