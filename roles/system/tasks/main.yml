@@ -20,3 +20,15 @@
   when: 
   - snapd_installed.changed
   - ansible_os_family == "Debian" or ansible_os_family == 'RedHat'
+
+- name: install apt-file 
+  package:
+    name: apt-file 
+    state: present 
+  register: apt_file
+  when: ansible_os_family == "Debian"
+
+- name: init apt-file 
+  command: apt-file update 
+  when: apt_file.changed 
+  
