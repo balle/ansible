@@ -8,6 +8,11 @@
     owner: 'root'
     group: 'root'
     mode: 0600
+  register: sysctl 
+  
+- name: reload sysctl 
+  command: sysctl -p 
+  when: sysctl.changed
 
 - name: install snapd
   package: 
@@ -31,4 +36,3 @@
 - name: init apt-file 
   command: apt-file update 
   when: apt_file.changed 
-  
