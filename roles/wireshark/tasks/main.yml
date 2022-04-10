@@ -6,6 +6,13 @@
     name: '{{ wireshark_package }}'
     state: present
 
+- name: Add user to wireshark group
+  user:
+    name: "{{ my_user }}"
+    groups:
+      - wireshark
+    append: yes
+
 - name: copy wireshark preferences
   copy:
     src: preferences.conf
