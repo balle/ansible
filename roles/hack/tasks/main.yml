@@ -1,9 +1,19 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
+
+- name: Create hack dir 
+  file: 
+    path: "{{ my_home }}/hack"
+    state: directory
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+    mode: 0700
+
 - include: metasploit.yml
 - include: wifi.yml
 - include: hijacking.yml
 - include: web.yml
+- include: reveng.yml
 - include: bluetooth.yml
 
 - name: install nmap
@@ -14,7 +24,7 @@
 - name: clone routersploit
   git:
     clone: yes
-    dest: '{{ my_home }}/routersploit'
+    dest: '{{ my_home }}/hack/routersploit'
     repo: 'https://github.com/threat9/routersploit.git'
 
 - name: install routersploit dependencies

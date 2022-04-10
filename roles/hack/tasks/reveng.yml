@@ -1,0 +1,33 @@
+---
+- name: install binutils 
+  package: 
+    name: binutils
+    state: present 
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: install gdb 
+  package: 
+    name: gdb 
+    state: present 
+
+- name: install strace
+  package: 
+    name: strace
+    state: present 
+
+- name: install java 
+  package: 
+    name: openjdk-17-jdk
+    state: present 
+
+- name: Get Ghidra
+  get_url:
+    url: https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.1.2_build/ghidra_10.1.2_PUBLIC_20220125.zip
+    checksum: sha256:ac96fbdde7f754e0eb9ed51db020e77208cdb12cf58c08657a2ab87cb2694940
+    dest: "{{ my_home }}/ghidra.zip"
+
+- name: unpack ghidra 
+  unarchive:
+    src: "{{ my_home }}/ghidra.zip"
+    dest: "{{ my_home }}/hack"
+    creates: "{{ my_home }}/hack/ghidra_10.1.2_PUBLIC"
