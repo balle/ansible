@@ -14,6 +14,12 @@
   command: sysctl -p 
   when: sysctl.changed
 
+- name: hide pids from other users 
+  blockinfile:
+    block: "proc                    /proc                   proc    nosuid,noexec,nodev,hidepid=2 0 0"
+    path: /etc/fstab
+  when: ansible_os_family == "Debian" or ansible_os_family == "Linux"
+
 - name: install snapd
   package: 
     name: snapd
