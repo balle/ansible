@@ -229,11 +229,10 @@ gui.column.format:
 	"Dest", "%d",
 	"Dport", "%uD",
 	"Protocol", "%p",
-	"SSID", "%Cus:wlan_mgt.ssid:0:R",
-	"Channel", "%Cus:wlan.channel:0:R",
-	"Signal", "%Cus:wlan.signal_strength:0:R",
+	"SSID", "%Cus:wlan.ssid:0:R",
+	"Channel", "%Cus:wlan_radio.channel:0:R",
+	"Signal", "%Cus:wlan_radio.signal_dbm:0:R",
 	"TX", "%x",
-	"Protect", "%Cus:wlan.fc.protected:0:R",
 	"Info", "%i"
 
 ####### User Interface: Font ########
@@ -295,7 +294,7 @@ capture.device: eth0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-#capture.devices_linktypes: 
+capture.devices_linktypes: enp3s0f1(1),wlp2s0mon(127),any(113),lo(1),docker0(1),bluetooth0(201),bluetooth-monitor(254),nflog(239),nfqueue(228),dbus-system(231),dbus-session(231),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -311,15 +310,15 @@ capture.device: eth0
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-#capture.devices_buffersize: 
+capture.devices_buffersize: enp3s0f1(2),wlp2s0mon(2),any(2),lo(2),docker0(2),wlp2s0(2),bluetooth0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),dbus-system(2),dbus-session(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-#capture.devices_snaplen: 
+capture.devices_snaplen: enp3s0f1:0(262144),wlp2s0mon:0(262144),any:0(262144),lo:0(262144),docker0:0(262144),wlp2s0:0(262144),bluetooth0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),dbus-system:0(262144),dbus-session:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-#capture.devices_pmode: 
+capture.devices_pmode: enp3s0f1(1),wlp2s0mon(1),any(1),lo(1),docker0(1),wlp2s0(1),bluetooth0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),dbus-system(1),dbus-session(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -456,7 +455,7 @@ capture.pcap_ng: FALSE
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::82fa:5bff:fe0b:efca or host 10.0.42.67) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::82fa:5bff:fe0b:efca or host 172.17.0.1 or host 10.0.42.67) and port 22)
 
 # Packets to capture
 # A string
@@ -536,7 +535,7 @@ capture.pcap_ng: FALSE
 
 # Remote capture filter
 # A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::82fa:5bff:fe0b:efca any eq 0, deny tcp any eq 0 host fe80::82fa:5bff:fe0b:efca, deny tcp host 10.0.42.67 any eq 0, deny tcp any eq 0 host 10.0.42.67, permit ip any any
+#extcap.ciscodump.remotefilter: deny tcp host fe80::82fa:5bff:fe0b:efca any eq 0, deny tcp any eq 0 host fe80::82fa:5bff:fe0b:efca, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 10.0.42.67 any eq 0, deny tcp any eq 0 host 10.0.42.67, permit ip any any
 
 # Packets to capture
 # A string
