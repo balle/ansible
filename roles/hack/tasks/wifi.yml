@@ -4,3 +4,13 @@
     name: 'aircrack-ng'
     state: present
 
+- name: install wifite
+  package:
+    name: wifite
+    state: present
+
+- name: clone pyrit
+  git:
+    clone: yes
+    dest: '{{ my_home }}/hack/pyrit'
+    repo: 'https://github.com/JPaulMora/Pyrit'

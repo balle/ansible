@@ -1,0 +1,31 @@
+---
+- name: install john
+  package:
+    name: john
+    state: present
+
+- name: install hydra
+  package:
+    name: hydra
+    state: present
+
+- name: install hashcat
+  package: 
+    name: hashcat
+    state: present
+    
+- name: install fcrackzip
+  package: 
+    name: fcrackzip
+    state: present
+    
+- name: install pdfcrack
+  package:
+    name: pdfcrack
+    state: present
+    
+- name: clone SecLists
+  git:
+    clone: yes
+    dest: '{{ my_home }}/hack/SecLists'
+    repo: 'https://github.com/danielmiessler/SecLists'

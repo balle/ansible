@@ -11,25 +11,9 @@
 
 - include: metasploit.yml
 - include: wifi.yml
-- include: hijacking.yml
+- include: network.yml
+- include: bluetooth.yml
+- include: cracking.yml
 - include: web.yml
 - include: reveng.yml
-- include: bluetooth.yml
-
-- name: install nmap
-  package:
-    name: 'nmap'
-    state: present
-
-- name: clone routersploit
-  git:
-    clone: yes
-    dest: '{{ my_home }}/hack/routersploit'
-    repo: 'https://github.com/threat9/routersploit.git'
-
-- name: install routersploit dependencies
-  command: python3 -m pip install -r requirements.txt
-  args:
-    chdir: "{{ my_home }}/routersploit"
-  run_once: True
-  
+- include: misc.yml

@@ -31,3 +31,19 @@
     src: "{{ my_home }}/ghidra.zip"
     dest: "{{ my_home }}/hack"
     creates: "{{ my_home }}/hack/ghidra_10.1.2_PUBLIC"
+
+- name: get flasm 
+  get_url: 
+    url: http://www.nowrap.de/download/flasm16linux.tgz
+    dest: "{{ my_home }}/hack/flasm.tgz"
+
+- name: create flasm directory
+  file:
+    path: "{{ my_home }}/hack/flasm"
+    state: directory
+
+- name: unpack flasm
+  unarchive:
+    src: "{{ my_home }}/flasm.zip"
+    dest: "{{ my_home }}/hack/flasm"
+    creates: "{{ my_home }}/hack/flasm/flasm"
