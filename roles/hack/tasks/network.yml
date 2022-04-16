@@ -27,3 +27,7 @@
     name: '{{ ettercap_package }}'
     state: present
 
+- name: install yersinia
+  package:
+    name: yersinia
+    state: present

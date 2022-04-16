@@ -9,8 +9,25 @@
     name: wifite
     state: present
 
+- name: install reaver
+  package:
+    name: reaver
+    state: present
+
 - name: clone pyrit
   git:
     clone: yes
     dest: '{{ my_home }}/hack/pyrit'
     repo: 'https://github.com/JPaulMora/Pyrit'
+
+- name: clone airpwn-ng
+  git:
+    clone: yes
+    dest: '{{ my_home }}/hack/airpwn-ng'
+    repo: 'https://github.com/ICSec/airpwn-ng'
+
+- name: clone wifiphisher
+  git:
+    clone: yes
+    dest: '{{ my_home }}/hack/wifiphisher'
+    repo: 'https://github.com/wifiphisher/wifiphisher'
