@@ -15,7 +15,20 @@
     dest: /etc/apt/sources.list.d/vscode.list
     owner: root
     mode: 0644
+  register: vscode_debian_repo
   when: ansible_os_family == "Debian"
+
+- name: install microsoft key
+  copy:
+    src: microsoft.gpg
+    dest: /usr/share/keyrings/microsoft-archive-keyring.gpg
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Refresh DEB cache
+  command: apt update
+  when: vscode_debian_repo.changed
 
 - name: Install VSCode
   package:

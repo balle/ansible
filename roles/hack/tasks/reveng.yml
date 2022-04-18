@@ -44,6 +44,6 @@
 
 - name: unpack flasm
   unarchive:
-    src: "{{ my_home }}/flasm.zip"
+    src: "{{ my_home }}/hack/flasm.tgz"
     dest: "{{ my_home }}/hack/flasm"
     creates: "{{ my_home }}/hack/flasm/flasm"

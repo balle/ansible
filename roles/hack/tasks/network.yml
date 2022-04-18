@@ -13,7 +13,7 @@
 - name: install routersploit dependencies
   command: python3 -m pip install -r requirements.txt
   args:
-    chdir: "{{ my_home }}/routersploit"
+    chdir: "{{ my_home }}/hack/routersploit"
   run_once: True
 
 - name: install dsniff
