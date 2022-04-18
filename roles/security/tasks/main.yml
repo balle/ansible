@@ -61,10 +61,19 @@
     state: present
   when: ansible_os_family == 'Debian'
 
-- name: configure tiger
+- name: copy tiger config
   copy:
     src: "tigerrc"
     dest: '/etc/tiger/tigerrc'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+  when: ansible_os_family == 'Debian'
+
+- name: copy tiger ignore
+  copy:
+    src: "tiger.ignore"
+    dest: '/etc/tiger/tiger.ignore'
     owner: 'root'
     group: 'root'
     mode: 0600

@@ -152,7 +152,7 @@ Tiger_Run_AIDE=Y                # Slow
 # Custom Aide location (like read-only media)
 #Tiger_AIDE_LOC_OVERRIDE=/mnt/cdrom/aide/aide.bin
 # Custom Aide configuration file (say, read-only media)
-#Tiger_AIDE_CFG_OVERRIDE=/mnt/cdrom/aide/aide.conf
+Tiger_AIDE_CFG_OVERRIDE=/etc/aide/aide.conf
 # Custom database (for instance in read-only media)
 #Tiger_AIDE_DB_OVERRIDE=/mnt/cdrom/aide/in.db
 #
