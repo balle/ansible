@@ -6,6 +6,11 @@
     name: '{{ wireshark_package }}'
     state: present
 
+- name: Create wireshark group 
+  group:
+    name: wireshark
+    state: present
+
 - name: Add user to wireshark group
   user:
     name: "{{ my_user }}"
