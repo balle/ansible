@@ -3,3 +3,4 @@
 "TRUE","Slow TCP","tcp.analysis.window_full",""
 "TRUE","Slow HTTP","http.time > 1",""
 "TRUE","TCP SYN","tcp.flags.syn == 1",""
+"TRUE","No Broad/Chat","!(eth.dst==ff:ff:ff:ff:ff:ff or arp or cdp or lldp or stp)","No broadcast or chatty protocols"
