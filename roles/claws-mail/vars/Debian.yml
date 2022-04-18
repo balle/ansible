@@ -3,3 +3,4 @@ my_mua_addons:
   - "claws-mail-bogofilter"
   - "claws-mail-pgpinline"
   - "claws-mail-pgpmime"
+  - "claws-mail-litehtml-viewer"
