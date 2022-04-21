@@ -10,3 +10,9 @@
   package:
     name: 'jnettop'
     state: present
+
+
+- name: install minicom
+  package:
+    name: 'minicom'
+    state: present
