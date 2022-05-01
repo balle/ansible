@@ -15,6 +15,7 @@
     - { name: thunderbird, tags: [thunderbird,work] }
     - { name: multimedia, tags: [multimedia,work,home] }
     - { name: signal, tags: [signal,work,home] }
+    - { name: matrix-chat, tags: [matrix-chat, home] }
     - { name: wire, tags: [wire,work] }
     - { name: laptop, tags: [laptop,work,home] }
     - { name: doas, tags: doas }

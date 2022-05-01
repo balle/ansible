@@ -1,0 +1,5 @@
+---
+- name: Install Matrix chat client
+  snap:
+    name: neochat
+    state: present
