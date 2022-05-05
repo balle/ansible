@@ -1,6 +1,18 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
 
+- name: fstab optimizations
+  replace:
+    path: /etc/fstab 
+    regexp: defaults
+    replace: defaults,noatime
+
+- name: fstab optimizations
+  replace:
+    path: /etc/fstab 
+    regexp: errors=remount-ro
+    replace: errors=remount-ro,noatime
+
 - name: configure sysctl 
   copy:
     src: '{{ sysctl_config }}'
