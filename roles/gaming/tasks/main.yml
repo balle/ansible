@@ -4,14 +4,22 @@
     name: gog-galaxy-wine
     state: present 
 
-- name: Check DPKG architecture 
-  command: grep i386 /var/lib/dpkg/arch
-  register: dpkg-architecture 
+- name: Create DPKG architecture
+  file: 
+    path: /var/lib/dpkg/arch
+    state: touch
+  register: dpkg_architecture
+
+- name: Check DPKG architecture
+  lineinfile: 
+    name: /var/lib/dpkg/arch
+    line: i386
+    state: present
 
 - name: Activate i386 packages for APT
   command: dpkg --add-architecture i386
   register: dpkg
-  when: ansible_os_family == "Debian" and dpkg-architecture.stdout_lines == ""
+  when: ansible_os_family == "Debian" and dpkg_architecture.changed
 
 - name: APT Update
   command: apt update

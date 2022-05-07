@@ -15,6 +15,7 @@
     - { name: thunderbird, tags: [thunderbird,work] }
     - { name: multimedia, tags: [multimedia,work,home] }
     - { name: signal, tags: [signal,work,home] }
+    - { name: matrix-chat, tags: [matrix-chat, home] }
     - { name: wire, tags: [wire,work] }
     - { name: laptop, tags: [laptop,work,home] }
     - { name: doas, tags: doas }
@@ -22,7 +23,7 @@
     - { name: develop, tags: [develop,work,home] }
     - { name: write, tags: [write,work,home] }
     - { name: office, tags: [office,work,home] }
-    - { name: password-manager, tags: [password-manager,work] }
+    - { name: password-manager, tags: [password-manager,home,work] }
     - { name: remote-desktop, tags: [remote-desktop,work] }
     - { name: onedrive, tags: [onedrive,work] }
     - { name: vpn, tags: [vpn,work] }
