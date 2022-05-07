@@ -48,6 +48,19 @@
     mode: 0644
   when: ansible_os_family == "Debian"
 
+- name: install smartmontools
+  package:
+    name: smartmontools
+    state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: Start smartmontools service
+  service:
+    name: smartmontools
+    enabled: yes
+    state: started
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+
 - name: install snapd
   package: 
     name: snapd
