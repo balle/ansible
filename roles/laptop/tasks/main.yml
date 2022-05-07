@@ -12,8 +12,21 @@
     state: present
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
+- name: debug
+  debug:
+    msg: "{{ hostvars[inventory_hostname].ansible_devices }}"
+
+- name: copy tlp config
+  copy:
+    src: tlp.conf
+    dest: /etc/tlp.conf
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Start tlp service
   service:
     name: tlp
     enabled: yes
     state: started
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
