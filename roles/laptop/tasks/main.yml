@@ -6,15 +6,24 @@
     insertbefore: EOF
   when: ansible_os_family == "OpenBSD"
 
+- name: install anacron
+  package: 
+    name: anacron 
+    state: present
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+
+- name: start anacron service 
+  service:
+    name: anacron
+    enabled: yes
+    state: started
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+
 - name: install tlp
   package: 
     name: tlp
     state: present
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
-
-- name: debug
-  debug:
-    msg: "{{ hostvars[inventory_hostname].ansible_devices }}"
 
 - name: copy tlp config
   copy:
