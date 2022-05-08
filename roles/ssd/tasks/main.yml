@@ -1,0 +1,7 @@
+---
+
+- name: install nvme-cli 
+  package:
+    name: nvme-cli 
+    state: present
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"

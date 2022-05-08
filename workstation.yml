@@ -18,6 +18,7 @@
     - { name: matrix-chat, tags: [matrix-chat, home] }
     - { name: wire, tags: [wire,work] }
     - { name: laptop, tags: [laptop,work,home] }
+    - { name: ssd, tags: ssd }
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
     - { name: develop, tags: [develop,work,home] }
