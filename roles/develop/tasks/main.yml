@@ -2,6 +2,7 @@
 - include_vars: '{{ ansible_os_family }}.yml'
 - include: base.yml
 - include: c.yml
+- include: perl.yml
 - include: python.yml
 - include: go.yml
 - include: vscode.yml
