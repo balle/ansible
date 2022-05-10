@@ -1,0 +1,20 @@
+---
+- name: install libperl-dev
+  package:
+    name: libperl-dev 
+    state: present 
+  when: ansible_os_family == 'Debian'
+
+- name: install perl-devel
+  package:
+    name: perl-devel 
+    state: present 
+  when: ansible_os_family == 'RedHat'
+
+- name: install perlbrew
+  package:
+    name: perlbrew 
+    state: present 
+  
+- name: install Perl::LanguageServer
+  command: cpan Perl::LanguageServer
