@@ -23,4 +23,5 @@ extensions:
   - vscjava.vscode-java-test
   - vscjava.vscode-maven
   - dineug.vuerd-vscode
+  - richterger.perl
   
