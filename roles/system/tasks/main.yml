@@ -32,6 +32,23 @@
     path: /etc/fstab
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
+- name: Copy journald config
+  copy:
+    src: journald.conf
+    dest: /etc/systemd/journald.conf
+    owner: root 
+    group: root 
+    mode: 0644
+  register: journald_config
+  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+- name: Restart journald on config change
+  service:
+    name: systemd-journald
+    enabled: yes
+    state: restarted
+  when: journald_config.changed
+
 - name: install macchanger
   package:
     name: macchanger 
