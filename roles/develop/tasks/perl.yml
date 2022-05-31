@@ -11,10 +11,22 @@
     state: present 
   when: ansible_os_family == 'RedHat'
 
+- name: install cpanminus
+  package:
+    name: cpanminus
+    state: present 
+  when: ansible_os_family == 'Debian'
+
+- name: install perl-App-cpanminus
+  package:
+    name: perl-App-cpanminus
+    state: present 
+  when: ansible_os_family == 'RedHat'
+
 - name: install perlbrew
   package:
     name: perlbrew 
     state: present 
   
 - name: install Perl::LanguageServer
-  command: cpan Perl::LanguageServer
+  command: cpanm Perl::LanguageServer
