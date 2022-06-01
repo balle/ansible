@@ -26,3 +26,8 @@
     name: "{{ my_music_player }}"
     state: present
   when: ansible_os_family == "Debian"
+
+- name: install gimp
+  package:
+    name: gimp
+    state: present

@@ -5,7 +5,13 @@
     name: 'tcpdump'
     state: present
   when: ansible_os_family != 'OpenBSD'
-    
+
+- name: install whois
+  package:
+    name: 'whois'
+    state: present
+  when: ansible_os_family != 'OpenBSD' or ansible_os_family == 'Darwin'
+
 - name: install jnettop
   package:
     name: 'jnettop'

@@ -35,3 +35,13 @@
   package:
     name: '{{ ipython3_package }}'
     state: present
+
+- name: install pudb
+  package:
+    name: '{{ pudb_package }}'
+    state: present
+  when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat' or ansible_os_family == 'OpenBSD'
+
+- name: pip install pudb 
+  command: pip3 install pudb 
+  when: ansible_os_family != 'Debian' and ansible_os_family != 'RedHat' and ansible_os_family != 'OpenBSD'
