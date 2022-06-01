@@ -1,0 +1,14 @@
+ruby_package: 'ruby'
+ruby_devel_package: 'ruby'
+pcap_devel_package: 'libpcap'
+libusb_dev: "libusb"
+bluez_devel_package: "libbluetooth"
+sqlite_devel_package: 'sqlite'
+dsniff_package: 'dsniff'
+ettercap_package: 'ettercap-text-only'
+wireshark_package: 'wireshark-qt'
+zap_package: 'zaproxy'
+postgresql_server: 'postgresql'
+postgresql_server_dev: "postgresql"
+postgresql_client: 'pgcli'
+

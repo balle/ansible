@@ -29,7 +29,7 @@
   package:
     name: '{{ auctex_package }}'
     state: present
-  when: ansible_os_family != "OpenBSD"
+  when: ansible_os_family != "OpenBSD" and ansible_os_family != "Archlinux"
 
 - name: install gxmessage
   package:

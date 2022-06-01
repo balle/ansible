@@ -15,7 +15,7 @@
   package:
     name: cpanminus
     state: present 
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' or ansible_os_family == 'Archlinux'
 
 - name: install perl-App-cpanminus
   package:

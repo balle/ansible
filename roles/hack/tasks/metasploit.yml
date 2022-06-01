@@ -53,7 +53,7 @@
   package:
     name: ruby-bundler
     state: present
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Debian" or ansible_os_family == "Archlinux"
 
 - name: link bundler
   file:
