@@ -32,3 +32,8 @@
     name: sqlmap 
     state: present 
     
+- name: install whatweb
+  package:
+    name: whatweb
+    state: present
+    

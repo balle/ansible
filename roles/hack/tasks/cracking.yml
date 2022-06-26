@@ -9,6 +9,11 @@
     name: hydra
     state: present
 
+- name: install medusa
+  package:
+    name: medusa
+    state: present
+
 - name: install hashcat
   package: 
     name: hashcat
@@ -36,3 +41,7 @@
     dest: '{{ my_home }}/hack/SecLists'
     repo: https://gitlab.com/kalilinux/packages/wordlists.git
   
+- name: install cewl 
+  package:
+    name: cewl
+    state: present
