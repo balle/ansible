@@ -29,6 +29,7 @@
     - { name: onedrive, tags: [onedrive,work] }
     - { name: vpn, tags: [vpn,work] }
     - { name: teams, tags: [teams,work] }
+    - { name: tools, tags: [tools,home,work] }
     - { name: nettools, tags: [hack,nettools,work,home] }
     - { name: wireshark, tags: [hack,wireshark,work,home] }
     - { name: hack, tags: [hack,work,home] }
