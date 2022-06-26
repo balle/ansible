@@ -27,7 +27,7 @@
     state: present 
 
 - name: Install Debian Stable x64 pxe image 
-  url_get:
+  get_url:
     url: http://ftp.ch.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/netboot.tar.gz
     dest: /tmp/debian-netboot64.tgz
 
@@ -43,7 +43,7 @@
     dest: /srv/tftp/bootnetx64.efi
 
 - name: Get OpenBSD pxe image 
-  url_get:
+  get_url:
     url: "https://ftp.ch.openbsd.org/pub/OpenBSD/7.1/i386/{{ item }}"
     dest: "/srv/tftp/{{ item }}"
   with_items:

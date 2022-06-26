@@ -1,12 +1,12 @@
 ---
 
 - name: download nessus deb 
-  url_get: 
+  get_url: 
     url: https://www.tenable.com/downloads/api/v1/public/pages/nessus/downloads/16503/download?i_agree_to_tenable_license_agreement=true
-    dest: ¨{{ my_home }}/nessus.deb¨
+    dest: "{{ my_home }}/nessus.deb"
   register: nessus_deb
   when: ansible_os_family == "Debian"
 
 - name: install nessus
-  command: ¨dpkg -i {{ my_home }}/nessus.deb¨ 
+  command: "dpkg -i {{ my_home }}/nessus.deb" 
   when: nessus_deb.changed
