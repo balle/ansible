@@ -31,3 +31,9 @@
   package:
     name: yersinia
     state: present
+
+- name: install p0f
+  package:
+    name: p0f
+    state: present
+    
