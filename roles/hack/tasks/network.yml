@@ -7,6 +7,7 @@
 - name: clone routersploit
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/routersploit'
     repo: 'https://github.com/threat9/routersploit.git'
 

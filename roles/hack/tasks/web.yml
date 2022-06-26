@@ -24,6 +24,7 @@
 - name: clone w3af
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/w3af'
     repo: 'https://github.com/andresriancho/w3af.git'
 

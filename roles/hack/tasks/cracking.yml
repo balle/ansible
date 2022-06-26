@@ -32,12 +32,14 @@
 - name: clone SecLists
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/SecLists'
     repo: 'https://github.com/danielmiessler/SecLists'
 
 - name: clone Kali wordlists
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/SecLists'
     repo: https://gitlab.com/kalilinux/packages/wordlists.git
   
