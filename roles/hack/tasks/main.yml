@@ -16,4 +16,5 @@
 - include: cracking.yml
 - include: web.yml
 - include: reveng.yml
+- include: nessus.yml
 - include: misc.yml
