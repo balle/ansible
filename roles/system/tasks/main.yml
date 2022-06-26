@@ -100,3 +100,27 @@
 - name: init apt-file 
   command: apt-file update 
   when: apt_file.changed 
+
+- name: install iotop
+  package:
+    name: iotop
+    state: present
+
+- name: clone gotop repo
+  git:
+    repo: https://github.com/cjbassi/gotop.git
+    dest: "{{ my_home }}/gotop"
+    clone: yes
+  register: gotop_src
+
+- name: build gotop
+  shell: "cd {{ my_home }}/gotop && go build"
+  when: gotop_src.changed
+
+- name: copy gotop to /usr/local/bin
+  copy:
+    src: "{{ my_home }}/gotop"
+    dest: /usr/local/bin/gotop
+    mode: 0755
+  when: gotop_src.changed
+  
