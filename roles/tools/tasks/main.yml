@@ -1,8 +1,14 @@
 ---
+- include_vars: '{{ ansible_os_family }}.yml'
 
 - name: install iotop
   package:
     name: iotop
+    state: present
+
+- name: install golang
+  package:
+    name: '{{ go_package }}'
     state: present
 
 - name: clone gotop repo
@@ -10,6 +16,7 @@
     repo: https://github.com/cjbassi/gotop.git
     dest: "{{ my_home }}/gotop"
     clone: yes
+    force: yes
   register: gotop_src
 
 - name: build gotop
@@ -18,7 +25,7 @@
 
 - name: copy gotop to /usr/local/bin
   copy:
-    src: "{{ my_home }}/gotop"
+    src: "{{ my_home }}/gotop/gotop"
     dest: /usr/local/bin/gotop
     mode: 0755
   when: gotop_src.changed
