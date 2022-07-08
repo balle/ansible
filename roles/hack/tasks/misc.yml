@@ -2,6 +2,7 @@
 - name: clone evilgrade
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/evilgrade'
     repo: 'https://github.com/infobyte/evilgrade'
     

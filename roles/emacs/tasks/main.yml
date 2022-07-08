@@ -42,6 +42,7 @@
   become_user: '{{ my_user }}'
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/emacs'
     repo: https://github.com/balle/emacs.git
   when: ansible_os_family != "OpenBSD"

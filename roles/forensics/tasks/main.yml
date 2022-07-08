@@ -23,6 +23,7 @@
 - name: install volatility framework
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/volatility'
     repo: https://github.com/volatilityfoundation/volatility
 

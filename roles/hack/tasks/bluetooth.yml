@@ -25,12 +25,14 @@
 - name: clone libbtbb
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/libbtbb'
     repo: 'https://github.com/greatscottgadgets/libbtbb.git'
 
 - name: clone ubertooth
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/ubertooth'
     repo: 'https://github.com/greatscottgadgets/ubertooth.git'
 

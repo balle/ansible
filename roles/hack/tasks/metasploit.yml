@@ -2,6 +2,7 @@
 - name: clone metasploit
   git:
     clone: yes
+    force: yes
     dest: '{{ my_home }}/hack/metasploit'
     repo: 'https://github.com/rapid7/metasploit-framework.git'
 
