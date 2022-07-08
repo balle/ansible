@@ -1,0 +1,11 @@
+---
+
+- name: install ntfs-3g
+  package:
+    name: ntfs-3g
+    state: present
+
+- name: install hfsprogs
+  package:
+    name: hfsprogs
+    state: present

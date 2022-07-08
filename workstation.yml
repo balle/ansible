@@ -21,6 +21,7 @@
     - { name: ssd, tags: ssd }
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
+    - { name: filesystems, tags: [filesystems, apple, windows] }
     - { name: develop, tags: [develop,work,home] }
     - { name: write, tags: [write,work,home] }
     - { name: office, tags: [office,work,home] }
