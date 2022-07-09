@@ -1,0 +1,11 @@
+---
+
+- name: install ifuse
+  package:
+    name: ifuse
+    state: present
+
+- name: install libimobiledevice-utils
+  package:
+    name: libimobiledevice-utils
+    state: present

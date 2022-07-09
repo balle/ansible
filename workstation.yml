@@ -22,6 +22,7 @@
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
     - { name: android, tags: android }
+    - { name: ios, tags: [ios, ipad, iphone, apple] }
     - { name: filesystems, tags: [filesystems, apple, windows] }
     - { name: develop, tags: [develop,work,home] }
     - { name: write, tags: [write,work,home] }
