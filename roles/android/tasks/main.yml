@@ -1,0 +1,11 @@
+---
+
+- name: install android-tools
+  package:
+    name: android-sdk-platform-tools
+    state: present
+
+- name: install jmtpfs
+  package:
+    name: jmtpfs
+    state: present
