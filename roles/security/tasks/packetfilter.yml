@@ -1,0 +1,32 @@
+---
+
+- name: install iptables-persistent
+  package:
+    name: iptables-persistent
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: configure packetfilter
+  copy:
+    src: '{{ packetfilter_config }}'
+    dest: '{{ packetfilter_config_dest }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+  when: ansible_os_family != 'Darwin'
+
+- name: configure ipv6 packetfilter
+  copy:
+    src: '{{ packetfilter_config }}'
+    dest: '/etc/iptables/rules.v6'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+  when: ansible_os_family == 'Debian'
+
+- name: Start iptables service
+  service:
+    name: iptables
+    enabled: yes
+    state: started
+  when: ansible_os_family == 'Debian'

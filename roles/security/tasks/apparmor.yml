@@ -1,0 +1,11 @@
+---
+
+- name: install apparmor
+  package:
+    name: "{{ item }}"
+  with_items: 
+    - apparmor-profiles
+    - apparmor-profiles-extra
+    - apparmor-utils
+    - apparmor-notify
+  when: ansible_os_family == 'Debian'
