@@ -1,0 +1,13 @@
+---
+
+- name: Add lockdown to kernel parameter
+  replace:
+    path: /etc/default/grub
+    regexp: GRUB_CMDLINE_LINUX_DEFAULT="quiet
+    replace: GRUB_CMDLINE_LINUX_DEFAULT="quiet lsm=lockdown lockdown=confidentiality 
+  when: ansible_os_family == "Debian"
+  register: kernel_config
+
+- name: Update grub config
+  command: update-grub
+  when: kernel_config.changed

@@ -3,6 +3,7 @@
 
 - include: aide.yml
 - include: apparmor.yml
+- include: kernel.yml
 - include: packetfilter.yml
 - include: tiger.yml
 - include: misc.yml
