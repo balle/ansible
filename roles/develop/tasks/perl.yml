@@ -30,3 +30,9 @@
   
 - name: install Perl::LanguageServer
   command: cpanm Perl::LanguageServer
+
+- name: install Devel::Cover
+  package:
+    name: libdevel-cover-perl
+    state: present 
+  when: ansible_os_family == 'Debian'
