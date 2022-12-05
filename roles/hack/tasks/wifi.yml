@@ -34,3 +34,8 @@
     force: yes
     dest: '{{ my_home }}/hack/wifiphisher'
     repo: 'https://github.com/wifiphisher/wifiphisher'
+
+- name: install hcxdumptool
+  package:
+    name: hcxdumptool
+    state: present
