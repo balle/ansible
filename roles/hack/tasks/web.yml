@@ -38,3 +38,7 @@
     name: whatweb
     state: present
     
+- name: install nikto
+  package:
+    name: whatweb
+    state: present
