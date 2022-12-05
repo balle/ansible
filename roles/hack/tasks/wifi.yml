@@ -28,6 +28,14 @@
     dest: '{{ my_home }}/hack/airpwn-ng'
     repo: 'https://github.com/ICSec/airpwn-ng'
 
+- name: install wifiphishers dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - libnl-3-dev 
+    - libnl-genl-3-dev
+
 - name: clone wifiphisher
   git:
     clone: yes
