@@ -45,3 +45,7 @@
 - name: pip install pudb 
   command: pip3 install pudb 
   when: ansible_os_family != 'Debian' and ansible_os_family != 'RedHat' and ansible_os_family != 'OpenBSD'
+
+- name: install poetry
+  command: pip3 install poetry
+  
