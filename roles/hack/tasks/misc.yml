@@ -6,3 +6,5 @@
     dest: '{{ my_home }}/hack/evilgrade'
     repo: 'https://github.com/infobyte/evilgrade'
     
+- name: install recon-ng
+  
