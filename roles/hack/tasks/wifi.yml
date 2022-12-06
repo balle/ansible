@@ -43,7 +43,10 @@
     dest: '{{ my_home }}/hack/wifiphisher'
     repo: 'https://github.com/wifiphisher/wifiphisher'
 
-- name: install hcxdumptool
+- name: install pmkid tools
   package:
-    name: hcxdumptool
+    name: "{{ item }}"
     state: present
+  with_items: 
+    - hcxdumptool
+    - hcxtools
