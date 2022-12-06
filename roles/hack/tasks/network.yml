@@ -38,3 +38,21 @@
     name: p0f
     state: present
     
+- name: install sslstrip dependencies
+  package:
+    name: "{{ item }}"
+  with_items: 
+    - python3-twisted
+    - python3-openssl
+
+- name: Clone sslstrip fork for python3
+  git:
+    clone: yes 
+    force: yes 
+    dest: '{{ my_home }}/hack/sslstrip3'
+    repo: 'https://github.com/Skatinger/sslstrip3.git'
+  register: sslstrip3_cloned
+
+- name: Install sslstrip fork for python3
+  command: "python3 {{ my_home }}/hack/sslstrip3/setup.py install"
+  
