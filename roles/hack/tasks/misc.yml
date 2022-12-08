@@ -7,4 +7,7 @@
     repo: 'https://github.com/infobyte/evilgrade'
     
 - name: install recon-ng
-  
+  package:
+    name: recon-ng
+    state: present
+    
