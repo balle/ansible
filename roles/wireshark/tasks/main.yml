@@ -21,7 +21,7 @@
 - name: ensure wireshark config dir exists
   file:
     state: directory
-    path: "{{ my_home }}/.config/wireshark/preferences"
+    path: "{{ my_home }}/.config/wireshark"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
 
