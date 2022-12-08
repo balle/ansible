@@ -21,6 +21,30 @@
     dest: '{{ my_home }}/hack/pyrit'
     repo: 'https://github.com/JPaulMora/Pyrit'
 
+- name: Install bettercap dependencies 
+  package: 
+    name: "{{ item }}"
+    state: present 
+  with_items: 
+    - golang
+    - git
+    - build-essential 
+    - libpcap-dev 
+    - libusb-1.0-0-dev 
+    - libnetfilter-queue-dev
+
+- name: Get bettercap
+  shell: go get github.com/bettercap/bettercap
+  args:
+    creates: "$GOPATH/src/github.com/bettercap/bettercap"
+  register: bettercap 
+
+- name: Install bettercap 
+  shell: make build install
+  args:
+    chdir: "$GOPATH/src/github.com/bettercap/bettercap" 
+  when: bettercap.changed
+
 - name: clone airpwn-ng
   git:
     clone: yes
