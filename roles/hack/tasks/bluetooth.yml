@@ -101,3 +101,15 @@
   shell: cmake .. && make install && ldconfig
   args:
     chdir: '{{ my_home }}/hack/ubertooth/host/build'
+
+- name: clone btlejack
+  git:
+    clone: yes
+    force: yes
+    dest: '{{ my_home }}/hack/btlejack'
+    repo: https://github.com/virtualabs/btlejack.git
+
+- name: install btlejack
+  command: python3 setup.py install
+  args:
+    chdir: '{{ my_home }}/hack/btlejack'
