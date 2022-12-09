@@ -40,6 +40,36 @@
   args:
     chdir: '{{ my_home }}/hack/libbtbb/build'
 
+- name: install libbtbb wireshark plugin dependencies 
+  package:
+    name: "{{ item }}"
+    state: present 
+  with_items: 
+    - wireshark-dev
+    - libwireshark-dev
+
+- name: create build dirs for libbtbb wireshark plugins 
+  file:
+    state: directory 
+    path: "{{ my_home }}/hack/libbtbb/wireshark/plugins/{{ item }}/build"
+  with_items:
+    - btbb 
+    - btbredr
+
+- name: ensure python is a link to python3 
+  file:
+    state: link 
+    src: /usr/bin/python3
+    dest: /usr/bin/python
+
+- name: build libbtbb wireshark plugins
+  shell: cmake .. && make install 
+  args:
+    chdir: "{{ my_home }}/hack/libbtbb/wireshark/plugins/{{ item }}/build"
+  with_items:
+    - btbb 
+    - btbredr
+
 - name: clone ubertooth
   git:
     clone: yes
