@@ -113,3 +113,19 @@
   command: python3 setup.py install
   args:
     chdir: '{{ my_home }}/hack/btlejack'
+
+- name: install btlejack firmware build dependencies 
+  package:
+    name: yotta
+    state: present 
+
+- name: ensure yt is a link to yotta 
+  file:
+    state: link 
+    src: /usr/bin/yotta 
+    dest: /usr/bin/yt
+
+- name: build btlejack firmware 
+  command: make all 
+  args:
+    chdir: '{{ my_home }}/hack/btlejack/btlejack-firmware'
