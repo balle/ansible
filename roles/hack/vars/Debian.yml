@@ -5,7 +5,7 @@ libusb_dev: "libusb-dev"
 bluez_devel_package: "libbluetooth-dev"
 sqlite_devel_package: 'libsqlite3-dev'
 dsniff_package: 'dsniff'
-ettercap_package: 'ettercap-text-only'
+ettercap_package: 'ettercap-graphical'
 wireshark_package: 'wireshark'
 zap_package: 'zaproxy'
 postgresql_server: 'postgresql-13'
