@@ -1,5 +1,6 @@
 ---
 - include_vars: '{{ ansible_os_family }}.yml'
+  tags: [metasploit, wifihack, networkhack, bluetoothhack, cracking, webhack, reveng, nessus, mischack]
 
 - name: Create hack dir 
   file: 
@@ -10,11 +11,28 @@
     mode: 0700
 
 - include: metasploit.yml
+  tags: metasploit
+
 - include: wifi.yml
+  tags: wifihack
+
 - include: network.yml
+  tags: networkhack
+
 - include: bluetooth.yml
+  tags: bluetoothhack
+
 - include: cracking.yml
+  tags: cracking
+
 - include: web.yml
+  tags: webhack 
+
 - include: reveng.yml
+  tags: reveng 
+
 - include: nessus.yml
+  tags: nessus 
+
 - include: misc.yml
+  tags: mischack

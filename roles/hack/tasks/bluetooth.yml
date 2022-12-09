@@ -1,4 +1,5 @@
 ---
+    
 - name: Install cmake
   package:
     name: cmake
@@ -29,6 +30,16 @@
     dest: '{{ my_home }}/hack/libbtbb'
     repo: 'https://github.com/greatscottgadgets/libbtbb.git'
 
+- name: create libbtbb build dir 
+  file:
+    state: directory 
+    path: '{{ my_home }}/hack/libbtbb/build'
+
+- name: build libbtbb 
+  shell: cmake .. && make install && ldconfig
+  args:
+    chdir: '{{ my_home }}/hack/libbtbb/build'
+
 - name: clone ubertooth
   git:
     clone: yes
@@ -36,3 +47,27 @@
     dest: '{{ my_home }}/hack/ubertooth'
     repo: 'https://github.com/greatscottgadgets/ubertooth.git'
 
+- name: install ubertooh dependencies
+  package:
+    name: "{{ item }}"
+    state: present 
+  with_items: 
+    - make 
+    - gcc 
+    - g++ 
+    - wget 
+    - pkg-config 
+    - python3-numpy 
+    - python3-qtpy 
+    - python3-distutils 
+    - python3-setuptools
+
+- name: create ubertooth build dir 
+  file:
+    state: directory 
+    path: '{{ my_home }}/hack/ubertooth/host/build'
+
+- name: build ubertooth 
+  shell: cmake .. && make install && ldconfig
+  args:
+    chdir: '{{ my_home }}/hack/ubertooth/host/build'
