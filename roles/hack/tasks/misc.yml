@@ -10,4 +10,8 @@
   package:
     name: recon-ng
     state: present
-    
+
+- name: Download mac oui db 
+  get_url:
+    url: https://maclookup.app/downloads/csv-database/get-db?t=22-12-10&h=150820948dce1e74f1fabeaea44afa717fd10b37
+    dest: '{{ my_home }}/hack/macoui.csv'
