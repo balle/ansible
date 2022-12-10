@@ -40,10 +40,15 @@
   git:
     clone: yes
     force: yes
-    dest: '{{ my_home }}/hack/SecLists'
+    dest: '{{ my_home }}/hack/KaliWordlists'
     repo: https://gitlab.com/kalilinux/packages/wordlists.git
   
 - name: install cewl 
   package:
     name: cewl
     state: present
+
+- name: Download default password list 
+  get_url:
+    url: https://raw.githubusercontent.com/many-passwords/many-passwords/main/passwords.csv
+    dest: '{{ my_home }}/hack/DefaultPasswords.csv'
