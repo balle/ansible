@@ -82,10 +82,12 @@
   git:
     clone: yes
     force: yes
-    dest: '/usr/src/rtl8814au-4.3.21'
-    repo: 'https://github.com/zebulon2/rtl8814au.git'
+    dest: '/usr/src/rtl8814au'
+    repo: 'https://github.com/aircrack-ng/rtl8814au.git'
   register: rtl8814au
 
 - name: build rtl8814au driver 
-  shell: dkms install -m rtl8814au -v 4.3.21
+  command: make dkms_install
+  args:
+    chdir: '/usr/src/rtl8814au'
   when: rtl8814au.changed
