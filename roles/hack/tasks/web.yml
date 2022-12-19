@@ -25,8 +25,8 @@
   git:
     clone: yes
     force: yes
-    dest: '{{ my_home }}/hack/w3af'
-    repo: 'https://github.com/andresriancho/w3af.git'
+    dest: '{{ my_home }}/hack/w3af-python3'
+    repo: 'https://github.com/codders/w3af-python3.git'
 
 - name: install sqlmap
   package:
