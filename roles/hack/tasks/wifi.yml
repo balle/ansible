@@ -67,3 +67,24 @@
   with_items: 
     - hcxdumptool
     - hcxtools
+
+- name: install alfa awus1900 driver dependencies 
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - make
+    - gcc 
+    - dkms
+  
+- name: clone rtl8814au driver src
+  git:
+    clone: yes
+    force: yes
+    dest: '/usr/src/rtl8814au-4.3.21'
+    repo: 'https://github.com/zebulon2/rtl8814au.git'
+  register: rtl8814au
+
+- name: build rtl8814au driver 
+  shell: dkms build -m rtl8814au -v 4.3.21 && dkms install -m rtl8814au -v 4.3.21
+  when: rtl8814au.changed
