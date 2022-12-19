@@ -23,8 +23,11 @@
 
 - name: install w3af dependencies 
   package:
-    name: libxml2-dev
+    name: "{{ items }}"
     state: present
+  with_items: 
+    - libxml2-dev
+    - npm
 
 - name: clone w3af
   git:
@@ -36,6 +39,12 @@
 
 - name: install w3af python modules
   command: pip install pyClamd==0.4.0 PyGithub==1.57 GitPython==3.1.29 bloom-filter2==2.0.0 phply==1.2.5 nltk==3.8 chardet==5.1.0 tblib==1.7.0 pdfminer==20191125 pyOpenSSL==22.1.0 ndg-httpsclient==0.5.1 lxml==4.9.2 scapy==2.5.0rc1 cluster==1.4.1.post3 python-ntlm3==1.0.2 darts-util-lru==0.5 Jinja2==3.1.2 vulndb==0.1.3 markdown==3.4.1 psutil==5.9.4 ds-store==1.3.1 mitmproxy==0.13 Flask==2.2.2 PyYAML==6.0 morfessor==2.0.6 numpy==1.23.5 polyglot==16.7.4 pycld2==0.41 pyicu==2.10.2 tldextract==3.4.0 pebble==5.0.3 acora==2.3 diff-match-patch==20200713 bravado-core==5.17.1 lz4==4.0.2 vulners==2.0.4 ipaddresses==0.0.2 nocasedict==1.0.4
+  when: w3af.changed
+
+- name: install w3af npm modules
+  shell: npm install -g retire@3.0.6 && npm update -g retire
+  args:
+    chdir: '{{ my_home }}/hack/w3af-python3'
   when: w3af.changed
 
 - name: install sqlmap
