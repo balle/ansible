@@ -15,3 +15,10 @@
   get_url:
     url: https://maclookup.app/downloads/csv-database/get-db?t=22-12-10&h=150820948dce1e74f1fabeaea44afa717fd10b37
     dest: '{{ my_home }}/hack/macoui.csv'
+
+- name: install gitlab scanner truffle hog 
+  git:
+    clone: yes 
+    forcce: yes 
+    repo: 'https://github.com/trufflesecurity/trufflehog.git'
+    dest: '{{ my_home }}/hack/trufflehog'
