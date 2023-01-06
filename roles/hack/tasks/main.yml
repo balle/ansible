@@ -36,3 +36,6 @@
 
 - include: misc.yml
   tags: mischack
+
+- include: cloud.yml
+  tags: cloudhack

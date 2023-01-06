@@ -1,0 +1,7 @@
+---
+- name: install S3 bucket enumeration tool slurp
+  command: "{{ item }}"
+  with_items: 
+    - go get github.com/manuelbua/slurp
+    - go install github.com/manuelbua/slurp
+    
