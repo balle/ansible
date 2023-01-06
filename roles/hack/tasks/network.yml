@@ -56,3 +56,10 @@
 - name: Install sslstrip fork for python3
   command: "python3 {{ my_home }}/hack/sslstrip3/setup.py install"
   
+- name: install subbrute 
+  git:
+    clone: yes 
+    force: yes 
+    dest: '{{ my_home }}/hack/subbrute'
+    repo: 'https://github.com/TheRook/subbrute.git'
+    
