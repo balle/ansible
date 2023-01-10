@@ -22,3 +22,16 @@
     forcce: yes 
     repo: 'https://github.com/trufflesecurity/trufflehog.git'
     dest: '{{ my_home }}/hack/trufflehog'
+
+- name: install metagoofil
+  git:
+    clone: yes 
+    forcce: yes 
+    repo: 'https://github.com/opsdisk/metagoofil.git'
+    dest: '{{ my_home }}/hack/metagoofil'
+
+- name: install metagoofil dependencies
+  command: python3 -m pip install -r requirements.txt
+  args:
+    chdir: "{{ my_home }}/hack/metagoofil"
+  run_once: True
