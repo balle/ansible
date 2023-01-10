@@ -35,3 +35,8 @@
   args:
     chdir: "{{ my_home }}/hack/metagoofil"
   run_once: True
+
+- name: install exiftool
+  package:
+    name: exiftool
+    state: present
