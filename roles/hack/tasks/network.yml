@@ -55,11 +55,24 @@
 
 - name: Install sslstrip fork for python3
   command: "python3 {{ my_home }}/hack/sslstrip3/setup.py install"
-  
+  when: sslstrip3_cloned.changed
+
 - name: install subbrute 
   git:
     clone: yes 
     force: yes 
     dest: '{{ my_home }}/hack/subbrute'
     repo: 'https://github.com/TheRook/subbrute.git'
-    
+
+- name: install responder dependencies
+  package:
+    name: "{{ item }}"
+  with_items: 
+    - python3-netifaces
+
+- name: install responder
+  git:
+    clone: yes 
+    force: yes 
+    dest: '{{ my_home }}/hack/responder'
+    repo: 'https://github.com/lgandx/Responder.git'
