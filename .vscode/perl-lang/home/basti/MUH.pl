@@ -1,1 +1,0 @@
-{"version":5,"vars":[{"kind":2,"containerName":"","name":"strict","line":2},{"line":4,"name":"FH","kind":12},{"name":"FH","line":6,"kind":12},{"definition":"my","kind":13,"containerName":null,"name":"@parts","localvar":"my","line":8},{"kind":12,"line":13,"name":"FH"}]}

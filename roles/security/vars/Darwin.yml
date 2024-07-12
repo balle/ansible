@@ -1,5 +1,4 @@
 aide_config: 'aide_macos.conf'
 aide_config_dest: '/usr/local/etc/aide.conf'
-
-
-
+packetfilter_config: 'pf_macos.conf'
+packetfilter_config_dest: '/private/etc/pf.conf'
