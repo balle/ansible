@@ -48,4 +48,10 @@
 
 - name: install poetry
   command: pip3 install poetry
-  
+  when: ansible_os_family != 'Debian'
+
+- name: install poetry
+  package:
+    name: python3-poetry
+    state: present
+  when: ansible_os_family == 'Debian'
