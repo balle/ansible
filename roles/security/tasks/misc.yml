@@ -4,3 +4,34 @@
   package:
     name: 'gnupg'
     state: present
+
+- name: install unattended-upgrades
+  package:
+    name: 'unattended-upgrades'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: copy unattended-upgrades config
+  copy:
+    src: "unattended-upgrades"
+    dest: '/etc/apt/apt.conf.d/50unattended-upgrades'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+  when: ansible_os_family == 'Debian'
+
+- name: copy auto-upgrades config
+  copy:
+    src: "auto-upgrades"
+    dest: '/etc/apt/apt.conf.d/20auto-upgrades'
+    owner: 'root'
+    group: 'root'
+    mode: 0600
+  when: ansible_os_family == 'Debian'
+
+- name: Start unattended-upgrades service
+  service:
+    name: unattended-upgrades
+    enabled: yes
+    state: started
+  when: ansible_os_family == "Debian"
