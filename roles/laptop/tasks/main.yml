@@ -40,3 +40,10 @@
     enabled: yes
     state: started
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+
+- name: dont suspend on lid close when on external power
+  lineinfile:
+    path: '/etc/systemd/logind.conf'
+    backrefs: true
+    regexp: '^\#HandleLidSwitchExternalPower\=suspend$'
+    line: 'HandleLidSwitchExternalPower=ignore'
