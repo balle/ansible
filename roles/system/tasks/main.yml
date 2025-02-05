@@ -100,3 +100,19 @@
 - name: init apt-file 
   command: apt-file update 
   when: apt_file.changed 
+
+- name: disable polkit for NetworkManager
+  copy:
+    src: nm-polkit.disable
+    dest: /etc/NetworkManager/conf.d/any-user.conf
+    owner: root 
+    group: root 
+    mode: 0644
+  when: ansible_os_family == "Debian"
+
+- name: Restart NetworkManager
+  service:
+    name: NetworkManager
+    enabled: yes
+    state: restarted
+  when: ansible_os_family == "Debian"
