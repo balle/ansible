@@ -1,32 +1,32 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- include_vars: "{{ ansible_os_family }}.yml"
 
 - name: fstab optimizations
   replace:
-    path: /etc/fstab 
+    path: /etc/fstab
     regexp: defaults
     replace: defaults,noatime
 
 - name: fstab optimizations
   replace:
-    path: /etc/fstab 
+    path: /etc/fstab
     regexp: errors=remount-ro
     replace: errors=remount-ro,noatime
 
-- name: configure sysctl 
+- name: configure sysctl
   copy:
-    src: '{{ sysctl_config }}'
-    dest: '{{ sysctl_config_dest }}'
-    owner: 'root'
-    group: 'root'
+    src: "{{ sysctl_config }}"
+    dest: "{{ sysctl_config_dest }}"
+    owner: "root"
+    group: "root"
     mode: 0600
-  register: sysctl 
-  
-- name: reload sysctl 
-  command: sysctl -p 
+  register: sysctl
+
+- name: reload sysctl
+  command: sysctl -p
   when: sysctl.changed
 
-- name: hide pids from other users 
+- name: hide pids from other users
   blockinfile:
     block: "proc                    /proc                   proc    nosuid,noexec,nodev,hidepid=2 0 0"
     path: /etc/fstab
@@ -36,8 +36,8 @@
   copy:
     src: journald.conf
     dest: /etc/systemd/journald.conf
-    owner: root 
-    group: root 
+    owner: root
+    group: root
     mode: 0644
   register: journald_config
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat" or ansible_os_family == "Archlinux"
@@ -51,17 +51,17 @@
 
 - name: install macchanger
   package:
-    name: macchanger 
-    state: present 
+    name: macchanger
+    state: present
   register: macchanger
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat" or ansible_os_family == "Archlinux"
 
-- name: configure macchanger 
+- name: configure macchanger
   copy:
     src: macchanger
     dest: /etc/default/macchanger
-    owner: root 
-    group: root 
+    owner: root
+    group: root
     mode: 0644
   when: ansible_os_family == "Debian"
 
@@ -78,35 +78,28 @@
     state: started
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: install snapd
-  package: 
-    name: snapd
-    state: present
-  register: snapd_installed
-
-- name: setup snapd 
-  command: snap install core 
-  when: 
-  - snapd_installed.changed
-  - ansible_os_family == "Debian" or ansible_os_family == 'RedHat'
-
-- name: install apt-file 
+- name: install flatpak
   package:
-    name: apt-file 
-    state: present 
+    name: flatpak
+    state: present
+
+- name: install apt-file
+  package:
+    name: apt-file
+    state: present
   register: apt_file
   when: ansible_os_family == "Debian"
 
-- name: init apt-file 
-  command: apt-file update 
-  when: apt_file.changed 
+- name: init apt-file
+  command: apt-file update
+  when: apt_file.changed
 
 - name: disable polkit for NetworkManager
   copy:
     src: nm-polkit.disable
     dest: /etc/NetworkManager/conf.d/any-user.conf
-    owner: root 
-    group: root 
+    owner: root
+    group: root
     mode: 0644
   when: ansible_os_family == "Debian"
 

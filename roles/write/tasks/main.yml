@@ -35,3 +35,13 @@
   package:
     name: pandoc
     state: present
+
+- name: install mscorefonts
+  package:
+    name: ttf-mscorefonts-installer
+    state: present
+
+- name: install fonts-ebgaramond
+  package:
+    name: fonts-ebgaramond
+    state: present

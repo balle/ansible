@@ -1,17 +1,17 @@
 ---
 - name: Install GOG Galaxy
-  snap: 
-    name: gog-galaxy-wine
-    state: present 
+  flatpak:
+    name: io.github.sharkwouter.Minigalaxy
+    state: present
 
 - name: Create DPKG architecture
-  file: 
+  file:
     path: /var/lib/dpkg/arch
     state: touch
   register: dpkg_architecture
 
 - name: Check DPKG architecture
-  lineinfile: 
+  lineinfile:
     name: /var/lib/dpkg/arch
     line: i386
     state: present
@@ -31,8 +31,8 @@
     state: present
   when: ansible_os_family == 'RedHat'
 
-- name: install Steam 
+- name: install Steam
   package:
-    name: steam 
-    state: present 
+    name: steam
+    state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"

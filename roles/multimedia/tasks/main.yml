@@ -1,9 +1,9 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
-  
+- include_vars: "{{ ansible_os_family }}.yml"
+
 - name: install mplayer
   package:
-    name: 'mplayer'
+    name: "mplayer"
     state: present
 
 - name: install gstreamer plugins
@@ -16,20 +16,20 @@
     - "{{ gstreamer1_plugins_ugly }}"
 
 - name: install music player
-  package: 
+  package:
     name: "{{ my_music_player }}"
     state: present
   when: ansible_os_family != "Debian"
 
 - name: install music player
-  snap: 
+  flatpak:
     name: "{{ my_music_player }}"
     state: present
   when: ansible_os_family == "Debian"
 
 - name: install spotify
-  snap: 
-    name: "spotify"
+  flatpak:
+    name: "com.spotify.Client"
     state: present
   when: ansible_os_family == "Debian"
 

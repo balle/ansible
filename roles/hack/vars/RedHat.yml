@@ -7,7 +7,7 @@ sqlite_devel_package: 'sqlite-devel'
 dsniff_package: 'dsniff'
 ettercap_package: 'ettercap'
 wireshark_package: 'wireshark'
-zap_package: 'zaproxy'
+zap_package: 'org.zaproxy.ZAP'
 postgresql_server: 'postgresql-server'
 postgresql_server_dev: "postgresql-server-devel"
 postgresql_client: 'postgresql'

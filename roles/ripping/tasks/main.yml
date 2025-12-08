@@ -1,29 +1,29 @@
---- 
-- include_vars: '{{ ansible_os_family }}.yml'
+---
+- include_vars: "{{ ansible_os_family }}.yml"
 
-- name: install dvdcss 
-  package: 
+- name: install dvdcss
+  package:
     name: "{{ dvdcss_package }}"
-    state: present 
+    state: present
   when: ansible_os_family != "Darwin"
 
-- name: install dvdcss on macos 
+- name: install dvdcss on macos
   homebrew:
     name: libdvdcss
-    state: present 
+    state: present
   when: ansible_os_family == "Darwin"
 
-- name: Reconfigure dvdcss 
+- name: Reconfigure dvdcss
   command: dpkg-reconfigure -fnoninteractive libdvd-pkg
   when: ansible_os_family == "Debian"
 
 - name: install makemkv
-  snap:
-    name: makemkv
+  flatpak:
+    name: com.makemkv.MakeMKV
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
-- name: install makemkv on macos 
+- name: install makemkv on macos
   homebrew:
     name: makemkv
     state: present
@@ -35,14 +35,14 @@
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install handbrake on macos 
+- name: install handbrake on macos
   homebrew:
     name: handbrake
-    state: present 
+    state: present
   when: ansible_os_family == "Darwin"
 
-- name: install lame 
-  package: 
+- name: install lame
+  package:
     name: lame
     state: present
   when: ansible_os_family != "Darwin"
@@ -59,10 +59,10 @@
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install streamripper on macos 
+- name: install streamripper on macos
   homebrew:
     name: streamripper
-    state: present 
+    state: present
   when: ansible_os_family == "Darwin"
 
 - name: install youtube-dl
@@ -71,9 +71,8 @@
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install youtube-dl on macos 
+- name: install youtube-dl on macos
   homebrew:
     name: youtube-dl
     state: present
   when: ansible_os_family == "Darwin"
-

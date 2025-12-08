@@ -1,21 +1,21 @@
 ---
 - name: install zed attack proxy on macOS
   package:
-    name: '{{ zap_package }}'
+    name: "{{ zap_package }}"
     state: present
   ignore_errors: yes
   when: ansible_os_family == 'Darwin'
 
 - name: install zed attack proxy on OpenBSD
   package:
-    name: '{{ zap_package }}'
+    name: "{{ zap_package }}"
     state: present
   when:
     - ansible_os_family == 'OpenBSD'
 
 - name: install zed attack proxy on Linux
-  snap:
-    name: '{{ zap_package }}'
+  flatpak:
+    name: "{{ zap_package }}"
     state: present
     classic: yes
   when:
@@ -23,21 +23,21 @@
 
 - name: install sqlmap
   package:
-    name: sqlmap 
-    state: present 
+    name: sqlmap
+    state: present
 
 - name: clone nosqlmap
   git:
     clone: yes
     force: yes
-    dest: '{{ my_home }}/hack/nosqlmap'
-    repo: 'https://github.com/SirKnightV/NoSQLMap-Python3-update.git'
+    dest: "{{ my_home }}/hack/nosqlmap"
+    repo: "https://github.com/SirKnightV/NoSQLMap-Python3-update.git"
   register: nosqlmap
 
-- name: install nosqlmap requirements 
+- name: install nosqlmap requirements
   command: pip3 install -r requirements.txt
   args:
-    chdir: '{{ my_home }}/hack/nosqlmap'
+    chdir: "{{ my_home }}/hack/nosqlmap"
   when: nosqlmap.changed
 
 - name: install pymongo
@@ -49,7 +49,7 @@
   package:
     name: whatweb
     state: present
-    
+
 - name: install nikto
   package:
     name: whatweb
@@ -59,12 +59,12 @@
   git:
     clone: yes
     force: yes
-    dest: '{{ my_home }}/hack/beef'
-    repo: 'https://github.com/beefproject/beef.git'
+    dest: "{{ my_home }}/hack/beef"
+    repo: "https://github.com/beefproject/beef.git"
   register: beef
 
-- name: install beef 
+- name: install beef
   shell: yes | ./install
   args:
-    chdir: '{{ my_home }}/hack/beef'
+    chdir: "{{ my_home }}/hack/beef"
   when: beef.changed
