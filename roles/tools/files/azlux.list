@@ -1,0 +1,1 @@
+deb [arch=amd64 signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian   stable main

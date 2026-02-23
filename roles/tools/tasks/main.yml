@@ -6,10 +6,36 @@
     name: iotop
     state: present
 
+- name: configure ctop repo
+  copy:
+    src: "azlux.list"
+    dest: "/etc/apt/sources.list.d/azlux.list"
+    mode: 0644
+  when: ansible_os_family == "Debian"
+
+- name: copy ctop gpg key
+  copy:
+    src: "azlux-archive-keyring.gpg"
+    dest: "/usr/share/keyrings/azlux-archive-keyring.gpg"
+    mode: 0644
+  when: ansible_os_family == "Debian"
+
+- name: install ctop
+  package: 
+    name: "docker-ctop"
+    state: present
+  when: ansible_os_family == "Debian"
+
 - name: install golang
   package:
     name: '{{ go_package }}'
     state: present
+
+- name: Check if gotop is installed
+  command: which gotop
+  register: gotop_check
+  ignore_errors: true
+  changed_when: false
 
 - name: clone gotop repo
   git:
@@ -18,17 +44,22 @@
     clone: yes
     force: yes
   register: gotop_src
+  when: gotop_check.rc == 1
 
 - name: build gotop
   shell: "cd {{ my_home }}/gotop && go build"
-  when: gotop_src.changed
+  when: 
+    - gotop_check.rc == 1
+    - gotop_src.changed
 
 - name: copy gotop to /usr/local/bin
   copy:
     src: "{{ my_home }}/gotop/gotop"
     dest: /usr/local/bin/gotop
-    mode: 0755
-  when: gotop_src.changed
+    mode: 0755    
+  when: 
+    - gotop_check.rc == 1
+    - gotop_src.changed
   
 - name: install clustershell
   package:
