@@ -12,10 +12,7 @@ export LOGCHECK=10
 # check local mails every minute
 export MAILCHECK=60
 
-export PYMACS_PYTHON=python3
-
 # default editor / browser settings
-export SVN_EDITOR="{{ mg_binary }}"
 export EDITOR="{{ mg_binary }}"
 export BROWSER="{{ my_browser }}"
 
@@ -85,28 +82,32 @@ export PS1="
 --:[ Jobs: %j | Hist: %h | Term: %y | Date: %D{%d.%m.%Y}
 [%*] %n@%m:%c$ "
 
+git_branch_info() {
+  local branch=$(git branch --show-current 2>/dev/null)
+  [[ -n $branch ]] && echo "| Git: %F{green}($branch)%f"
+}
+
+add_date() {
+  echo "| Date: %D{%d.%m.%Y}"
+}
+
+setopt PROMPT_SUBST
+export PS1='             
+--:[ Jobs: %j | Hist: %h $(git_branch_info)
+[%*] %n@%m:%c$ '
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-alias tripwire='LC_ALL=C /usr/sbin/tripwire'
-
 alias em="emacs -nw"
 alias b="popd"
-alias g="xscreensaver-command -lock &"
+alias j='journalctl -f'
 alias l='ls -aluih'
 alias m='tail -f /var/log/messages'
 alias n='netstat -anp | grep LISTEN'
 alias p='ps -e -o ppid,pid,%cpu,%mem,stackp,tty,user,state,cmd'
 alias psg="ps ax | grep"
 alias psm="ps -e -o size,rss,pid,cmd|sort -h"
-alias okm="setxkbmap de"
-alias nkm="setxkbmap de -variant dvorak"
-
-alias praesi_on="sudo xrandr --output LVDS1 --mode 800x600 --output VGA1 --mode 800x600 --same-as LVDS1"
-alias praesi_off="sudo xrandr --output VGA1 --off; sudo xrandr --output LVDS1 --mode 1024x600"
-
-alias play_on="xrandr --size 800x600"
-alias play_off="xrandr --size 1024x600"
 
 {% endraw %}
