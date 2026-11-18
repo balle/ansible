@@ -1,41 +1,25 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
   tags: [metasploit, wifihack, networkhack, bluetoothhack, cracking, webhack, reveng, nessus, mischack]
 
-- name: Create hack dir 
-  file: 
+- name: Create hack dir
+  ansible.builtin.file:
     path: "{{ my_home }}/hack"
     state: directory
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
-    mode: 0700
+    mode: "700"
 
-- include: metasploit.yml
-  tags: metasploit
-
-- include: wifi.yml
-  tags: wifihack
-
-- include: network.yml
-  tags: networkhack
-
-- include: bluetooth.yml
-  tags: bluetoothhack
-
-- include: cracking.yml
-  tags: cracking
-
-- include: web.yml
-  tags: webhack 
-
-- include: reveng.yml
-  tags: reveng 
-
-- include: nessus.yml
-  tags: nessus 
-
-- include: misc.yml
-  tags: mischack
-
-- include: cloud.yml
-  tags: cloudhack
+  ansible.builtin.include_tasks: "{{ item }}.yml"
+  loop:
+    - metasploit
+    - wifi
+    - network
+    - bluetooth
+    - cracking
+    - web
+    - reveng
+    - nessus
+    - misc
+    - cloud

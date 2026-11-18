@@ -1,19 +1,17 @@
 ---
-- name: clone metasploit
-  git:
-    clone: yes
-    force: yes
+- name: Clone metasploit
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/metasploit'
     repo: 'https://github.com/rapid7/metasploit-framework.git'
 
-- name: install rbenv on macos
-  package: 
+- name: Install rbenv on macos
+  ansible.builtin.package: 
     name: "postgresql"
     state: present
   when: ansible_os_family == 'Darwin'
 
-- name: install postgresql
-  package:
+- name: Install postgresql
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   loop:
@@ -21,66 +19,66 @@
     - "{{ postgresql_server_dev }}"
     - "{{ postgresql_client }}"
   when: ansible_os_family != 'Darwin'
-  
-- name: install rbenv on macos
-  package: 
+
+- name: Install rbenv on macos
+  ansible.builtin.package:
     name: "rbenv"
     state: present
   when: ansible_os_family == 'Darwin'
 
-- name: install ruby on macos
-  command: "{{ item }}"
-  run_once: True
+- name: Install ruby on macos
+  ansible.builtin.command: "{{ item }}"
+  run_once: true
   loop:
     - "rbenv install 2.7.2"
     - "rbenv global 2.7.2"
   when: ansible_os_family == 'Darwin'
 
-- name: install ruby
-  package: 
+- name: Install ruby
+  ansible.builtin.package:
     name: "{{ ruby_package }}"
     state: present
   when: ansible_os_family != 'Darwin'
-  
-- name: install ruby development files
-  package: 
+
+- name: Install ruby development files
+  ansible.builtin.package:
     name: "{{ ruby_devel_package }}"
     state: present
   when:
     - ansible_os_family != 'OpenBSD'
     - ansible_os_family != 'Darwin'
 
-- name: install ruby bundler
-  package:
+- name: Install ruby bundler
+  ansible.builtin.package:
     name: ruby-bundler
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "Archlinux"
 
-- name: link bundler
-  file:
-    follow: yes
+- name: Link bundler
+  ansible.builtin.file:
+    follow: true
     src: '/usr/local/bin/bundle27'
     dest: '/usr/local/bin/bundle'
     state: link
   when: ansible_os_family == 'OpenBSD'
 
-- name: install pcap development files
-  package: 
+- name: Install pcap development files
+  ansible.builtin.package:
     name: "{{ pcap_devel_package }}"
     state: present
   when:
     - ansible_os_family != 'OpenBSD'
     - ansible_os_family != 'Darwin'
 
-- name: install sqlite development files
-  package: 
+- name: Install sqlite development files
+  ansible.builtin.package:
     name: "{{ sqlite_devel_package }}"
     state: present
   when:
     - ansible_os_family != 'OpenBSD'
     - ansible_os_family != 'Darwin'
 
-- name: install metasploit dependencies
+- name: Install metasploit dependencies
   command: bundle install
   args:
     chdir: "{{ my_home }}/hack/metasploit"

@@ -1,54 +1,50 @@
 ---
-- name: install john
-  package:
+- name: Install john
+  ansible.builtin.package:
     name: john
     state: present
 
-- name: install hydra
-  package:
+- name: Install hydra
+  ansible.builtin.package:
     name: hydra
     state: present
 
-- name: install medusa
-  package:
+- name: Install medusa
+  ansible.builtin.package:
     name: medusa
     state: present
 
-- name: install hashcat
-  package: 
+- name: Install hashcat
+  ansible.builtin.package: 
     name: hashcat
     state: present
-    
-- name: install fcrackzip
-  package: 
+
+- name: Install fcrackzip
+  ansible.builtin.package: 
     name: fcrackzip
     state: present
-    
-- name: install pdfcrack
-  package:
+
+- name: Install pdfcrack
+  ansible.builtin.package:
     name: pdfcrack
     state: present
-    
-- name: clone SecLists
-  git:
-    clone: yes
-    force: yes
+
+- name: Clone SecLists
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/SecLists'
     repo: 'https://github.com/danielmiessler/SecLists'
 
-- name: clone Kali wordlists
-  git:
-    clone: yes
-    force: yes
+- name: Clone Kali wordlists
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/KaliWordlists'
     repo: https://gitlab.com/kalilinux/packages/wordlists.git
-  
-- name: install cewl 
-  package:
+
+- name: Install cewl 
+  ansible.builtin.package:
     name: cewl
     state: present
 
-- name: Download default password list 
-  get_url:
+- name: Download default password list
+  ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/many-passwords/many-passwords/main/passwords.csv
     dest: '{{ my_home }}/hack/DefaultPasswords.csv'

@@ -1,42 +1,36 @@
 ---
-- name: clone evilgrade
-  git:
-    clone: yes
-    force: yes
+- name: Clone evilgrade
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/evilgrade'
     repo: 'https://github.com/infobyte/evilgrade'
-    
-- name: install recon-ng
-  package:
+
+- name: Install recon-ng
+  ansible.builtin.package:
     name: recon-ng
     state: present
 
-- name: Download mac oui db 
-  get_url:
+- name: Download mac oui db
+  ansible.builtin.get_url:
     url: https://maclookup.app/downloads/csv-database/get-db?t=22-12-10&h=150820948dce1e74f1fabeaea44afa717fd10b37
     dest: '{{ my_home }}/hack/macoui.csv'
 
-- name: install gitlab scanner truffle hog 
-  git:
-    clone: yes 
-    forcce: yes 
+- name: Install gitlab scanner truffle hog
+  ansible.builtin.git:
     repo: 'https://github.com/trufflesecurity/trufflehog.git'
     dest: '{{ my_home }}/hack/trufflehog'
 
-- name: install metagoofil
-  git:
-    clone: yes 
-    forcce: yes 
+- name: Install metagoofil
+  ansible.builtin.git:
     repo: 'https://github.com/opsdisk/metagoofil.git'
     dest: '{{ my_home }}/hack/metagoofil'
 
-- name: install metagoofil dependencies
-  command: python3 -m pip install -r requirements.txt
+- name: Install metagoofil dependencies
+  ansible.builtin.command: python3 -m pip install -r requirements.txt
   args:
     chdir: "{{ my_home }}/hack/metagoofil"
   run_once: True
 
-- name: install exiftool
+- name: Install exiftool
   package:
     name: exiftool
     state: present

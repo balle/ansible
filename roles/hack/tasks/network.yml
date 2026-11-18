@@ -1,78 +1,70 @@
 ---
-- name: install nmap
-  package:
+- name: Install nmap
+  ansible.builtin.package:
     name: 'nmap'
     state: present
 
-- name: clone routersploit
-  git:
-    clone: yes
-    force: yes
+- name: Clone routersploit
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/routersploit'
     repo: 'https://github.com/threat9/routersploit.git'
 
-- name: install routersploit dependencies
-  command: python3 -m pip install -r requirements.txt
+- name: Install routersploit dependencies
+  ansible.builtin.command: python3 -m pip install -r requirements.txt
   args:
     chdir: "{{ my_home }}/hack/routersploit"
   run_once: True
 
-- name: install dsniff
-  package:
+- name: Install dsniff
+  ansible.builtin.package:
     name: '{{ dsniff_package }}'
     state: present
   when: ansible_os_family != 'Darwin'
-  
-- name: install ettercap
-  package:
+
+- name: Install ettercap
+  ansible.builtin.package:
     name: '{{ ettercap_package }}'
     state: present
 
-- name: install yersinia
-  package:
+- name: Install yersinia
+  ansible.builtin.package:
     name: yersinia
     state: present
 
-- name: install p0f
-  package:
+- name: Install p0f
+  ansible.builtin.package:
     name: p0f
     state: present
-    
-- name: install sslstrip dependencies
-  package:
+
+- name: Install sslstrip dependencies
+  ansible.builtin.package:
     name: "{{ item }}"
-  with_items: 
+  with_items:
     - python3-twisted
     - python3-openssl
 
 - name: Clone sslstrip fork for python3
-  git:
-    clone: yes 
-    force: yes 
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/sslstrip3'
     repo: 'https://github.com/Skatinger/sslstrip3.git'
   register: sslstrip3_cloned
 
 - name: Install sslstrip fork for python3
-  command: "python3 {{ my_home }}/hack/sslstrip3/setup.py install"
+  ansible.builtin.command: "python3 {{ my_home }}/hack/sslstrip3/setup.py install"
   when: sslstrip3_cloned.changed
 
-- name: install subbrute 
-  git:
-    clone: yes 
-    force: yes 
+- name: Install subbrute
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/subbrute'
     repo: 'https://github.com/TheRook/subbrute.git'
 
-- name: install responder dependencies
-  package:
+- name: Install responder dependencies
+  ansible.builtin.package:
     name: "{{ item }}"
-  with_items: 
+  with_items:
     - python3-netifaces
 
-- name: install responder
+- name: Install responder
   git:
-    clone: yes 
-    force: yes 
     dest: '{{ my_home }}/hack/responder'
     repo: 'https://github.com/lgandx/Responder.git'

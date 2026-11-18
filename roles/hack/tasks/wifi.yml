@@ -1,93 +1,87 @@
 ---
-- name: install aircrack-ng
-  package:
+- name: Install aircrack-ng
+  ansible.builtin.package:
     name: 'aircrack-ng'
     state: present
 
-- name: install wifite
-  package:
+- name: Install wifite
+  ansible.builtin.package:
     name: wifite
     state: present
 
-- name: install reaver
-  package:
+- name: Install reaver
+  ansible.builtin.package:
     name: reaver
     state: present
 
-- name: Install bettercap dependencies 
-  package: 
+- name: Install bettercap dependencies
+  ansible.builtin.package:
     name: "{{ item }}"
-    state: present 
-  with_items: 
+    state: present
+  with_items:
     - golang
     - git
-    - build-essential 
-    - libpcap-dev 
-    - libusb-1.0-0-dev 
+    - build-essential
+    - libpcap-dev
+    - libusb-1.0-0-dev
     - libnetfilter-queue-dev
 
 - name: Get bettercap
-  shell: go get github.com/bettercap/bettercap
+  ansible.builtin.shell: go get github.com/bettercap/bettercap
   args:
     creates: "$GOPATH/src/github.com/bettercap/bettercap"
-  register: bettercap 
+  register: bettercap
 
-- name: Install bettercap 
-  shell: make build install
+- name: Install bettercap
+  ansible.builtin.shell: make build install
   args:
-    chdir: "$GOPATH/src/github.com/bettercap/bettercap" 
+    chdir: "$GOPATH/src/github.com/bettercap/bettercap"
   when: bettercap.changed
 
-- name: clone airpwn-ng
-  git:
-    clone: yes
-    force: yes
+- name: Clone airpwn-ng
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/airpwn-ng'
     repo: 'https://github.com/ICSec/airpwn-ng'
 
-- name: install wifiphishers dependencies
-  package:
+- name: Install wifiphishers dependencies
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
-  with_items: 
-    - libnl-3-dev 
+  with_items:
+    - libnl-3-dev
     - libnl-genl-3-dev
 
-- name: clone wifiphisher
-  git:
-    clone: yes
-    force: yes
+- name: Clone wifiphisher
+  ansible.builtin.git:
     dest: '{{ my_home }}/hack/wifiphisher'
     repo: 'https://github.com/wifiphisher/wifiphisher'
 
-- name: install pmkid tools
-  package:
+- name: Install pmkid tools
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
-  with_items: 
+  with_items:
     - hcxdumptool
     - hcxtools
 
-- name: install alfa awus1900 driver dependencies 
-  package:
+- name: Install alfa awus1900 driver dependencies 
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
-  with_items: 
+  with_items:
     - make
     - gcc
-    - linux-source 
+    - linux-source
     - dkms
-  
-- name: clone rtl8814au driver src
-  git:
-    clone: yes
-    force: yes
+
+- name: Clone rtl8814au driver src
+  ansible.builtin.git:
     dest: '/usr/src/rtl8814au'
     repo: 'https://github.com/aircrack-ng/rtl8814au.git'
   register: rtl8814au
 
-- name: build rtl8814au driver 
-  command: make dkms_install
+- name: Build rtl8814au driver 
+  ansible.builtin.command: make dkms_install
   args:
     chdir: '/usr/src/rtl8814au'
   when: rtl8814au.changed
