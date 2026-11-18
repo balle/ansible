@@ -1,15 +1,14 @@
 ---
-- name: install tmux
-  package:
+- name: Install tmux
+  ansible.builtin.package:
     name: tmux
     state: present
   when: ansible_os_family != "OpenBSD"
 
-- name: configure tmux
-  copy:
+- name: Configure tmux
+  ansible.builtin.copy:
     src: tmux.conf
     dest: '{{ my_home }}/.tmux.conf'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
-    mode: 0440
-
+    mode: "440"

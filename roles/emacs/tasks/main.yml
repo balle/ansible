@@ -1,72 +1,74 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install emacs
-  package:
+- name: Install emacs
+  ansible.builtin.package:
     name: '{{ emacs_package }}'
     state: present
 
-- name: install mg
-  package:
+- name: Install mg
+  ansible.builtin.package:
     name: 'mg'
     state: present
   when: ansible_os_family != "OpenBSD"
 
-- name: configure mg
-  copy:
+- name: Configure mg
+  ansible.builtin.copy:
     src: mg.conf
     dest: '{{ my_home }}/.mg'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
-    mode: 0600
+    mode: "600"
 
-- name: install xclip
-  package:
+- name: Install xclip
+  ansible.builtin.package:
     name: 'xclip'
     state: present
 
-- name: install emacs auctex
-  package:
+- name: Install emacs auctex
+  ansible.builtin.package:
     name: '{{ auctex_package }}'
     state: present
   when: ansible_os_family != "OpenBSD" and ansible_os_family != "Archlinux"
 
-- name: install gxmessage
-  package:
-    name: gxmessage 
+- name: Install gxmessage
+  ansible.builtin.package:
+    name: gxmessage
     state: present
   when: ansible_os_family != "OpenBSD"
 
 
-- name: clone emacs config
-  become_user: '{{ my_user }}'
-  git:
-    clone: yes
-    force: yes
-    dest: '{{ my_home }}/emacs'
+- name: Clone emacs config
+  ansible.builtin.git:
     repo: https://github.com/balle/emacs.git
+    dest: "{{ my_home }}/emacs"
+    depth: 1
+  become: true
+  become_user: "{{ my_user }}"
+  args:
+    creates: "{{ my_home }}/emacs"
   when: ansible_os_family != "OpenBSD"
 
-- name: clone emacs config
-  git:
-    clone: yes
-    force: yes
-    dest: '{{ my_home }}/emacs'
+- name: Clone emacs config
+  ansible.builtin.git:
     repo: https://github.com/balle/emacs.git
+    dest: '{{ my_home }}/emacs'
+    depth: 1
+  args:
+    creates: '{{ my_home }}/emacs'
   when: ansible_os_family == "OpenBSD"
 
-- name: link .emacs
-  file:
-    follow: yes
+- name: Link .emacs
+  ansible.builtin.file:
+    follow: true
     src: '{{ my_home }}/emacs/.emacs'
     dest: '{{ my_home }}/.emacs'
     state: link
 
-- name: link .emacs.d
-  file:
-    follow: yes
+- name: Link .emacs.d
+  ansible.builtin.file:
+    follow: true
     src: '{{ my_home }}/emacs/.emacs.d'
     dest: '{{ my_home }}/.emacs.d'
     state: link
-
-

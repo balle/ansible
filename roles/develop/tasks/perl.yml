@@ -1,38 +1,40 @@
 ---
-- name: install libperl-dev
-  package:
-    name: libperl-dev 
-    state: present 
+- name: Install libperl-dev
+  ansible.builtin.package:
+    name: libperl-dev
+    state: present
   when: ansible_os_family == 'Debian'
 
-- name: install perl-devel
-  package:
-    name: perl-devel 
-    state: present 
+- name: Install perl-devel
+  ansible.builtin.package:
+    name: perl-devel
+    state: present
   when: ansible_os_family == 'RedHat'
 
-- name: install cpanminus
-  package:
+- name: Install cpanminus
+  ansible.builtin.package:
     name: cpanminus
-    state: present 
+    state: present
   when: ansible_os_family == 'Debian' or ansible_os_family == 'Archlinux'
 
-- name: install perl-App-cpanminus
-  package:
+- name: Install perl-App-cpanminus
+  ansible.builtin.package:
     name: perl-App-cpanminus
-    state: present 
+    state: present
   when: ansible_os_family == 'RedHat'
 
-- name: install perlbrew
-  package:
-    name: perlbrew 
-    state: present 
-  
-- name: install Perl::LanguageServer
-  command: cpanm Perl::LanguageServer
+- name: Install perlbrew
+  ansible.builtin.package:
+    name: perlbrew
+    state: present
 
-- name: install Devel::Cover
-  package:
+- name: Install Perl::LanguageServer
+  ansible.builtin.command: cpanm Perl::LanguageServer
+  args:
+    creates: "/usr/local/bin/perl-language-server"
+
+- name: Install Devel::Cover
+  ansible.builtin.package:
     name: libdevel-cover-perl
-    state: present 
+    state: present
   when: ansible_os_family == 'Debian'

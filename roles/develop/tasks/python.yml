@@ -1,57 +1,61 @@
 ---
 
-- name: install python3
-  package:
+- name: Install python3
+  ansible.builtin.package:
     name: '{{ python3_package }}'
     state: present
 
-- name: install python 3 pip
-  package:
+- name: Install python 3 pip
+  ansible.builtin.package:
     name: '{{ python3_pip_package }}'
     state: present
 
-- name: install python 3 virtualenv
-  package:
+- name: Install python 3 virtualenv
+  ansible.builtin.package:
     name: '{{ python3_virtualenv_package }}'
     state: present
 
-- name: link python3
-  file:
-    follow: yes
+- name: Link python3
+  ansible.builtin.file:
+    follow: true
     src: '/usr/local/bin/python3.8'
     dest: '/usr/bin/python3'
     state: link
   when: ansible_os_family == 'OpenBSD'
 
-- name: link pydoc3
-  file:
-    follow: yes
+- name: Link pydoc3
+  ansible.builtin.file:
+    follow: true
     src: '/usr/local/bin/pydoc3.8'
     dest: '/usr/local/bin/pydoc3'
     state: link
   when: ansible_os_family == 'OpenBSD'
 
-- name: install ipython3
-  package:
+- name: Install ipython3
+  ansible.builtin.package:
     name: '{{ ipython3_package }}'
     state: present
 
-- name: install pudb
-  package:
+- name: Install pudb
+  ansible.builtin.package:
     name: '{{ pudb_package }}'
     state: present
   when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat' or ansible_os_family == 'OpenBSD'
 
-- name: pip install pudb 
-  command: pip3 install pudb 
+- name: Pip install pudb
+  ansible.builtin.pip:
+    name: pudb
+    state: present
   when: ansible_os_family != 'Debian' and ansible_os_family != 'RedHat' and ansible_os_family != 'OpenBSD'
 
-- name: install poetry
-  command: pip3 install poetry
+- name: Install poetry
+  ansible.builtin.pip:
+    name: poetry
+    state: present
   when: ansible_os_family != 'Debian'
 
-- name: install poetry
-  package:
+- name: Install poetry
+  ansible.builtin.package:
     name: python3-poetry
     state: present
   when: ansible_os_family == 'Debian'

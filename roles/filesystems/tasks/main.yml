@@ -1,11 +1,11 @@
 ---
 
-- name: install ntfs-3g
-  package:
+- name: Install ntfs-3g
+  ansible.builtin.package:
     name: ntfs-3g
     state: present
 
-- name: install hfsprogs
-  package:
+- name: Install hfsprogs
+  ansible.builtin.package:
     name: hfsprogs
     state: present

@@ -1,111 +1,112 @@
 ---
-- include_vars: "{{ ansible_os_family }}.yml"
+- name: Load os specific vars
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
-- name: fstab optimizations
-  replace:
+- name: Fstab optimizations
+  ansible.builtin.replace:
     path: /etc/fstab
     regexp: defaults
     replace: defaults,noatime
 
-- name: fstab optimizations
-  replace:
+- name: Fstab optimizations
+  ansible.builtin.replace:
     path: /etc/fstab
     regexp: errors=remount-ro
     replace: errors=remount-ro,noatime
 
-- name: configure sysctl
-  copy:
+- name: Configure sysctl
+  ansible.builtin.copy:
     src: "{{ sysctl_config }}"
     dest: "{{ sysctl_config_dest }}"
     owner: "root"
     group: "root"
-    mode: 0600
+    mode: "600"
   register: sysctl
 
-- name: reload sysctl
-  command: sysctl -p
+- name: Reload sysctl
+  ansible.builtin.command: sysctl -p
   when: sysctl.changed
 
-- name: hide pids from other users
-  blockinfile:
+- name: Hide pids from other users
+  ansible.builtin.blockinfile:
     block: "proc                    /proc                   proc    nosuid,noexec,nodev,hidepid=2 0 0"
     path: /etc/fstab
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat" or ansible_os_family == "Archlinux"
 
 - name: Copy journald config
-  copy:
+  ansible.builtin.copy:
     src: journald.conf
     dest: /etc/systemd/journald.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "644"
   register: journald_config
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat" or ansible_os_family == "Archlinux"
 
 - name: Restart journald on config change
-  service:
+  ansible.builtin.service:
     name: systemd-journald
-    enabled: yes
+    enabled: true
     state: restarted
   when: journald_config.changed
 
-- name: install macchanger
-  package:
+- name: Install macchanger
+  ansible.builtin.package:
     name: macchanger
     state: present
   register: macchanger
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat" or ansible_os_family == "Archlinux"
 
-- name: configure macchanger
-  copy:
+- name: Configure macchanger
+  ansible.builtin.copy:
     src: macchanger
     dest: /etc/default/macchanger
     owner: root
     group: root
-    mode: 0644
+    mode: "644"
   when: ansible_os_family == "Debian"
 
-- name: install smartmontools
-  package:
+- name: Install smartmontools
+  ansible.builtin.package:
     name: smartmontools
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: Start smartmontools service
-  service:
+  ansible.builtin.service:
     name: smartmontools
-    enabled: yes
+    enabled: true
     state: started
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: install flatpak
-  package:
+- name: Install flatpak
+  ansible.builtin.package:
     name: flatpak
     state: present
 
-- name: install apt-file
-  package:
+- name: Install apt-file
+  ansible.builtin.package:
     name: apt-file
     state: present
   register: apt_file
   when: ansible_os_family == "Debian"
 
-- name: init apt-file
-  command: apt-file update
+- name: Init apt-file
+  ansible.builtin.command: apt-file update
   when: apt_file.changed
 
-- name: disable polkit for NetworkManager
-  copy:
+- name: Disable polkit for NetworkManager
+  ansible.builtin.copy:
     src: nm-polkit.disable
     dest: /etc/NetworkManager/conf.d/any-user.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "644"
   when: ansible_os_family == "Debian"
 
 - name: Restart NetworkManager
-  service:
+  ansible.builtin.service:
     name: NetworkManager
-    enabled: yes
+    enabled: true
     state: restarted
   when: ansible_os_family == "Debian"

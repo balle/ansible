@@ -1,6 +1,6 @@
 ---
-- name: install dockapps
-  package:
+- name: Install dockapps
+  ansible.builtin.package:
     name: '{{ item }}'
     state: present
   with_items:
@@ -8,4 +8,3 @@
     - wmnetload
     - wmmon
     - wmtime
-

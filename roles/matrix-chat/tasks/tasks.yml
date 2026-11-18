@@ -1,28 +1,29 @@
 ---
-- name: copy element gpg key
-  copy:
+- name: Copy element gpg key
+  ansible.builtin.copy:
     src: element-io-archive-keyring.gpg
     dest: /usr/share/keyrings/element-io-archive-keyring.gpg
     owner: rppt
     group: root
-    mode: 0644
+    mode: "644"
   when: ansible_os_family == "Debian"
 
-- name: copy element deb repo
-  copy:
+- name: Copy element deb repo
+  ansible.builtin.copy:
     src: element.repo
     dest: /etc/apt/sources.list.d/element-io.list
     owner: root
     group: root
-    mode: 0644
+    mode: "644"
   register: element_repo
   when: ansible_os_family == "Debian"
 
-- name: apt update
-  command: apt update
+- name: Apt update
+  ansible.builtin.apt:
+    update: true
   when: element_repo.changed
 
 - name: Install Matrix chat client
-  flatpak:
+  ansible.builtin.flatpak:
     name: eim.riot.Riot
     state: present

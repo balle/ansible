@@ -1,52 +1,53 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
 
-- name: create xorg.conf.d dir
-  file:
+- name: Create xorg.conf.d dir
+  ansible.builtin.file:
     path: '/etc/X11/xorg.conf.d'
     state: directory
-    recurse: yes
+    recurse: true
     owner: 'root'
     group: 'root'
 
-- name: xorg keyboard config
-  copy:
+- name: Xorg keyboard config
+  ansible.builtin.copy:
     src: xorg_keyboard.conf
     dest: '/etc/X11/xorg.conf.d/xorg_keyboard.conf'
     owner: 'root'
     group: 'root'
-    mode: 0744
+    mode: "744"
 
-- name: xorg synaptics config
-  copy:
+- name: Xorg synaptics config
+  ansible.builtin.copy:
     src: xorg_synaptics.conf
     dest: '/etc/X11/xorg.conf.d/xorg_synaptics.conf'
     owner: 'root'
     group: 'root'
-    mode: 0744
+    mode: "744"
 
-- name: install xbindkeys
-  package:
+- name: Install xbindkeys
+  ansible.builtin.package:
     name: 'xbindkeys'
     state: present
 
-- name: install xscreensaver
-  package:
+- name: Install xscreensaver
+  ansible.builtin.package:
     name: 'xscreensaver'
     state: present
 
-- name: x startup config
-  copy:
+- name: X startup config
+  ansible.builtin.copy:
     src: xinitrc
     dest: '{{ desktop_xstartup_script }}'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
-    mode: 0700
+    mode: "700"
 
-- name: xbindkeys config
-  template:
+- name: Xbindkeys config
+  ansible.builtin.template:
     src: xbindkeysrc.j2
     dest: '{{ my_home }}/.xbindkeysrc'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
-    mode: 0440
+    mode: "440"

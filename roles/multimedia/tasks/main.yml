@@ -1,13 +1,14 @@
 ---
-- include_vars: "{{ ansible_os_family }}.yml"
+- name: Load os specific vars
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
-- name: install mplayer
-  package:
+- name: Install mplayer
+  ansible.builtin.package:
     name: "mplayer"
     state: present
 
-- name: install gstreamer plugins
-  package:
+- name: Install gstreamer plugins
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   loop:
@@ -15,25 +16,25 @@
     - "{{ gstreamer1_plugins_bad }}"
     - "{{ gstreamer1_plugins_ugly }}"
 
-- name: install music player
-  package:
+- name: Install music player
+  ansible.builtin.package:
     name: "{{ my_music_player }}"
     state: present
   when: ansible_os_family != "Debian"
 
-- name: install music player
-  flatpak:
+- name: Install music player
+  ansible.builtin.flatpak:
     name: "{{ my_music_player }}"
     state: present
   when: ansible_os_family == "Debian"
 
-- name: install spotify
-  flatpak:
+- name: Install spotify
+  ansible.builtin.flatpak:
     name: "com.spotify.Client"
     state: present
   when: ansible_os_family == "Debian"
 
-- name: install gimp
-  package:
-    name: gimp
+- name: Install gimp
+  ansible.builtin.flatpak:
+    name: org.gimp.GIMP
     state: present

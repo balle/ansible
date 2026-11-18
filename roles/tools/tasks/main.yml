@@ -1,67 +1,68 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install iotop
-  package:
+- name: Install iotop
+  ansible.builtin.package:
     name: iotop
     state: present
 
-- name: configure ctop repo
-  copy:
+- name: Configure ctop repo
+  ansible.builtin.copy:
     src: "azlux.list"
     dest: "/etc/apt/sources.list.d/azlux.list"
-    mode: 0644
+    mode: 644
   when: ansible_os_family == "Debian"
 
-- name: copy ctop gpg key
-  copy:
+- name: Copy ctop gpg key
+  ansible.builtin.copy:
     src: "azlux-archive-keyring.gpg"
     dest: "/usr/share/keyrings/azlux-archive-keyring.gpg"
-    mode: 0644
+    mode: 644
   when: ansible_os_family == "Debian"
 
-- name: install ctop
-  package: 
+- name: Install ctop
+  ansible.builtin.package:
     name: "docker-ctop"
     state: present
   when: ansible_os_family == "Debian"
 
-- name: install golang
-  package:
+- name: Install golang
+  ansible.builtin.package:
     name: '{{ go_package }}'
     state: present
 
 - name: Check if gotop is installed
-  command: which gotop
+  ansible.builtin.command: which gotop
   register: gotop_check
   ignore_errors: true
   changed_when: false
 
-- name: clone gotop repo
-  git:
+- name: Clone gotop repo
+  ansible.builtin.git:
     repo: https://github.com/cjbassi/gotop.git
     dest: "{{ my_home }}/gotop"
-    clone: yes
-    force: yes
+    clone: true
+    force: true
   register: gotop_src
   when: gotop_check.rc == 1
 
-- name: build gotop
-  shell: "cd {{ my_home }}/gotop && go build"
-  when: 
+- name: Build gotop
+  ansible.builtin.shell: "cd {{ my_home }}/gotop && go build"
+  when:
     - gotop_check.rc == 1
     - gotop_src.changed
 
-- name: copy gotop to /usr/local/bin
-  copy:
+- name: Copy gotop to /usr/local/bin
+  ansible.builtin.copy:
     src: "{{ my_home }}/gotop/gotop"
     dest: /usr/local/bin/gotop
-    mode: 0755    
-  when: 
+    mode: "755"
+  when:
     - gotop_check.rc == 1
     - gotop_src.changed
-  
-- name: install clustershell
-  package:
+
+- name: Install clustershell
+  ansible.builtin.package:
     name: clustershell
     state: present

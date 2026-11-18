@@ -1,18 +1,17 @@
 ---
-
-- name: install golang
-  package:
+- name: Install golang
+  ansible.builtin.package:
     name: '{{ go_package }}'
     state: present
 
-#- name: install go modules
-#  command: "{{ item }}"
-#  become_user: "{{ my_user }}"
-#  become_method: "su"
-#  with_items:
-#    - go install golang.org/x/tools/cmd/guru
-#    - go install github.com/rogpeppe/godef
-#    - go install github.com/nsf/gocode
-#    - go install golang.org/x/tools/cmd/goimports
-#    - go install github.com/dougm/goflymake
-    #- go install github.com/x-motemen/gore/cmd/gore
+# - name: Install go modules
+#   ansible.builtin.command: "{{ item }}"
+#   become_user: "{{ my_user }}"
+#   become_method: "su"
+#   with_items:
+#     - go install golang.org/x/tools/cmd/guru
+#     - go install github.com/rogpeppe/godef
+#     - go install github.com/nsf/gocode
+#     - go install golang.org/x/tools/cmd/goimports
+#     - go install github.com/dougm/goflymake
+#     - go install github.com/x-motemen/gore/cmd/gore

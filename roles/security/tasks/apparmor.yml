@@ -1,9 +1,9 @@
 ---
 
-- name: install apparmor
-  package:
+- name: Install apparmor
+  ansible.builtin.package:
     name: "{{ item }}"
-  with_items: 
+  with_items:
     - apparmor-profiles
     - apparmor-profiles-extra
     - apparmor-utils

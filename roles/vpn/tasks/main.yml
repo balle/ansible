@@ -1,7 +1,6 @@
 ---
-- name: install network-manager-openvpn-gnome
-  package:
+- name: Install network-manager-openvpn-gnome
+  ansible.builtin.package:
     name: network-manager-openvpn-gnome
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
-  

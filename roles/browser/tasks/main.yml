@@ -1,7 +1,8 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install browser
-  package:
+- name: Install browser
+  ansible.builtin.package:
     name: '{{ my_browser }}'
     state: present

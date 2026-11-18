@@ -1,24 +1,24 @@
-
-- name: install gcc
-  package:
+---
+- name: Install gcc
+  ansible.builtin.package:
     name: gcc
     state: present
   when: ansible_os_family != 'OpenBSD'
 
-- name: install make
-  package:
+- name: Install make
+  ansible.builtin.package:
     name: make
     state: present
   when: ansible_os_family != 'OpenBSD'
 
-- name: install automake
-  package:
+- name: Install automake
+  ansible.builtin.package:
     name: automake
     state: present
   when: ansible_os_family != 'OpenBSD'
 
-- name: install autoconf
-  package:
+- name: Install autoconf
+  ansible.builtin.package:
     name: autoconf
     state: present
   when: ansible_os_family != 'OpenBSD'

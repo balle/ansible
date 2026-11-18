@@ -1,45 +1,48 @@
 ---
-- include_vars: "vars/vscode-extensions.yml"
+- name: Include VSCode extensions
+  ansible.builtin.include_vars: "vars/vscode-extensions.yml"
 
 - name: Install VSCode Redhat Repo
-  copy:
+  ansible.builtin.copy:
     src: vscode-rpm.repo
     dest: /etc/yum.repos.d/vscode.repo
     owner: root
-    mode: 0644
+    mode: "644"
   when: ansible_os_family == "Redhat"
 
 - name: Install VSCode Debian Repo
-  copy:
+  ansible.builtin.copy:
     src: vscode-deb.repo
     dest: /etc/apt/sources.list.d/vscode.list
     owner: root
-    mode: 0644
+    mode: "644"
   register: vscode_debian_repo
   when: ansible_os_family == "Debian"
 
-- name: install microsoft key
-  copy:
+- name: Install microsoft key
+  ansible.builtin.copy:
     src: microsoft.gpg
     dest: /usr/share/keyrings/microsoft-archive-keyring.gpg
     owner: root
     group: root
-    mode: 0644
+    mode: "644"
   when: ansible_os_family == "Debian" or ansible_os_family == "Redhat"
 
-- name: Refresh DEB cache
-  command: apt update
+- name: Refresh apt cache
+  ansible.builtin.apt:
+    update_cache: true
   when: vscode_debian_repo.changed
 
 - name: Install VSCode
-  package:
+  ansible.builtin.package:
     name: code
     state: present
   when: ansible_os_family == "Redhat" or ansible_os_family == "Debian"
-    
+
 - name: Install VSCode Extensions
-  command: "code --install-extension {{item}}"
+  ansible.builtin.command: "code --install-extension {{ item }}"
   become_user: "{{ my_user }}"
   become_method: "su"
   loop: "{{ extensions }}"
   when: ansible_os_family == "Redhat" or ansible_os_family == "Debian"
+  changed_when: false

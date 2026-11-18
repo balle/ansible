@@ -1,20 +1,21 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install libvirt
-  package:
+- name: Install libvirt
+  ansible.builtin.package:
     name: "{{ libvirt_package }}"
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
-- name: install virt-viewer
-  package:
+- name: Install virt-viewer
+  ansible.builtin.package:
     name: "{{ virt_viewer_package }}"
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
-- name: install guestfs-tools
-  package:
+- name: Install guestfs-tools
+  ansible.builtin.package:
     name: "{{ guestfs_tools_package }}"
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"

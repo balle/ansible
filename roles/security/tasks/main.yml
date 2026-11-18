@@ -1,9 +1,11 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
-
-- include: aide.yml
-- include: apparmor.yml
-- include: kernel.yml
-- include: packetfilter.yml
-- include: tiger.yml
-- include: misc.yml
+- name: Include security components
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
+  ansible.builtin.include_tasks: "{{ item }}.yml"
+  loop:
+    - aide
+    - apparmor
+    - kernel
+    - packetfilter
+    - tiger
+    - misc

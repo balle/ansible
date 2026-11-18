@@ -1,49 +1,49 @@
 ---
-- name: install dhcp server 
-  package:
+- name: Install dhcp server 
+  ansible.builtin.package:
     name: isc-dhcp-server
-    state: present 
+    state: present
 
-- name: configure dhcp as pxe server 
-  copy:
+- name: Configure dhcp as pxe server 
+  ansible.builtin.copy:
     src: dhcpd.conf
     dest: /etc/dhcp/dhcpd.conf
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: "644"
 
 - name: Config dhcpd debian defaults
-  template:
+  ansible.builtin.template:
     src: debian-isc-dhcp-server-default
     dest: /etc/default/isc-dhcp-server
-    owner: root 
-    group: root 
-    mode: 0644 
+    owner: root
+    group: root
+    mode: "644"
   when: ansible_os_family == "Debian"
 
-- name: install tftp server 
-  package:
+- name: Install tftp server 
+  ansible.builtin.package:
     name: tftpd-hpa
-    state: present 
+    state: present
 
-- name: Install Debian Stable x64 pxe image 
-  get_url:
+- name: Install Debian Stable x64 pxe image
+  ansible.builtin.get_url:
     url: http://ftp.ch.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/netboot.tar.gz
     dest: /tmp/debian-netboot64.tgz
 
-- name: Unpack Debian Stable x64 pxe image 
-  archvive:
+- name: Unpack Debian Stable x64 pxe image
+  ansible.builtin.archvive:
     src: /tmp/debian-netboot64.tgz
     dest: /srv/tftp
 
-- name: Link boot image 
-  file:
-    state: link 
+- name: Link boot image
+  ansible.builtin.file:
+    state: link
     src: /srv/tftp/debian-installer/amd64/bootnetx64.efi
     dest: /srv/tftp/bootnetx64.efi
 
-- name: Get OpenBSD pxe image 
-  get_url:
+- name: Get OpenBSD pxe image
+  ansible.builtin.get_url:
     url: "https://ftp.ch.openbsd.org/pub/OpenBSD/7.1/i386/{{ item }}"
     dest: "/srv/tftp/{{ item }}"
   with_items:
@@ -51,18 +51,17 @@
     - bsd.rd
 
 - name: Create tftpd etc directory
-  file:
+  ansible.builtin.file:
     state: directory
     path: /src/tftp/etc
-    owner: root 
-    group: root 
-    mode: 0755 
+    owner: root
+    group: root
+    mode: "755"
 
-- name: Copy boot.conf 
-  copy:
+- name: Copy boot.conf
+  ansible.builtin.copy:
     src: boot.conf
     dest: /src/tftp/etc/boot.conf
-    owner: root 
-    group: root 
-    mode: 0644
-
+    owner: root
+    group: root
+    mode: "644"

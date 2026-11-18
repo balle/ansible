@@ -1,4 +1,4 @@
-extensions: 
+extensions:
   - alefragnani.Bookmarks
   - cweijan.vscode-mysql-client2
   - eamodio.gitlens
@@ -24,4 +24,3 @@ extensions:
   - vscjava.vscode-maven
   - dineug.vuerd-vscode
   - richterger.perl
-  

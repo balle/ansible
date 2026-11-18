@@ -1,29 +1,28 @@
 ---
-- name: install sleuthkit
-  package:
+- name: Install sleuthkit
+  ansible.builtin.package:
     name: 'sleuthkit'
     state: present
 
-- name: install autopsy
-  package:
+- name: Install autopsy
+  ansible.builtin.package:
     name: 'autopsy'
     state: present
   when: ansible_os_family != "OpenBSD"
-  
-- name: install testdisk
-  package:
+
+- name: Install testdisk
+  ansible.builtin.package:
     name: 'testdisk'
     state: present
 
-- name: install foremost
-  package:
+- name: Install foremost
+  ansible.builtin.package:
     name: 'foremost'
     state: present
 
-- name: install volatility framework
-  git:
-    clone: yes
-    force: yes
+- name: Install volatility framework
+  ansible.builtin.git:
+    clone: true
+    force: true
     dest: '{{ my_home }}/volatility'
     repo: https://github.com/volatilityfoundation/volatility
-

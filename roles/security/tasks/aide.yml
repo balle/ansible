@@ -1,19 +1,18 @@
 ---
-
-- name: install aide
-  package:
+- name: Install aide
+  ansible.builtin.package:
     name: 'aide'
     state: present
 
-- name: configure aide
-  copy:
+- name: Configure aide
+  ansible.builtin.copy:
     src: "{{ aide_config }}"
     dest: '{{ aide_config_dest }}'
     owner: 'root'
     group: 'root'
-    mode: 0600
+    mode: "600"
   register: aide_config
 
-- name: init aide db
-  command: aide --init --config {{ aide_config_dest }}
+- name: Init aide db
+  ansible.builtin.command: aide --init --config {{ aide_config_dest }}
   when: aide_config.changed

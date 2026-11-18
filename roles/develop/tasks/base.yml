@@ -1,11 +1,11 @@
-
-- name: install git
-  package:
+---
+- name: Install git
+  ansible.builtin.package:
     name: 'git'
     state: present
 
-- name: install patch
-  package:
+- name: Install patch
+  ansible.builtin.package:
     name: patch
     state: present
   when: ansible_os_family != 'OpenBSD'

@@ -1,48 +1,48 @@
 ---
-- name: enable apmd
-  lineinfile:
+- name: Enable apmd
+  ansible.builtin.lineinfile:
     path: /etc/rc.conf.local
     line: 'apmd_flags='
     insertbefore: EOF
   when: ansible_os_family == "OpenBSD"
 
-- name: install anacron
-  package: 
-    name: anacron 
+- name: Install anacron
+  ansible.builtin.package: 
+    name: anacron
     state: present
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: start anacron service 
-  service:
+- name: Start anacron service 
+  ansible.builtin.service:
     name: anacron
-    enabled: yes
+    enabled: true
     state: started
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: install tlp
-  package: 
+- name: Install tlp
+  ansible.builtin.package:
     name: tlp
     state: present
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: copy tlp config
-  copy:
+- name: Copy tlp config
+  ansible.builtin.copy:
     src: tlp.conf
     dest: /etc/tlp.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "644"
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
-  
+
 - name: Start tlp service
-  service:
+  ansible.builtin.service:
     name: tlp
-    enabled: yes
+    enabled: true
     state: started
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: dont suspend on lid close when on external power
-  lineinfile:
+- name: Dont suspend on lid close when on external power
+  ansible.builtin.lineinfile:
     path: '/etc/systemd/logind.conf'
     backrefs: true
     regexp: '^\#HandleLidSwitchExternalPower\=suspend$'

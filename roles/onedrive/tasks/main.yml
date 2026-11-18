@@ -1,15 +1,15 @@
 ---
 
-- name: install onedrive
-  package:
+- name: Install onedrive
+  ansible.builtin.package:
     name: onedrive
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: Start onedrive service
-  systemd:
+  ansible.builtin.systemd:
     name: onedrive
-    enabled: yes
+    enabled: true
     state: started
     scope: user
   become_user: "{{ my_user }}"

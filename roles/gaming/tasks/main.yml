@@ -1,38 +1,39 @@
 ---
-- name: Install GOG Galaxy
-  flatpak:
-    name: io.github.sharkwouter.Minigalaxy
+- name: Install Lutris
+  ansible.builtin.flatpak:
+    name: net.lutris.Lutris
     state: present
 
 - name: Create DPKG architecture
-  file:
+  ansible.builtin.file:
     path: /var/lib/dpkg/arch
     state: touch
   register: dpkg_architecture
 
 - name: Check DPKG architecture
-  lineinfile:
+  ansible.builtin.lineinfile:
     name: /var/lib/dpkg/arch
     line: i386
     state: present
 
 - name: Activate i386 packages for APT
-  command: dpkg --add-architecture i386
+  ansible.builtin.command: dpkg --add-architecture i386
   register: dpkg
   when: ansible_os_family == "Debian" and dpkg_architecture.changed
 
 - name: APT Update
-  command: apt update
+  ansible.builtin.apt:
+    update: true
   when: dpkg.changed
 
 - name: Enable the RPM Fusion repository
-  dnf:
-    name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
+  ansible.builtin.dnf:
+    name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: present
   when: ansible_os_family == 'RedHat'
 
-- name: install Steam
-  package:
+- name: Install Steam
+  ansible.builtin.package:
     name: steam
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"

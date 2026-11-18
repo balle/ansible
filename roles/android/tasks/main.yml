@@ -1,11 +1,11 @@
 ---
 
-- name: install android-tools
-  package:
+- name: Install android-tools
+  ansible.builtin.package:
     name: android-sdk-platform-tools
     state: present
 
-- name: install jmtpfs
-  package:
+- name: Install jmtpfs
+  ansible.builtin.package:
     name: jmtpfs
     state: present

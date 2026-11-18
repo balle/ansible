@@ -1,70 +1,71 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install wireshark
-  package:
+- name: Install wireshark
+  ansible.builtin.package:
     name: '{{ wireshark_package }}'
     state: present
 
 - name: Create wireshark group 
-  group:
+  ansible.builtin.group:
     name: wireshark
     state: present
 
 - name: Add user to wireshark group
-  user:
+  ansible.builtin.user:
     name: "{{ my_user }}"
     groups:
       - wireshark
-    append: yes
+    append: true
 
-- name: ensure wireshark config dir exists
-  file:
+- name: Ensure wireshark config dir exists
+  ansible.builtin.file:
     state: directory
     path: "{{ my_home }}/.config/wireshark"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
 
-- name: copy wireshark preferences
-  copy:
+- name: Copy wireshark preferences
+  ansible.builtin.copy:
     src: preferences.conf
     dest: "{{ my_home }}/.config/wireshark/preferences"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
 
-- name: create wireshark profile dirs
-  file:
+- name: Create wireshark profile dirs
+  ansible.builtin.file:
     path: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/"
     state: directory
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
   with_items: "{{ wireshark_profiles }}"
 
-- name: copy wireshark profiles
-  copy:
+- name: Copy wireshark profiles
+  ansible.builtin.copy:
     src: "{{ item }}-profile"
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/preferences"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
   with_items: "{{ wireshark_profiles }}"
 
-- name: copy wireshark dfilter buttons
-  copy:
+- name: Copy wireshark dfilter buttons
+  ansible.builtin.copy:
     src: dfilter_buttons
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/dfilter_buttons"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
   with_items: "{{ wireshark_profiles }}"
 
-- name: copy wireshark wifi dfilter buttons
-  copy:
+- name: Copy wireshark wifi dfilter buttons
+  ansible.builtin.copy:
     src: Wifi-dfilter_buttons
     dest: "{{ my_home }}/.config/wireshark/profiles/Wifi/dfilter_buttons"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
 
-- name: copy wireshark dfilter macros
-  copy:
+- name: Copy wireshark dfilter macros
+  ansible.builtin.copy:
     src: dfilter_macros
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/dfilter_macros"
     owner: "{{ my_user }}"

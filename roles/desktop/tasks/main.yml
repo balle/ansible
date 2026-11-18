@@ -1,5 +1,7 @@
 ---
-- include: xorg.yml
-- include: openbox.yml
-- include: dockapps.yml
-
+- name: Include desktop components
+  ansible.builtin.include_tasks: "{{ item }}.yml"
+  loop:
+    - xorg
+    - openbox
+    - dockapps

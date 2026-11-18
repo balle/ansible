@@ -1,25 +1,24 @@
 ---
-
-- name: install tiger
-  package:
+- name: Install tiger
+  ansible.builtin.package:
     name: tiger
     state: present
   when: ansible_os_family == 'Debian'
 
-- name: copy tiger config
-  copy:
+- name: Copy tiger config
+  ansible.builtin.copy:
     src: "tigerrc"
     dest: '/etc/tiger/tigerrc'
     owner: 'root'
     group: 'root'
-    mode: 0600
+    mode: "600"
   when: ansible_os_family == 'Debian'
 
-- name: copy tiger ignore
-  copy:
+- name: Copy tiger ignore
+  ansible.builtin.copy:
     src: "tiger.ignore"
     dest: '/etc/tiger/tiger.ignore'
     owner: 'root'
     group: 'root'
-    mode: 0600
+    mode: "600"
   when: ansible_os_family == 'Debian'

@@ -1,30 +1,29 @@
 ---
-
-- name: install iptables-persistent
-  package:
+- name: Install iptables-persistent
+  ansible.builtin.package:
     name: iptables-persistent
     state: present
   when: ansible_os_family == 'Debian'
 
-- name: configure packetfilter
-  copy:
+- name: Configure packetfilter
+  ansible.builtin.copy:
     src: '{{ packetfilter_config }}'
     dest: '{{ packetfilter_config_dest }}'
     owner: 'root'
     group: 'root'
-    mode: 0600
+    mode: "600"
 
-- name: configure ipv6 packetfilter
-  copy:
+- name: Configure ipv6 packetfilter
+  ansible.builtin.copy:
     src: '{{ packetfilter_config }}'
     dest: '/etc/iptables/rules.v6'
     owner: 'root'
     group: 'root'
-    mode: 0600
+    mode: "600"
   when: ansible_os_family == 'Debian'
 
-- name: replace icmp with icmpv6 in ipv6 packetfilter config 
-  lineinfile:
+- name: Replace icmp with icmpv6 in ipv6 packetfilter config 
+  ansible.builtin.lineinfile:
     path: '/etc/iptables/rules.v6'
     backrefs: true
     regexp: '^(.+) icmp (.+)$'
@@ -33,6 +32,6 @@
 - name: Start iptables service
   service:
     name: iptables
-    enabled: yes
+    enabled: true
     state: started
   when: ansible_os_family == 'Debian'

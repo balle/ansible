@@ -1,18 +1,19 @@
 ---
-- include_vars: '{{ ansible_os_family }}.yml'
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
 
-- name: install mail user agent
-  package:
+- name: Install mail user agent
+  ansible.builtin.package:
     name: '{{ my_mua }}'
     state: present
 
-- name: install mail user agent addons
-  package:
+- name: Install mail user agent addons
+  ansible.builtin.package:
     name: '{{ item }}'
     state: present
   with_items: '{{ my_mua_addons }}'
 
-- name: install spam filter
-  package:
+- name: Install spam filter
+  ansible.builtin.package:
     name: '{{ my_spam_filter }}'
     state: present

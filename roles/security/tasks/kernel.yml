@@ -1,12 +1,12 @@
 ---
 
 - name: Copy kernel security grub conf
-  copy:
+  ansible.builtin.copy:
     src: grub.conf
     dest: /etc/grub.d/01_security.cfg
-    owner: root 
-    group: root 
-    mode: 0644
+    owner: root
+    group: root
+    mode: "644"
   when: ansible_os_family == "Debian"
   register: kernel_config
 

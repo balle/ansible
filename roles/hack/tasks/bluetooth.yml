@@ -1,131 +1,130 @@
 ---
-    
 - name: Install cmake
-  package:
+  ansible.builtin.package:
     name: cmake
     state: present
 
 - name: Install libusb development files
-  package:
+  ansible.builtin.package:
     name: "{{ libusb_dev }}"
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: Install bluez-libs-devel
-  package:
+  ansible.builtin.package:
     name: "{{ bluez_devel_package }}"
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: Install libpcap-devel
-  package:
+  ansible.builtin.package:
     name: "{{ pcap_devel_package }}"
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
-- name: clone libbtbb
-  git:
-    clone: yes
-    force: yes
+- name: Clone libbtbb
+  ansible.builtin.git:
+    clone: true
+    force: true
     dest: '{{ my_home }}/hack/libbtbb'
     repo: 'https://github.com/greatscottgadgets/libbtbb.git'
 
-- name: create libbtbb build dir 
-  file:
-    state: directory 
+- name: Create libbtbb build dir 
+  ansible.builtin.file:
+    state: directory
     path: '{{ my_home }}/hack/libbtbb/build'
 
-- name: build libbtbb 
-  shell: cmake .. && make install && ldconfig
+- name: Build libbtbb
+  ansible.builtin.shell: cmake .. && make install && ldconfig
   args:
     chdir: '{{ my_home }}/hack/libbtbb/build'
 
-- name: install libbtbb wireshark plugin dependencies 
-  package:
+- name: Install libbtbb wireshark plugin dependencies
+  ansible.builtin.package:
     name: "{{ item }}"
-    state: present 
-  with_items: 
+    state: present
+  with_items:
     - wireshark-dev
     - libwireshark-dev
 
-- name: create build dirs for libbtbb wireshark plugins 
-  file:
-    state: directory 
+- name: Create build dirs for libbtbb wireshark plugins 
+  ansible.builtin.file:
+    state: directory
     path: "{{ my_home }}/hack/libbtbb/wireshark/plugins/{{ item }}/build"
   with_items:
-    - btbb 
+    - btbb
     - btbredr
 
-- name: ensure python is a link to python3 
-  file:
-    state: link 
+- name: Ensure python is a link to python3 
+  ansible.builtin.file:
+    state: link
     src: /usr/bin/python3
     dest: /usr/bin/python
 
-- name: build libbtbb wireshark plugins
-  shell: cmake .. && make install 
+- name: Build libbtbb wireshark plugins
+  ansible.builtin.shell: cmake .. && make install 
   args:
     chdir: "{{ my_home }}/hack/libbtbb/wireshark/plugins/{{ item }}/build"
   with_items:
-    - btbb 
+    - btbb
     - btbredr
 
-- name: clone ubertooth
-  git:
-    clone: yes
-    force: yes
+- name: Clone ubertooth
+  ansible.builtin.git:
+    clone: true
+    force: true
     dest: '{{ my_home }}/hack/ubertooth'
     repo: 'https://github.com/greatscottgadgets/ubertooth.git'
 
-- name: install ubertooh dependencies
-  package:
+- name: Install ubertooh dependencies
+  ansible.builtin.package:
     name: "{{ item }}"
-    state: present 
-  with_items: 
-    - make 
-    - gcc 
-    - g++ 
-    - wget 
-    - pkg-config 
-    - python3-numpy 
-    - python3-qtpy 
-    - python3-distutils 
+    state: present
+  with_items:
+    - make
+    - gcc
+    - g++
+    - wget
+    - pkg-config
+    - python3-numpy
+    - python3-qtpy
+    - python3-distutils
     - python3-setuptools
 
-- name: create ubertooth build dir 
-  file:
-    state: directory 
+- name: Create ubertooth build dir
+  ansible.builtin.file:
+    state: directory
     path: '{{ my_home }}/hack/ubertooth/host/build'
 
-- name: build ubertooth 
-  shell: cmake .. && make install && ldconfig
+- name: Build ubertooth
+  ansible.builtin.shell: cmake .. && make install && ldconfig
   args:
     chdir: '{{ my_home }}/hack/ubertooth/host/build'
 
-- name: clone btlejack
-  git:
-    clone: yes
-    force: yes
+- name: Clone btlejack
+  ansible.builtin.git:
+    clone: true
+    force: true
     dest: '{{ my_home }}/hack/btlejack'
     repo: https://github.com/virtualabs/btlejack.git
 
-- name: install btlejack
-  command: python3 setup.py install
+- name: Install btlejack
+  ansible.builtin.command: python3 setup.py install
   args:
     chdir: '{{ my_home }}/hack/btlejack'
 
-- name: install btlejack firmware build dependencies 
-  package:
+- name: Install btlejack firmware build dependencies
+  ansible.builtin.package:
     name: yotta
-    state: present 
+    state: present
 
-- name: ensure yt is a link to yotta 
-  file:
-    state: link 
-    src: /usr/bin/yotta 
+- name: Ensure yt is a link to yotta
+  ansible.builtin.file:
+    state: link
+    src: /usr/bin/yotta
     dest: /usr/bin/yt
 
-- name: build btlejack firmware 
-  command: make all 
+- name: Build btlejack firmware
+  ansible.builtin.command: make all
   args:
     chdir: '{{ my_home }}/hack/btlejack/btlejack-firmware'

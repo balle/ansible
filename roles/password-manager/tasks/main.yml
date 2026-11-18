@@ -1,5 +1,5 @@
 ---
 - name: Install password manager
-  package:
+  ansible.builtin.package:
     name: "{{ my_password_manager }}"
     state: present

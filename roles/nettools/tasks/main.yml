@@ -1,24 +1,24 @@
 ---
 
-- name: install tcpdump
-  package:
+- name: Install tcpdump
+  ansible.builtin.package:
     name: 'tcpdump'
     state: present
   when: ansible_os_family != 'OpenBSD'
 
-- name: install whois
-  package:
+- name: Install whois
+  ansible.builtin.package:
     name: 'whois'
     state: present
   when: ansible_os_family != 'OpenBSD' or ansible_os_family == 'Darwin'
 
-- name: install jnettop
-  package:
+- name: Install jnettop
+  ansible.builtin.package:
     name: 'jnettop'
     state: present
 
 
-- name: install minicom
-  package:
+- name: Install minicom
+  ansible.builtin.package:
     name: 'minicom'
     state: present

@@ -1,35 +1,34 @@
 ---
 - name: Install Debian Repo
-  copy:
+  ansible.builtin.copy:
     src: debian.repo
     dest: /etc/apt/sources.list.d/teams.list
     owner: root
     group: root
-    mode: 0600
+    mode: "600"
   register: debian_teams_repo
   when: ansible_os_family == "Debian"
 
 - name: APT Update
-  command: apt update
+  ansible.builtin.command: apt update
   when: debian_teams_repo.changed
 
 - name: Install Redhat Repo
-  copy:
+  ansible.builtin.copy:
     src: redhat.repo
     dest: /etc/yum.repos.d/teams.repo
     owner: root
     group: root
-    mode: 0600
+    mode: "600"
   register: redhat_teams_repo
   when: ansible_os_family == "RedHat"
 
 - name: DNF Cache Update
-  command: dnf make-cache
+  ansible.builtin.command: dnf make-cache
   when: redhat_teams_repo.changed
 
 - name: Install MS Teams
-  package:
+  ansible.builtin.package:
     name: teams
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
-  

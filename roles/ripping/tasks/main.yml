@@ -1,78 +1,79 @@
 ---
-- include_vars: "{{ ansible_os_family }}.yml"
+- name: Load os specific vars
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
-- name: install dvdcss
-  package:
+- name: Install dvdcss
+  ansible.builtin.package:
     name: "{{ dvdcss_package }}"
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install dvdcss on macos
-  homebrew:
+- name: Install dvdcss on macos
+  ansible.builtin.homebrew:
     name: libdvdcss
     state: present
   when: ansible_os_family == "Darwin"
 
 - name: Reconfigure dvdcss
-  command: dpkg-reconfigure -fnoninteractive libdvd-pkg
+  ansible.builtin.command: dpkg-reconfigure -fnoninteractive libdvd-pkg
   when: ansible_os_family == "Debian"
 
-- name: install makemkv
-  flatpak:
+- name: Install makemkv
+  ansible.builtin.flatpak:
     name: com.makemkv.MakeMKV
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
-- name: install makemkv on macos
-  homebrew:
+- name: Install makemkv on macos
+  ansible.builtin.homebrew:
     name: makemkv
     state: present
   when: ansible_os_family == "Darwin"
 
-- name: install handbrake
-  package:
+- name: Install handbrake
+  ansible.builtin.package:
     name: handbrake
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install handbrake on macos
-  homebrew:
+- name: Install handbrake on macos
+  ansible.builtin.homebrew:
     name: handbrake
     state: present
   when: ansible_os_family == "Darwin"
 
-- name: install lame
-  package:
+- name: Install lame
+  ansible.builtin.package:
     name: lame
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install sound juicer
-  package:
+- name: Install sound juicer
+  ansible.builtin.package:
     name: sound-juicer
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install streamripper
-  package:
+- name: Install streamripper
+  ansible.builtin.package:
     name: streamripper
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install streamripper on macos
-  homebrew:
+- name: Install streamripper on macos
+  ansible.builtin.homebrew:
     name: streamripper
     state: present
   when: ansible_os_family == "Darwin"
 
-- name: install youtube-dl
-  package:
+- name: Install youtube-dl
+  ansible.builtin.package:
     name: youtube-dl
     state: present
   when: ansible_os_family != "Darwin"
 
-- name: install youtube-dl on macos
-  homebrew:
+- name: Install youtube-dl on macos
+  ansible.builtin.homebrew:
     name: youtube-dl
     state: present
   when: ansible_os_family == "Darwin"

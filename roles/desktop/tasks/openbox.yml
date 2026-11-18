@@ -1,37 +1,35 @@
 ---
-- name: install openbox
-  package:
+- name: Install openbox
+  ansible.builtin.package:
     name: openbox
     state: present
 
-- name: make openbox config dir
-  file:
+- name: Make openbox config dir
+  ansible.builtin.file:
     path: '{{ my_home }}/.config/openbox'
     state: directory
-    recurse: yes
+    recurse: true
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
-    
 
-- name: configure openbox
-  copy:
+- name: Configure openbox
+  ansible.builtin.copy:
     src: ob-rc.xml
     dest: '{{ my_home }}/.config/openbox/rc.xml'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
-    mode: 0755
+    mode: "755"
 
-- name: openbox autostart
-  template:
+- name: Openbox autostart
+  ansible.builtin.template:
     src: ob-autostart.j2
     dest: '{{ my_home }}/.config/openbox/autostart.sh'
     owner: '{{ my_user }}'
     group: '{{ my_group }}'
-    mode: 0755
+    mode: "755"
 
-- name: install feh
-  package:
+- name: Install feh
+  ansible.builtin.package:
     name: 'feh'
     state: present
   when: ansible_os_family != "Darwin"
-  

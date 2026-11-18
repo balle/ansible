@@ -3,42 +3,42 @@
   hosts: localhost
 
   roles:
-    - { name: system, tags: [system,base,work,home] }
-    - { name: security, tags: [security,base,work,home] }
-    - { name: emacs, tags: [emacs,work,home] }
-    - { name: tmux, tags: [tmux,base,work,home] }
-    - { name: zsh, tags: [zsh,base,work,home] }
+    - { name: system, tags: [system, base, work, home] }
+    - { name: security, tags: [security, base, work, home] }
+    - { name: emacs, tags: [emacs, work, home] }
+    - { name: tmux, tags: [tmux, base, work, home] }
+    - { name: zsh, tags: [zsh, base, work, home] }
     - { name: desktop, tags: desktop }
-    - { name: gnome, tags: [gnome,home,work] }
-    - { name: browser, tags: [browser,work,home] }
-    - { name: claws-mail, tags: [claws-mail,home] }
-    - { name: thunderbird, tags: [thunderbird,work] }
-    - { name: multimedia, tags: [multimedia,work,home] }
-    - { name: signal, tags: [signal,work,home] }
+    - { name: gnome, tags: [gnome, home, work] }
+    - { name: browser, tags: [browser, work, home] }
+    - { name: claws-mail, tags: [claws-mail, home] }
+    - { name: thunderbird, tags: [thunderbird, work] }
+    - { name: multimedia, tags: [multimedia, work, home] }
+    - { name: signal, tags: [signal, work, home] }
     - { name: matrix-chat, tags: [matrix-chat, home] }
-    - { name: wire, tags: [wire,work] }
-    - { name: laptop, tags: [laptop,work,home] }
+    - { name: wire, tags: [wire, work] }
+    - { name: laptop, tags: [laptop, work, home] }
     - { name: ssd, tags: ssd }
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
     - { name: android, tags: android }
     - { name: ios, tags: [ios, ipad, iphone, apple] }
     - { name: filesystems, tags: [filesystems, apple, windows] }
-    - { name: develop, tags: [develop,work,home] }
-    - { name: write, tags: [write,work,home] }
-    - { name: office, tags: [office,work,home] }
-    - { name: password-manager, tags: [password-manager,home,work] }
-    - { name: remote-desktop, tags: [remote-desktop,work] }
-    - { name: onedrive, tags: [onedrive,work] }
-    - { name: vpn, tags: [vpn,work] }
-    - { name: teams, tags: [teams,work] }
-    - { name: tools, tags: [tools,home,work] }
-    - { name: nettools, tags: [hack,nettools,work,home] }
-    - { name: wireshark, tags: [hack,wireshark,work,home] }
-    - { name: hack, tags: [hack,work,home] }
-    - { name: forensics, tags: [forensics,work,home] }
-    - { name: virtualization, tags: [virtualization,work,home] }
-    - { name: docker, tags: [docker,work,home] }
+    - { name: develop, tags: [develop, work, home] }
+    - { name: write, tags: [write, work, home] }
+    - { name: office, tags: [office, work, home] }
+    - { name: password-manager, tags: [password-manager, home, work] }
+    - { name: remote-desktop, tags: [remote-desktop, work] }
+    - { name: onedrive, tags: [onedrive, work] }
+    - { name: vpn, tags: [vpn, work] }
+    - { name: teams, tags: [teams, work] }
+    - { name: tools, tags: [tools, home, work] }
+    - { name: nettools, tags: [hack, nettools, work, home] }
+    - { name: wireshark, tags: [hack, wireshark, work, home] }
+    - { name: hack, tags: [hack, work, home] }
+    - { name: forensics, tags: [forensics, work, home] }
+    - { name: virtualization, tags: [virtualization, work, home] }
+    - { name: docker, tags: [docker, work, home] }
     - { name: pxe, tags: [pxe] }
-    - { name: ripping, tags: [ripping,home] }
-    - { name: gaming, tags: [gaming,home] }
+    - { name: ripping, tags: [ripping, home] }
+    - { name: gaming, tags: [gaming, home] }

@@ -1,5 +1,5 @@
 ---
-- name: install libreoffice
-  package:
+- name: Install libreoffice
+  ansible.builtin.package:
     name: 'libreoffice'
     state: present
