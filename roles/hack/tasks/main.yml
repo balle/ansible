@@ -11,6 +11,7 @@
     group: "{{ my_user }}"
     mode: "700"
 
+- name: Include hack components
   ansible.builtin.include_tasks: "{{ item }}.yml"
   loop:
     - metasploit

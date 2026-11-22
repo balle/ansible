@@ -1,6 +1,8 @@
 ---
+- name: Load os specific vars
+  ansible.builtin.include_vars: '{{ community.general.flatpak }}.yml'
+
 - name: Include security components
-  ansible.builtin.include_vars: '{{ ansible_os_family }}.yml'
   ansible.builtin.include_tasks: "{{ item }}.yml"
   loop:
     - aide
