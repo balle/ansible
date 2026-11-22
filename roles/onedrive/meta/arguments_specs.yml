@@ -1,0 +1,17 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure rclone with a OneDrive remote
+    options:
+      rclone_onedrive_token:
+        type: raw
+        required: true
+        description: OAuth token object or JSON string generated via 'rclone authorize "onedrive"'.
+      rclone_onedrive_drive_type:
+        type: str
+        required: false
+        default: personal
+        choices:
+          - personal
+          - business
+        description: Type of OneDrive account.

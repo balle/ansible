@@ -1,17 +1,26 @@
----
+- name: Check installed rclone version
+  ansible.builtin.command: rclone version
+  register: rclone_ver
+  changed_when: false
+  failed_when: false
 
-- name: Install onedrive
-  ansible.builtin.package:
-    name: onedrive
-    state: present
-  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+- name: Install latest rclone via official script
+  ansible.builtin.shell: set -o pipefail && curl -fsSL https://rclone.org/install.sh | bash
+  args:
+    executable: /bin/bash
+    creates: /usr/bin/rclone
+  become: true
+  changed_when: true
+  when: rclone_ver.rc != 0
 
-- name: Start onedrive service
-  ansible.builtin.systemd:
-    name: onedrive
-    enabled: true
-    state: started
-    scope: user
-  become_user: "{{ my_user }}"
-  become_method: "su"
-  when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+- name: Configure OneDrive remote in rclone.conf
+  ansible.builtin.copy:
+    dest: "{{ my_home }}/.config/rclone/rclone.conf"
+    mode: "0600"
+    content: |
+      [onedrive]
+      type = onedrive
+      token = {{ rclone_onedrive_token | to_json }}
+      drive_type = personal
+  no_log: true
+  when: rclone_onedrive_token is defined
