@@ -22,27 +22,23 @@
     - { name: security, tags: [security, base, work, home] }
     - { name: emacs, tags: [emacs, work, home] }
     - { name: tmux, tags: [tmux, base, work, home] }
-    - { name: zsh, tags: [zsh, base, work, home] }
-    - { name: desktop, tags: desktop }
+    - { name: zsh, tags: [zsh] }
     - { name: gnome, tags: [gnome, home, work] }
     - { name: browser, tags: [browser, work, home] }
-    - { name: claws-mail, tags: [claws-mail, home] }
-    - { name: thunderbird, tags: [thunderbird, work] }
     - { name: multimedia, tags: [multimedia, work, home] }
-    - { name: signal, tags: [signal, work, home] }
+    - { name: signal, tags: [signal, home] }
     - { name: matrix-chat, tags: [matrix-chat, home] }
-    - { name: wire, tags: [wire, work] }
     - { name: laptop, tags: [laptop, work, home] }
-    - { name: ssd, tags: ssd }
+    - { name: ssd, tags: [ssd, laptop, work, home] }
     - { name: doas, tags: doas }
     - { name: ksh, tags: ksh }
-    - { name: android, tags: android }
-    - { name: ios, tags: [ios, ipad, iphone, apple] }
-    - { name: filesystems, tags: [filesystems, apple, windows] }
+    - { name: android, tags: [android, home] }
+    - { name: ios, tags: [ios, ipad, iphone, apple, home] }
+    - { name: filesystems, tags: [filesystems, apple, windows, home] }
     - { name: develop, tags: [develop, work, home] }
-    - { name: write, tags: [write, work, home] }
+    - { name: write, tags: [write, home] }
     - { name: office, tags: [office, work, home] }
-    - { name: password-manager, tags: [password-manager, home, work] }
+    - { name: password-manager, tags: [password-manager, home] }
     - { name: remote-desktop, tags: [remote-desktop, work] }
     - { name: onedrive, tags: [onedrive, work] }
     - { name: vpn, tags: [vpn, work] }
@@ -50,8 +46,8 @@
     - { name: tools, tags: [tools, home, work] }
     - { name: nettools, tags: [hack, nettools, work, home] }
     - { name: wireshark, tags: [hack, wireshark, work, home] }
-    - { name: hack, tags: [hack, work, home] }
-    - { name: forensics, tags: [forensics, work, home] }
+    - { name: hack, tags: [hack, home] }
+    - { name: forensics, tags: [forensics, home] }
     - { name: virtualization, tags: [virtualization, work, home] }
     - { name: docker, tags: [docker, work, home] }
     - { name: pxe, tags: [pxe] }
