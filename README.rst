@@ -1,9 +1,17 @@
+Requirements
+============
+
+.. code-block:: bash
+  
+  ansible-galaxy collection install -r requirements.yml
+
+
 Run locally without ssh
 =======================
 
 .. code-block:: bash
   
-  ansible-playbook -c local workstation.yml
+  ansible-playbook -K -c local workstation.yml
 
 
 Run remote over ssh
@@ -13,7 +21,7 @@ Run remote over ssh
 
 .. code-block:: bash
 
-  ansible-playbook -k workstation.yml 
+  ansible-playbook -K -k workstation.yml 
 
   
 Run only one tag locally
@@ -21,7 +29,7 @@ Run only one tag locally
 
 .. code-block:: bash
   
-  ansible-playbook -c local -t base workstation.yml
+  ansible-playbook -K -c local -t base workstation.yml
 
   
 Run all but some tags locally
@@ -29,15 +37,14 @@ Run all but some tags locally
 
 .. code-block:: bash
   
-  ansible-playbook -c local --skip-tags desktop,office workstation.yml
+  ansible-playbook -K -c local --skip-tags desktop,office workstation.yml
 
 
 On macos run
 ============
 
 .. code-block:: bash
-
-  ansible-galaxy collection install community.general
-  ansible-playbook -c local --skip-tags desktop,desktop-tools,doas,ksh -e my_home=/Users/$YOUR_USERNAME --become-user $YOUR_USERNAME workstation.yml
+  
+  ansible-playbook -K -c local --skip-tags desktop,desktop-tools,doas,ksh -e my_home=/Users/$YOUR_USERNAME --become-user $YOUR_USERNAME workstation.yml
 
 
