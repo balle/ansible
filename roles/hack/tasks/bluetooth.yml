@@ -71,10 +71,9 @@
 
 - name: Clone ubertooth
   ansible.builtin.git:
-    clone: true
-    force: true
     dest: '{{ my_home }}/hack/ubertooth'
     repo: 'https://github.com/greatscottgadgets/ubertooth.git'
+    version: master
 
 - name: Install ubertooh dependencies
   ansible.builtin.package:
@@ -94,29 +93,43 @@
 - name: Create ubertooth build dir
   ansible.builtin.file:
     state: directory
+    mode: "755"
     path: '{{ my_home }}/hack/ubertooth/host/build'
 
-- name: Build ubertooth
-  ansible.builtin.shell: cmake .. && make install && ldconfig
-  args:
+- name: Configure ubertooth build with Cmake
+  ansible.builtin.command:
+    cmd: cmake ..
     chdir: '{{ my_home }}/hack/ubertooth/host/build'
+    creates: '{{ my_home }}/hack/ubertooth/host/build/Makefile'
+
+- name: Build ubertooth
+  ansible.builtin.command:
+    cmd: make install
+    chdir: '{{ my_home }}/hack/ubertooth/host/build'
+    creates: /usr/local/bin/ubertooth-util
+  register: ubertooth_install
+  nofity: Update shared library cache
 
 - name: Clone btlejack
   ansible.builtin.git:
-    clone: true
-    force: true
     dest: '{{ my_home }}/hack/btlejack'
+    depth: 1
+    version: master
     repo: https://github.com/virtualabs/btlejack.git
+  register: btlejack_repo
 
 - name: Install btlejack
   ansible.builtin.command: python3 setup.py install
   args:
     chdir: '{{ my_home }}/hack/btlejack'
+    creates: /usr/local/bin/btlejack
+  become: true
 
 - name: Install btlejack firmware build dependencies
   ansible.builtin.package:
     name: yotta
     state: present
+  become: true
 
 - name: Ensure yt is a link to yotta
   ansible.builtin.file:
@@ -125,6 +138,8 @@
     dest: /usr/bin/yt
 
 - name: Build btlejack firmware
-  ansible.builtin.command: make all
-  args:
+  ansible.builtin.command:
+    cmd: make all
     chdir: '{{ my_home }}/hack/btlejack/btlejack-firmware'
+  changed_when: true
+  when: btlejack_repo.changed

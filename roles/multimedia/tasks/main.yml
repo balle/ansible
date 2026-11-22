@@ -23,18 +23,18 @@
   when: ansible_os_family != "Debian"
 
 - name: Install music player
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: "{{ my_music_player }}"
     state: present
   when: ansible_os_family == "Debian"
 
 - name: Install spotify
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: "com.spotify.Client"
     state: present
   when: ansible_os_family == "Debian"
 
 - name: Install gimp
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.gimp.GIMP
     state: present

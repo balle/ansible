@@ -11,14 +11,14 @@
   ansible.builtin.copy:
     src: "azlux.list"
     dest: "/etc/apt/sources.list.d/azlux.list"
-    mode: 644
+    mode: "644"
   when: ansible_os_family == "Debian"
 
 - name: Copy ctop gpg key
   ansible.builtin.copy:
     src: "azlux-archive-keyring.gpg"
     dest: "/usr/share/keyrings/azlux-archive-keyring.gpg"
-    mode: 644
+    mode: "644"
   when: ansible_os_family == "Debian"
 
 - name: Install ctop
@@ -38,17 +38,25 @@
   ignore_errors: true
   changed_when: false
 
+- name: Check if gotop binary already exists
+  ansible.builtin.stat:
+    path: "{{ my_home }}/.local/bin/gotop"
+  register: gotop_bin
+
 - name: Clone gotop repo
   ansible.builtin.git:
     repo: https://github.com/cjbassi/gotop.git
     dest: "{{ my_home }}/gotop"
-    clone: true
-    force: true
+    depth: 1
+    version: master
   register: gotop_src
-  when: gotop_check.rc == 1
+  when: not gotop_bin.exists
 
 - name: Build gotop
-  ansible.builtin.shell: "cd {{ my_home }}/gotop && go build"
+  ansible.builtin.command:
+    cmd: "go build"
+    chdir: "{{ my_home }}/gotop"
+    creates: "{{ my_home }}/.local/bin/gotop"
   when:
     - gotop_check.rc == 1
     - gotop_src.changed

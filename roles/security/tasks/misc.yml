@@ -30,7 +30,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Start unattended-upgrades service
-  service:
+  ansible.builtin.service:
     name: unattended-upgrades
     enabled: true
     state: started

@@ -6,12 +6,8 @@
     owner: root
     group: root
     mode: "600"
-  register: debian_teams_repo
+  notify: Refresh apt cache
   when: ansible_os_family == "Debian"
-
-- name: APT Update
-  ansible.builtin.command: apt update
-  when: debian_teams_repo.changed
 
 - name: Install Redhat Repo
   ansible.builtin.copy:

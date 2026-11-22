@@ -9,23 +9,23 @@
   when: ansible_os_family != "Darwin"
 
 - name: Install dvdcss on macos
-  ansible.builtin.homebrew:
+  community.general.homebrew:
     name: libdvdcss
     state: present
   when: ansible_os_family == "Darwin"
 
-- name: Reconfigure dvdcss
-  ansible.builtin.command: dpkg-reconfigure -fnoninteractive libdvd-pkg
-  when: ansible_os_family == "Debian"
+# - name: Reconfigure dvdcss
+#   ansible.builtin.command: dpkg-reconfigure -fnoninteractive libdvd-pkg
+#   when: ansible_os_family == "Debian"
 
 - name: Install makemkv
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.makemkv.MakeMKV
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
 - name: Install makemkv on macos
-  ansible.builtin.homebrew:
+  community.general.homebrew:
     name: makemkv
     state: present
   when: ansible_os_family == "Darwin"
@@ -37,7 +37,7 @@
   when: ansible_os_family != "Darwin"
 
 - name: Install handbrake on macos
-  ansible.builtin.homebrew:
+  community.general.homebrew:
     name: handbrake
     state: present
   when: ansible_os_family == "Darwin"
@@ -61,7 +61,7 @@
   when: ansible_os_family != "Darwin"
 
 - name: Install streamripper on macos
-  ansible.builtin.homebrew:
+  community.general.homebrew:
     name: streamripper
     state: present
   when: ansible_os_family == "Darwin"
@@ -73,7 +73,7 @@
   when: ansible_os_family != "Darwin"
 
 - name: Install youtube-dl on macos
-  ansible.builtin.homebrew:
+  community.general.homebrew:
     name: youtube-dl
     state: present
   when: ansible_os_family == "Darwin"

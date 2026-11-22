@@ -3,9 +3,10 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/metasploit'
     repo: 'https://github.com/rapid7/metasploit-framework.git'
+    version: master
 
 - name: Install rbenv on macos
-  ansible.builtin.package: 
+  ansible.builtin.package:
     name: "postgresql"
     state: present
   when: ansible_os_family == 'Darwin'
@@ -78,8 +79,19 @@
     - ansible_os_family != 'OpenBSD'
     - ansible_os_family != 'Darwin'
 
-- name: Install metasploit dependencies
-  command: bundle install
-  args:
+- name: Check if Metasploit Ruby gems are satisfied
+  ansible.builtin.command:
+    cmd: bundle check
     chdir: "{{ my_home }}/hack/metasploit"
-  run_once: True
+  register: msf_bundle_check
+  changed_when: false
+  failed_when: false
+  environment:
+    PATH: "/usr/local/rvm/gems/default/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+
+- name: Install metasploit dependencies
+  ansible.builtin.command:
+    cmd: bundle install
+    chdir: "{{ my_home }}/hack/metasploit"
+  changed_when: true
+  when: msf_bundle_check.rc != 0

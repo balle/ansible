@@ -7,12 +7,12 @@
   when: ansible_os_family == "OpenBSD"
 
 - name: Install anacron
-  ansible.builtin.package: 
+  ansible.builtin.package:
     name: anacron
     state: present
   when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
 
-- name: Start anacron service 
+- name: Start anacron service
   ansible.builtin.service:
     name: anacron
     enabled: true

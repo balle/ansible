@@ -25,22 +25,27 @@
     url: https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.1.2_build/ghidra_10.1.2_PUBLIC_20220125.zip
     checksum: sha256:ac96fbdde7f754e0eb9ed51db020e77208cdb12cf58c08657a2ab87cb2694940
     dest: "{{ my_home }}/ghidra.zip"
+    mode: "644"
+  register: ghidra_download
 
 - name: Unpack ghidra
   ansible.builtin.unarchive:
     src: "{{ my_home }}/ghidra.zip"
     dest: "{{ my_home }}/hack"
     creates: "{{ my_home }}/hack/ghidra_10.1.2_PUBLIC"
+  when: ghidra_download.changed
 
 - name: Get flasm
   ansible.builtin.get_url:
     url: http://www.nowrap.de/download/flasm16linux.tgz
     dest: "{{ my_home }}/hack/flasm.tgz"
+    mode: "644"
 
 - name: Create flasm directory
   ansible.builtin.file:
     path: "{{ my_home }}/hack/flasm"
     state: directory
+    mode: "755"
 
 - name: Unpack flasm
   ansible.builtin.unarchive:

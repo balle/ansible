@@ -17,6 +17,7 @@
     owner: root
     mode: "644"
   register: vscode_debian_repo
+  notify: Refresh apt cache
   when: ansible_os_family == "Debian"
 
 - name: Install microsoft key
@@ -27,11 +28,6 @@
     group: root
     mode: "644"
   when: ansible_os_family == "Debian" or ansible_os_family == "Redhat"
-
-- name: Refresh apt cache
-  ansible.builtin.apt:
-    update_cache: true
-  when: vscode_debian_repo.changed
 
 - name: Install VSCode
   ansible.builtin.package:

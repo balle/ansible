@@ -8,12 +8,13 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/routersploit'
     repo: 'https://github.com/threat9/routersploit.git'
+    version: master
 
 - name: Install routersploit dependencies
-  ansible.builtin.command: python3 -m pip install -r requirements.txt
-  args:
+  ansible.builtin.command:
+    cmd: python3 -m pip install -r requirements.txt
     chdir: "{{ my_home }}/hack/routersploit"
-  run_once: True
+  changed_when: true
 
 - name: Install dsniff
   ansible.builtin.package:
@@ -47,6 +48,7 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/sslstrip3'
     repo: 'https://github.com/Skatinger/sslstrip3.git'
+    version: master
   register: sslstrip3_cloned
 
 - name: Install sslstrip fork for python3
@@ -57,6 +59,7 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/subbrute'
     repo: 'https://github.com/TheRook/subbrute.git'
+    version: master
 
 - name: Install responder dependencies
   ansible.builtin.package:
@@ -68,3 +71,4 @@
   git:
     dest: '{{ my_home }}/hack/responder'
     repo: 'https://github.com/lgandx/Responder.git'
+    version: master

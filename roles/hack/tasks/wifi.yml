@@ -27,14 +27,14 @@
     - libnetfilter-queue-dev
 
 - name: Get bettercap
-  ansible.builtin.shell: go get github.com/bettercap/bettercap
-  args:
+  ansible.builtin.command:
+    cmd: go get github.com/bettercap/bettercap
     creates: "$GOPATH/src/github.com/bettercap/bettercap"
   register: bettercap
 
 - name: Install bettercap
-  ansible.builtin.shell: make build install
-  args:
+  ansible.builtin.command:
+    cmd: make build install
     chdir: "$GOPATH/src/github.com/bettercap/bettercap"
   when: bettercap.changed
 
@@ -42,6 +42,7 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/airpwn-ng'
     repo: 'https://github.com/ICSec/airpwn-ng'
+    version: master
 
 - name: Install wifiphishers dependencies
   ansible.builtin.package:
@@ -55,6 +56,7 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/wifiphisher'
     repo: 'https://github.com/wifiphisher/wifiphisher'
+    version: master
 
 - name: Install pmkid tools
   ansible.builtin.package:
@@ -64,7 +66,7 @@
     - hcxdumptool
     - hcxtools
 
-- name: Install alfa awus1900 driver dependencies 
+- name: Install alfa awus1900 driver dependencies
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
@@ -78,6 +80,7 @@
   ansible.builtin.git:
     dest: '/usr/src/rtl8814au'
     repo: 'https://github.com/aircrack-ng/rtl8814au.git'
+    version: master
   register: rtl8814au
 
 - name: Build rtl8814au driver 

@@ -1,6 +1,6 @@
 ---
 - name: Install Lutris
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: net.lutris.Lutris
     state: present
 
@@ -8,6 +8,7 @@
   ansible.builtin.file:
     path: /var/lib/dpkg/arch
     state: touch
+    mode: "644"
   register: dpkg_architecture
 
 - name: Check DPKG architecture
@@ -16,15 +17,20 @@
     line: i386
     state: present
 
+- name: Check configured foreign dpkg architectures
+  ansible.builtin.command: dpkg --print-foreign-architectures
+  register: dpkg_foreign_archs
+  changed_when: false
+  when: ansible_os_family == "Debian"
+
 - name: Activate i386 packages for APT
   ansible.builtin.command: dpkg --add-architecture i386
-  register: dpkg
-  when: ansible_os_family == "Debian" and dpkg_architecture.changed
-
-- name: APT Update
-  ansible.builtin.apt:
-    update: true
-  when: dpkg.changed
+  become: true
+  notify: Refresh apt cache
+  changed_when: true
+  when:
+    - ansible_os_family == "Debian"
+    - "'i386' not in dpkg_foreign_archs.stdout_lines"
 
 - name: Enable the RPM Fusion repository
   ansible.builtin.dnf:

@@ -1,6 +1,6 @@
 ---
 - name: Install signal messenger
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.signal.Signal
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"

@@ -1,10 +1,28 @@
 ---
-- name: Disable auto mount 
-  ansible.builtin.command: gsettings set org.gnome.desktop.media-handling automount false
+- name: Check current GNOME automount setting
+  ansible.builtin.command: gsettings get org.gnome.desktop.media-handling automount
+  register: gnome_automount
+  become: true
   become_user: "{{ my_user }}"
-  become_method: "su"
+  changed_when: false
+
+- name: Disable auto mount
+  ansible.builtin.command: dbus-run-session gsettings set org.gnome.desktop.media-handling automount false
+  become: true
+  become_user: "{{ my_user }}"
+  changed_when: true
+  when: gnome_automount.stdout | trim != 'false'
+
+- name: Check current GNOME automount-open setting
+  ansible.builtin.command: gsettings get org.gnome.desktop.media-handling automount-open
+  register: gnome_automount_open
+  become: true
+  become_user: "{{ my_user }}"
+  changed_when: false
 
 - name: Disable auto mount open
-  ansible.builtin.command: gsettings set org.gnome.desktop.media-handling automount-open false
+  ansible.builtin.command: dbus-run-session gsettings set org.gnome.desktop.media-handling automount-open false
+  become: true
   become_user: "{{ my_user }}"
-  become_method: "su"
+  changed_when: true
+  when: gnome_automount_open.stdout | trim != 'false'

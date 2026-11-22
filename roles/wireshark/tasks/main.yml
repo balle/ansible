@@ -7,7 +7,7 @@
     name: '{{ wireshark_package }}'
     state: present
 
-- name: Create wireshark group 
+- name: Create wireshark group
   ansible.builtin.group:
     name: wireshark
     state: present
@@ -25,6 +25,7 @@
     path: "{{ my_home }}/.config/wireshark"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
+    mode: "700"
 
 - name: Copy wireshark preferences
   ansible.builtin.copy:
@@ -32,6 +33,7 @@
     dest: "{{ my_home }}/.config/wireshark/preferences"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
+    mode: "700"
 
 - name: Create wireshark profile dirs
   ansible.builtin.file:
@@ -39,6 +41,7 @@
     state: directory
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
+    mode: "700"
   with_items: "{{ wireshark_profiles }}"
 
 - name: Copy wireshark profiles
@@ -47,6 +50,7 @@
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/preferences"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
+    mode: "700"
   with_items: "{{ wireshark_profiles }}"
 
 - name: Copy wireshark dfilter buttons
@@ -55,6 +59,7 @@
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/dfilter_buttons"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
+    mode: "700"
   with_items: "{{ wireshark_profiles }}"
 
 - name: Copy wireshark wifi dfilter buttons
@@ -63,6 +68,7 @@
     dest: "{{ my_home }}/.config/wireshark/profiles/Wifi/dfilter_buttons"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
+    mode: "700"
 
 - name: Copy wireshark dfilter macros
   ansible.builtin.copy:
@@ -70,4 +76,5 @@
     dest: "{{ my_home }}/.config/wireshark/profiles/{{ item }}/dfilter_macros"
     owner: "{{ my_user }}"
     group: "{{ my_user }}"
+    mode: "700"
   with_items: "{{ wireshark_profiles }}"

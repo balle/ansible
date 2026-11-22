@@ -38,16 +38,14 @@
     state: present
   when: ansible_os_family != "OpenBSD"
 
-
 - name: Clone emacs config
   ansible.builtin.git:
     repo: https://github.com/balle/emacs.git
     dest: "{{ my_home }}/emacs"
     depth: 1
+    version: master
   become: true
   become_user: "{{ my_user }}"
-  args:
-    creates: "{{ my_home }}/emacs"
   when: ansible_os_family != "OpenBSD"
 
 - name: Clone emacs config
@@ -55,8 +53,7 @@
     repo: https://github.com/balle/emacs.git
     dest: '{{ my_home }}/emacs'
     depth: 1
-  args:
-    creates: '{{ my_home }}/emacs'
+    version: master
   when: ansible_os_family == "OpenBSD"
 
 - name: Link .emacs

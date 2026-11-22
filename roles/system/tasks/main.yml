@@ -21,11 +21,7 @@
     owner: "root"
     group: "root"
     mode: "600"
-  register: sysctl
-
-- name: Reload sysctl
-  ansible.builtin.command: sysctl -p
-  when: sysctl.changed
+  notify: Reload sysctl
 
 - name: Hide pids from other users
   ansible.builtin.blockinfile:

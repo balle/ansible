@@ -24,5 +24,6 @@
   ansible.builtin.git:
     clone: true
     force: true
+    version: master
     dest: '{{ my_home }}/volatility'
     repo: https://github.com/volatilityfoundation/volatility

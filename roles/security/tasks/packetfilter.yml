@@ -22,7 +22,7 @@
     mode: "600"
   when: ansible_os_family == 'Debian'
 
-- name: Replace icmp with icmpv6 in ipv6 packetfilter config 
+- name: Replace icmp with icmpv6 in ipv6 packetfilter config
   ansible.builtin.lineinfile:
     path: '/etc/iptables/rules.v6'
     backrefs: true
@@ -30,7 +30,7 @@
     line: '\1 icmpv6 \2'
 
 - name: Start iptables service
-  service:
+  ansible.builtin.service:
     name: iptables
     enabled: true
     state: started

@@ -2,6 +2,21 @@
 - name: Workstation setup
   hosts: localhost
 
+  handlers:
+    - name: Refresh apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      become: true
+
+    - name: Update shared library cache
+      ansible.builtin.command:
+        cmd: ldconfig
+      become: true
+
+    - name: Reload sysctl
+      ansible.builtin.command: sysctl -p
+      become: true
+
   roles:
     - { name: system, tags: [system, base, work, home] }
     - { name: security, tags: [security, base, work, home] }

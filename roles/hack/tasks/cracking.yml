@@ -15,12 +15,12 @@
     state: present
 
 - name: Install hashcat
-  ansible.builtin.package: 
+  ansible.builtin.package:
     name: hashcat
     state: present
 
 - name: Install fcrackzip
-  ansible.builtin.package: 
+  ansible.builtin.package:
     name: fcrackzip
     state: present
 
@@ -33,13 +33,15 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/SecLists'
     repo: 'https://github.com/danielmiessler/SecLists'
+    version: master
 
 - name: Clone Kali wordlists
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/KaliWordlists'
     repo: https://gitlab.com/kalilinux/packages/wordlists.git
+    version: master
 
-- name: Install cewl 
+- name: Install cewl
   ansible.builtin.package:
     name: cewl
     state: present
@@ -48,3 +50,4 @@
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/many-passwords/many-passwords/main/passwords.csv
     dest: '{{ my_home }}/hack/DefaultPasswords.csv'
+    mode: "644"

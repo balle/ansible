@@ -1,6 +1,6 @@
 ---
 - name: Install wire desktop
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.wire.WireDesktop
     state: present
   when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"

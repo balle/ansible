@@ -15,15 +15,10 @@
     owner: root
     group: root
     mode: "644"
-  register: element_repo
+  nofity: Refresh apt cache
   when: ansible_os_family == "Debian"
 
-- name: Apt update
-  ansible.builtin.apt:
-    update: true
-  when: element_repo.changed
-
 - name: Install Matrix chat client
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: eim.riot.Riot
     state: present

@@ -14,7 +14,7 @@
     - ansible_os_family == 'OpenBSD'
 
 - name: Install zed attack proxy on Linux
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: "{{ zap_package }}"
     state: present
     classic: true
@@ -30,12 +30,14 @@
   ansible.builtin.git:
     dest: "{{ my_home }}/hack/nosqlmap"
     repo: "https://github.com/SirKnightV/NoSQLMap-Python3-update.git"
+    version: master
   register: nosqlmap
 
 - name: Install nosqlmap requirements
   ansible.builtin.command: pip3 install -r requirements.txt
   args:
     chdir: "{{ my_home }}/hack/nosqlmap"
+  changed_when: true
   when: nosqlmap.changed
 
 - name: Install pymongo
@@ -57,6 +59,7 @@
   ansible.builtin.git:
     dest: "{{ my_home }}/hack/beef"
     repo: "https://github.com/beefproject/beef.git"
+    version: master
   register: beef
 
 - name: Install beef

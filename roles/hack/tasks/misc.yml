@@ -3,6 +3,7 @@
   ansible.builtin.git:
     dest: '{{ my_home }}/hack/evilgrade'
     repo: 'https://github.com/infobyte/evilgrade'
+    version: master
 
 - name: Install recon-ng
   ansible.builtin.package:
@@ -13,24 +14,27 @@
   ansible.builtin.get_url:
     url: https://maclookup.app/downloads/csv-database/get-db?t=22-12-10&h=150820948dce1e74f1fabeaea44afa717fd10b37
     dest: '{{ my_home }}/hack/macoui.csv'
+    mode: "644"
 
 - name: Install gitlab scanner truffle hog
   ansible.builtin.git:
     repo: 'https://github.com/trufflesecurity/trufflehog.git'
     dest: '{{ my_home }}/hack/trufflehog'
+    version: master
 
 - name: Install metagoofil
   ansible.builtin.git:
     repo: 'https://github.com/opsdisk/metagoofil.git'
     dest: '{{ my_home }}/hack/metagoofil'
+    version: master
 
 - name: Install metagoofil dependencies
-  ansible.builtin.command: python3 -m pip install -r requirements.txt
-  args:
+  ansible.builtin.command:
+    cmd: python3 -m pip install -r requirements.txt
     chdir: "{{ my_home }}/hack/metagoofil"
-  run_once: True
+  changed_when: true
 
 - name: Install exiftool
-  package:
+  ansible.builtin.package:
     name: exiftool
     state: present
