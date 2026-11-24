@@ -48,3 +48,37 @@ On macos run
   ansible-playbook -K -c local --skip-tags desktop,desktop-tools,doas,ksh -e my_home=/Users/$YOUR_USERNAME --become-user $YOUR_USERNAME workstation.yml
 
 
+Advanced setup
+===============
+
+* Install ansible-navigator
+
+.. code-block:: bash
+
+  mkdir ~/venv
+  python -m venv ~/venv/ansible
+  source ~/venv/ansible/bin/activate
+
+  pip3 install ansible-navigator
+
+* Install ARA 
+
+.. code-block:: bash
+
+  # On Debian
+  apt install python3-ara
+
+  # Or
+  pip3 install ara
+
+* Build local docker image
+
+.. code-block:: bash
+
+  ansible-builder build -t my-ansible-env:latest
+
+* Run ansible-navigator (ansible in container plus ARA UI)
+
+.. code-block:: bash
+
+  ansible-navigator run workstation.yml -K -c local -t base
